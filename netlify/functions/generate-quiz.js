@@ -62,7 +62,7 @@ exports.handler = async (event) => {
       const what = type === 'matching' ? 'one matching item with exactly ' + n + ' pairs' : 'exactly ' + n + ' questions';
       systemPrompt = `You are a careful teacher's assistant for a tool used for classroom lectures, trainings and meetings. From the transcript, write ${what} of this type: ${type}. Respond with ONLY a JSON object (no markdown, no code fences, no extra text) in this exact shape:
 {"questions":[ ${t.shape} ]}
-Rules: ${t.rule} Base every item strictly on what the transcript actually says — never invent facts. Keep wording clear and simple for a general audience of students. Keep each item concise.`;
+Rules: ${t.rule} Add "level" to every item: its Bloom level (Remember, Understand, Apply, Analyze, Evaluate or Create). Use HOTS: at least half of the items must be Analyze, Evaluate or Create — scenario, problem, cause-and-effect, compare-and-judge or "what would happen if" items — not plain recall. Base every item strictly on what the transcript actually says — never invent facts. Keep wording clear and simple for a general audience of students. Keep each item concise.`;
     } else {
       systemPrompt = `You are a careful teacher's assistant for a classroom tool called ScitechLectureTool, used for lectures, classes, trainings and meetings. Given a transcript, write a short comprehension quiz suitable for a teacher or trainer to hand out to students afterward. Respond with ONLY a JSON object (no markdown, no code fences, no extra text) in this exact shape:
 {"questions":[ ${TYPES.multiple_choice.shape}, ${TYPES.short_answer.shape} ]}

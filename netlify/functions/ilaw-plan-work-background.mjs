@@ -57,13 +57,16 @@ const TOOL = {
         resources: { type: 'array', items: { type: 'string' } },
         steps: { type: 'array', items: { type: 'object', properties: {
           phase: { type: 'string' }, minutes: { type: 'number' }, teacher: { type: 'string' }, learners: { type: 'string' },
-          differentiation: { type: 'string' }, indicators: { type: 'array', items: { type: 'string' } } }, required: ['phase', 'minutes', 'teacher', 'learners'] } },
+          differentiation: { type: 'string' }, indicators: { type: 'array', items: { type: 'string' } },
+          questions: { type: 'array', items: { type: 'object', properties: { q: { type: 'string' }, level: { type: 'string' } }, required: ['q', 'level'] } } },
+          required: ['phase', 'minutes', 'teacher', 'learners'] } },
         integration: { type: 'string' }, values: { type: 'string' }
       }, required: ['resources', 'steps'] },
       assessingLearning: { type: 'object', properties: {
         checks: { type: 'array', items: { type: 'object', properties: { when: { type: 'string' }, how: { type: 'string' } }, required: ['when', 'how'] } },
-        exitTask: { type: 'string' }, rubric: { type: 'string' }
-      }, required: ['checks'] },
+        exitTask: { type: 'string' }, rubric: { type: 'string' },
+        quiz: { type: 'array', items: { type: 'object', properties: { q: { type: 'string' }, level: { type: 'string' }, answer: { type: 'string' } }, required: ['q', 'level', 'answer'] } }
+      }, required: ['checks', 'quiz'] },
       waysForward: { type: 'object', properties: {
         reteach: { type: 'string' }, remediation: { type: 'string' }, enrichment: { type: 'string' },
         reflection: { type: 'array', items: { type: 'string' } }
@@ -90,7 +93,8 @@ Teacher's own ideas to build on: ${f.ideas || 'none given'}
 Write for the MATATAG curriculum where it applies (for College, use course outcomes instead). Use simple, clear English.
 INTENTIONS: content standard, performance standard and the learning competency (use the teacher's wording or the closest MATATAG competency; do not invent a code). Then 3 SMART objectives with measurable action verbs — one each for Knowledge, Skills and Attitude/Values.
 LEARNING EXPERIENCE: resources (low-cost, available in public schools; ICT optional), then a developmentally sequenced flow whose minutes add up to exactly ${f.minutes} minutes: activating prior knowledge, motivation, explicit teaching with examples, guided practice in groups (hands-on/exploration), independent practice, generalization, application to real life. For each step write what the teacher does and what learners do, a differentiation note when useful, and which indicator numbers it shows. Add integration across subjects and a values connection.
-ASSESSING LEARNING: formative checks throughout (when + how, e.g. thumbs up, mini whiteboards, exit ticket), an exit task and a short rubric.
+HOTS (Higher-Order Thinking Skills) must be clearly visible: for each step from motivation onward, give 1–3 key discussion questions the teacher asks ("questions"), each labeled with its Bloom level (Remember, Understand, Apply, Analyze, Evaluate or Create). Most discussion questions must be Analyze, Evaluate or Create — open-ended "why / how / what if / which is better and why / design a…" questions tied to real life, that make learners explain their reasoning and respond to each other's answers. Include learner-to-learner discussion (think-pair-share, debate, small-group problem solving).
+ASSESSING LEARNING: formative checks throughout (when + how, e.g. thumbs up, mini whiteboards, exit ticket), an exit task that requires higher-order thinking, a short rubric, and "quiz": a 5-item quick test with answers, each labeled with its Bloom level — at least 3 of the 5 at Analyze, Evaluate or Create (scenario or problem-based, not plain recall).
 WAYS FORWARD: reteach, remediation, enrichment, and 3 reflection questions for the teacher.
 COT: for EACH of these indicators the teacher's school observes, say exactly where in the plan it is shown and what the observer should see at Level 7:
 ${indList || '- (none selected)'}
@@ -105,7 +109,8 @@ Facilitator's own ideas: ${f.ideas || 'none given'}
 
 INTENTIONS: leave contentStandard and performanceStandard empty; competency = the main session goal; 3 measurable objectives (Knowledge, Skills, Attitude).
 LEARNING EXPERIENCE: materials, then a timed agenda whose minutes add up to exactly ${f.minutes} minutes (icebreaker, input, demonstration, group work/practice, sharing, wrap-up), with what the facilitator does and what participants do.
-ASSESSING LEARNING: quick checks during the session and an end-of-session evaluation.
+Give each agenda step 1–2 discussion questions ("questions") that make participants analyze, evaluate or apply ideas to their own work, labeled with Bloom level.
+ASSESSING LEARNING: quick checks during the session, an end-of-session evaluation, and "quiz": 5 scenario-based questions with answers, labeled with Bloom level, mostly Analyze/Evaluate/Apply.
 WAYS FORWARD: follow-up actions, support for those who need more help, and stretch tasks; 3 reflection questions for the facilitator.
 COT: return an empty list. CHECKLIST: 8 practical facilitation reminders.
 Fill in the ilaw_plan tool.`;

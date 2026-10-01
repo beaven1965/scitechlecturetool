@@ -1703,6 +1703,9 @@
     border-color:#1a73e8;
     color:#1a73e8;
   }
+  .share-app-btn{ margin:4px auto 0; display:block; padding:10px 18px; border-radius:999px; border:1.5px solid var(--gold); background:rgba(255,255,255,.85);
+    color:var(--gold); font-weight:700; font-size:14.5px; cursor:pointer; box-shadow:0 1px 4px rgba(30,50,52,.10); font-family:inherit; }
+  .share-app-btn:active{ transform:scale(.97); }
 </style>
 
 
@@ -1797,6 +1800,23 @@
         </span>
         <span class="home-icon-label">Stop</span>
       </button>
+      <button type="button" class="share-app-btn" id="shareAppBtn">📤 Share this app</button>
+      <script>
+      (function(){
+        var b = document.getElementById('shareAppBtn');
+        b.addEventListener('click', async function(){
+          var url = location.origin + '/';
+          var text = "Record lectures, make ILAW lesson plans, TOS, item analysis and more — free to try:";
+          if(navigator.share){
+            try{ await navigator.share({ title: "ScitechLectureTool", text: text, url: url }); return; }
+            catch(e){ if(e && e.name === 'AbortError') return; }
+          }
+          try{ await navigator.clipboard.writeText(text + ' ' + url); b.textContent = '✅ Link copied — paste it in Messenger'; }
+          catch(e){ prompt('Copy this link and send it:', url); }
+          setTimeout(function(){ b.textContent = '📤 Share this app'; }, 3500);
+        });
+      })();
+      </script>
     </div>
 
     <!-- SETTINGS -->

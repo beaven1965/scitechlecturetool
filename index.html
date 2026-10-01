@@ -1608,6 +1608,16 @@
   .at-key{ color:#1F7A44; font-weight:600; font-size:13px; margin-top:2px; }
   .test-preview .item{ border-bottom:1px solid #eef0f3; padding:8px 0; } .test-preview .opts{ margin:4px 0 0 16px; font-size:13.5px; }
   .test-preview .line{ border-bottom:1px solid #ccc; height:16px; }
+  .at-paper{ color:#111; } .at-paper select{ width:100%; margin-top:4px; padding:9px 10px; border:1px solid #bcc7c0; border-radius:8px; font-size:14px; background:#fff; color:#111; }
+  .at-check{ flex-direction:row !important; align-items:center; gap:8px !important; font-weight:400 !important; margin:8px 0; }
+  .at-check input{ width:18px; height:18px; accent-color:#3E9B63; }
+  .ia-counts{ display:grid; grid-template-columns:repeat(5, 1fr); gap:6px; }
+  .ia-counts label{ font-size:11.5px; font-weight:600; text-align:center; }
+  .ia-counts input{ text-align:center; padding:6px 2px !important; }
+  .ia-mps{ border:2px solid #3E9B63; border-radius:12px; padding:12px 14px; margin:12px 0; background:#F4FAF6; }
+  .ia-mps .big{ font-size:26px; font-weight:800; color:#1F6B40; }
+  .ia-least{ color:#B42318; font-weight:700; }
+  .at-card .lp-sub{ font-weight:700; margin:12px 0 4px; font-size:14px; }
   .gs-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; margin-top:8px; border:1px solid #d6e4db; border-radius:8px; }
   .gs-table, .tos-table{ border-collapse:collapse; font-size:12.5px; min-width:100%; }
   .gs-table th, .gs-table td, .tos-table th, .tos-table td{ border:1px solid #d6dbe1; padding:3px 4px; text-align:center; white-space:nowrap; color:#111; }
@@ -1781,7 +1791,7 @@
         </div>
         </div>
         <div class="settings-item clickable feature-row" id="lessonPlanRow" style="--accent:#2E6B8C"><span>📝 ILAW Lesson Plan helper</span><span class="chevron">→</span></div>
-        <div class="settings-item clickable feature-row" id="assessRow" style="--accent:#3E9B63"><span>🧰 Assessment Tools — HOTS test, TOS, grade sheet</span><span class="chevron">→</span></div>
+        <div class="settings-item clickable feature-row" id="assessRow" style="--accent:#3E9B63"><span>🧰 Assessment Tools — HOTS test, TOS, item analysis, grade sheet</span><span class="chevron">→</span></div>
       </div>
 
     </div>
@@ -1889,7 +1899,16 @@
         <span class="date">🧰 Assessment Tools</span>
         <button class="new-recording-btn" id="closeAssessBtn">Close</button>
       </div>
-      <div class="concordance-intro">Tools for tests and grades in the new curriculum: a HOTS test guide, a Table of Specifications (TOS) maker, a HOTS test paper maker, and a grade sheet (DepEd Order No. 015, s. 2026 — three terms).</div>
+      <div class="concordance-intro">Tools for tests and grades in the new curriculum: a HOTS test guide, a Table of Specifications (TOS) maker, a HOTS test paper maker, item analysis with MPS, and a grade sheet (DepEd Order No. 015, s. 2026 — three terms).</div>
+
+      <label class="at-lbl at-paper">🖨️ Paper size for printing
+        <select id="atPaper">
+          <option value="8.5in 13in">Long bond — 8.5 × 13 in (folio)</option>
+          <option value="8.5in 11in">Short bond — 8.5 × 11 in (Letter)</option>
+          <option value="A4" selected>A4 — 210 × 297 mm</option>
+          <option value="8.5in 14in">Legal — 8.5 × 14 in</option>
+        </select>
+      </label>
 
       <details class="se-fold at-fold" id="atGuide">
         <summary><span>🧠 How to make a HOTS test<small>Quick guide · free</small></span></summary>
@@ -1961,6 +1980,37 @@
           <div class="status-row" id="testStatus" style="display:none; margin-top:10px;"><div class="spinner"></div><span>Writing your test… about 1–2 minutes.</span></div>
           <div class="error-box" id="testError" style="display:none;"></div>
           <div id="testOut"></div>
+        </div></div>
+      </details>
+
+      <details class="se-fold at-fold" id="atItems">
+        <summary><span>📈 Item analysis &amp; MPS<small>After the test · least-mastered competencies · free, no AI</small></span></summary>
+        <div class="se-fold-body"><div class="paper-card at-card">
+          <p class="at-help">Find out how your class did: <b>MPS</b> (Mean Percentage Score) with the DepEd mastery level, each item's difficulty and discrimination, and the <b>least-mastered competencies</b> to re-teach.</p>
+          <div class="at-grid2">
+            <label>Test title<input id="iaTitle" type="text" placeholder="e.g. Term 1 ST1 Science 7"></label>
+            <label>Number of items<input id="iaItems" type="number" min="1" max="100" value="40"></label>
+            <label>Section<input id="iaSection" type="text" placeholder="e.g. Grade 7 – Rizal"></label>
+            <label>Least mastered if below<input id="iaCut" type="number" min="1" max="100" value="75"></label>
+          </div>
+          <label class="at-check"><input type="checkbox" id="iaUseTos" checked> Match items to the competencies in my TOS (from the TOS maker)</label>
+          <label class="at-lbl">How will you enter the results?
+            <select id="iaMode">
+              <option value="wrong">Each learner's WRONG item numbers (full analysis — recommended)</option>
+              <option value="count">Only the number of learners who got each item right (quick)</option>
+            </select>
+          </label>
+          <div id="iaWrongBox">
+            <label class="at-lbl">One learner per line — name (optional), then the item numbers they got wrong<textarea id="iaWrong" rows="6" placeholder="Juan: 3, 7, 12, 25&#10;Maria: 7, 30&#10;Pedro: 1, 2, 3, 7, 12, 18, 25, 31, 40&#10;Ana: (none wrong — just type her name)"></textarea></label>
+          </div>
+          <div id="iaCountBox" style="display:none;">
+            <label class="at-lbl">Number of learners who took the test<input id="iaN" type="number" min="1" max="200" value="40"></label>
+            <div class="at-help">Type how many learners got each item <b>right</b>:</div>
+            <div class="ia-counts" id="iaCounts"></div>
+          </div>
+          <div class="at-btnrow"><button type="button" class="at-btn" id="iaRun">Analyze</button></div>
+          <div class="error-box" id="iaError" style="display:none;"></div>
+          <div id="iaOut"></div>
         </div></div>
       </details>
 
@@ -3714,6 +3764,7 @@
       '.lp-bloom{font-size:10.5px; border:1px solid #888; border-radius:8px; padding:0 5px;} .lp-bloom.hots{font-weight:700;} ol{margin:3px 0; padding-left:20px;}' +
       '.sign{margin-top:26px; font-size:12.5px;} .sign span{display:inline-block; min-width:220px; border-top:1px solid #333; margin-top:28px; padding-top:2px;}' +
       '@media print{ body{margin:0; padding:14px;} }' +
+      '@page{size:' + (window.ST_PAGE ? window.ST_PAGE(false) : 'A4 portrait') + ';margin:12mm;}' +
       '</style></head><body>' +
       '<h1>' + esc(title) + '</h1>' +
       '<div class="meta">' + esc(lpSubjectInput.value.trim()) + ' · ' + esc(lpGradeSelect.value) + ' · ' + esc(sel ? sel.textContent : '') + (lpCodeInput.value.trim() ? ' · ' + esc(lpCodeInput.value.trim()) : '') + '</div>' +
@@ -4804,6 +4855,14 @@
     get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
     set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
   };
+  // Paper size chosen at the top of Assessment Tools (also used by the lesson plan printout).
+  function pageSize(landscape){
+    let v = 'A4'; try{ v = localStorage.getItem('st_paper') || 'A4'; }catch(e){}
+    if(v === 'A4') return landscape ? 'A4 landscape' : 'A4 portrait';
+    const [w, h] = v.split(' ');
+    return landscape ? h + ' ' + w : w + ' ' + h;
+  }
+  window.ST_PAGE = pageSize;
   function openPrint(title, bodyHtml, landscape){
     const win = window.open('', '_blank');
     if(!win){ alert('Please allow pop-ups for this site so the print page can open.'); return; }
@@ -4814,7 +4873,7 @@
       'table{border-collapse:collapse;width:100%;} th,td{border:1px solid #666;padding:3px 5px;font-size:11.5px;vertical-align:top;} th{background:#eee;}' +
       '.num{text-align:center;} .item{margin:0 0 10px; page-break-inside:avoid;} .opts{margin:3px 0 0 18px;} .line{border-bottom:1px solid #777;height:20px;margin:2px 0;}' +
       '.hdr td{border:none;padding:2px 0;font-size:13px;} .pb{page-break-before:always;}' +
-      '@page{size:' + (landscape ? 'A4 landscape' : 'A4 portrait') + ';margin:12mm;}' +
+      '@page{size:' + pageSize(landscape) + ';margin:12mm;}' +
       '</style></head><body>' + bodyHtml + '</body></html>');
     win.document.close();
     const go = () => { win.focus(); win.print(); };
@@ -4971,6 +5030,115 @@
       '<p class="meta" style="margin-top:12px;">AI-assisted draft (ScitechLectureTool), reviewed and edited by the teacher.</p>', false));
   }
 
+
+  // ================= ITEM ANALYSIS & MPS =================
+  // MPS = total correct answers ÷ (learners × items) × 100, with the DepEd mastery levels.
+  function masteryLevel(p){
+    return p >= 96 ? 'Mastered' : p >= 86 ? 'Closely Approximating Mastery' : p >= 66 ? 'Moving Toward Mastery' :
+      p >= 35 ? 'Average' : p >= 15 ? 'Low' : p >= 5 ? 'Very Low' : 'Absolutely No Mastery';
+  }
+  const difficultyOf = (p) => p > 80 ? 'Easy' : p >= 21 ? 'Average' : 'Difficult';
+  function discrimOf(d){ return d == null ? '' : d >= 0.40 ? 'Very good — keep' : d >= 0.30 ? 'Good — keep' : d >= 0.20 ? 'Fair — improve' : 'Poor — revise or drop'; }
+  function drawCounts(){
+    const n = Math.max(1, Math.min(100, +$('iaItems').value || 40));
+    const old = Array.from($('iaCounts').querySelectorAll('input')).map(i => i.value);
+    $('iaCounts').innerHTML = Array.from({ length: n }, (_, i) => '<label>#' + (i + 1) + '<input type="number" min="0" inputmode="numeric" data-i="' + i + '" value="' + esc(old[i] || '') + '"></label>').join('');
+  }
+  function itemMap(n){
+    const map = {};
+    if($('iaUseTos').checked && lastTos && lastTos.rows){
+      lastTos.rows.forEach(r => r.placed.forEach((nums, li) => nums.forEach(k => { map[k] = { comp: r.comp, level: LEVELS[li] }; })));
+    }
+    return map;
+  }
+  let lastIa = null;
+  function runIa(){
+    const err = $('iaError'); err.style.display = 'none';
+    const n = Math.max(1, Math.min(100, +$('iaItems').value || 0));
+    const cut = Math.max(1, Math.min(100, +$('iaCut').value || 75));
+    const map = itemMap(n);
+    let N = 0, correct = new Array(n).fill(0), scores = [], disc = new Array(n).fill(null);
+    if($('iaMode').value === 'wrong'){
+      const lines = $('iaWrong').value.split('\n').map(s => s.trim()).filter(Boolean);
+      if(!lines.length){ err.textContent = 'Please type at least one learner line.'; err.style.display = 'block'; return; }
+      const learners = lines.map((line, li) => {
+        const m = line.match(/^([^:0-9][^:]*?)\s*:\s*(.*)$/);
+        const name = m ? m[1].trim() : (/^[^0-9]/.test(line) && !/\d/.test(line) ? line : 'Learner ' + (li + 1));
+        const nums = (m ? m[2] : (/\d/.test(line) ? line : '')).match(/\d+/g) || [];
+        const wrong = new Set(nums.map(Number).filter(k => k >= 1 && k <= n));
+        return { name, wrong, score: n - wrong.size };
+      });
+      N = learners.length;
+      learners.forEach(l => { for(let i = 1; i <= n; i++) if(!l.wrong.has(i)) correct[i - 1]++; });
+      scores = learners.map(l => ({ name: l.name, score: l.score }));
+      // Discrimination index: upper 27% minus lower 27% (needs at least 10 learners).
+      if(N >= 10){
+        const sorted = learners.slice().sort((a, b) => b.score - a.score);
+        const g = Math.max(1, Math.round(N * 0.27));
+        const up = sorted.slice(0, g), lo = sorted.slice(-g);
+        for(let i = 1; i <= n; i++){
+          const u = up.filter(l => !l.wrong.has(i)).length, d = lo.filter(l => !l.wrong.has(i)).length;
+          disc[i - 1] = Math.round((u - d) / g * 100) / 100;
+        }
+      }
+    } else {
+      N = Math.max(1, +$('iaN').value || 0);
+      const vals = Array.from($('iaCounts').querySelectorAll('input')).map(i => i.value === '' ? null : Math.max(0, Math.min(N, +i.value)));
+      if(vals.slice(0, n).some(v => v == null)){ err.textContent = 'Please type the number of correct answers for every item.'; err.style.display = 'block'; return; }
+      correct = vals.slice(0, n);
+    }
+    const totalCorrect = correct.reduce((a, b) => a + b, 0);
+    const mps = Math.round(totalCorrect / (N * n) * 10000) / 100;
+    const items = correct.map((c, i) => {
+      const p = Math.round(c / N * 10000) / 100;
+      const info = map[i + 1] || {};
+      return { n: i + 1, comp: info.comp || '', level: info.level || '', correct: c, p, diff: difficultyOf(p), d: disc[i], least: p < cut };
+    });
+    const comps = {};
+    items.forEach(it => { if(!it.comp) return; const c = comps[it.comp] || (comps[it.comp] = { comp: it.comp, items: [], correct: 0 }); c.items.push(it.n); c.correct += it.correct; });
+    const compList = Object.values(comps).map(c => { const p = Math.round(c.correct / (N * c.items.length) * 10000) / 100; return { ...c, p, level: masteryLevel(p), least: p < cut }; });
+    lastIa = { title: $('iaTitle').value.trim(), section: $('iaSection').value.trim(), n, N, cut, mps, mpsLevel: masteryLevel(mps), items, compList, scores };
+    store.set('st_ia_last', { title: lastIa.title, section: lastIa.section, n, cut });
+    showIa();
+  }
+  function iaTables(a, forPrint){
+    const sc = a.scores.length ? a.scores.map(s => s.score) : null;
+    const stats = sc ? '<div>Highest: <b>' + Math.max.apply(null, sc) + '</b> · Lowest: <b>' + Math.min.apply(null, sc) + '</b> · Mean: <b>' + (Math.round(sc.reduce((x, y) => x + y, 0) / sc.length * 100) / 100) + '</b> · Reached 75%: <b>' + sc.filter(x => x / a.n * 100 >= 75).length + ' of ' + sc.length + '</b></div>' : '';
+    const mpsBox = '<div class="ia-mps"><div>MPS (Mean Percentage Score)</div><div class="big">' + a.mps.toFixed(2) + '%</div><div><b>' + a.mpsLevel + '</b> · ' + a.N + ' learners · ' + a.n + ' items</div>' + stats + '</div>';
+    const least = a.compList.filter(c => c.least);
+    const compTable = a.compList.length ? '<div class="lp-sub">By competency</div><div class="gs-scroll"><table class="' + (forPrint ? '' : 'tos-table') + '"><tr><th>Competency</th><th>Items</th><th>% correct</th><th>Mastery level</th></tr>' +
+      a.compList.map(c => '<tr><td>' + esc(c.comp) + '</td><td class="num">#' + rangeTxt(c.items) + '</td><td class="num">' + c.p.toFixed(2) + '%</td><td' + (c.least ? ' class="ia-least"' : '') + '>' + c.level + (c.least ? ' — least mastered' : '') + '</td></tr>').join('') + '</table></div>' : '';
+    const leastBox = '<div class="lp-sub">Least mastered (below ' + a.cut + '%)</div>' + (least.length
+      ? '<ul>' + least.map(c => '<li class="ia-least">' + esc(c.comp) + ' — ' + c.p.toFixed(2) + '%</li>').join('') + '</ul><div class="at-help">Plan re-teaching or remediation for these (your ILAW "Ways Forward").</div>'
+      : (a.compList.length ? '<p>None — all competencies are at or above ' + a.cut + '%.</p>' : '<p>Items below ' + a.cut + '%: ' + (a.items.filter(i => i.least).map(i => '#' + i.n).join(', ') || 'none') + '</p>'));
+    const hasD = a.items.some(i => i.d != null);
+    const itemTable = '<div class="lp-sub">Item by item</div><div class="gs-scroll"><table class="' + (forPrint ? '' : 'gs-table') + '"><tr><th>#</th>' + (a.compList.length ? '<th>Level</th>' : '') + '<th>Correct</th><th>% correct</th><th>Difficulty</th>' + (hasD ? '<th>Discrimination</th><th>Action</th>' : '') + '<th>Remark</th></tr>' +
+      a.items.map(i => '<tr><td>' + i.n + '</td>' + (a.compList.length ? '<td>' + esc(i.level) + '</td>' : '') + '<td>' + i.correct + '/' + a.N + '</td><td>' + i.p.toFixed(2) + '%</td><td>' + i.diff + '</td>' +
+        (hasD ? '<td>' + (i.d == null ? '' : i.d.toFixed(2)) + '</td><td>' + discrimOf(i.d) + '</td>' : '') + '<td' + (i.least ? ' class="ia-least"' : '') + '>' + (i.least ? 'Least mastered' : 'Mastered') + '</td></tr>').join('') + '</table></div>' +
+      '<div class="at-help">Difficulty: Easy above 80% correct · Average 21–80% · Difficult 20% and below.' + (hasD ? ' Discrimination = upper 27% minus lower 27% of learners (0.40+ very good, 0.30–0.39 good, 0.20–0.29 fair, below 0.20 poor).' : ' Use "wrong item numbers" mode with 10+ learners to also get the discrimination index.') + '</div>';
+    return mpsBox + leastBox + compTable + itemTable;
+  }
+  function showIa(){
+    if(!lastIa) return;
+    $('iaOut').innerHTML = iaTables(lastIa, false) + '<div class="at-help">MPS mastery levels: 96–100 Mastered · 86–95 Closely Approximating Mastery · 66–85 Moving Toward Mastery · 35–65 Average · 15–34 Low · 5–14 Very Low · 0–4 Absolutely No Mastery.</div>' +
+      '<div class="at-btnrow"><button type="button" class="at-btn light" id="iaPrint">🖨️ Print</button><button type="button" class="at-btn light" id="iaCsv">⬇ Save for Excel</button></div>';
+    $('iaPrint').addEventListener('click', () => openPrint('Item analysis', '<h1>Item Analysis and MPS</h1><div class="meta">' + esc(lastIa.title) + (lastIa.section ? ' · ' + esc(lastIa.section) : '') + '</div>' + iaTables(lastIa, true) +
+      '<p style="margin-top:20px;">Prepared by: ______________________ &nbsp;&nbsp;&nbsp; Checked by: ______________________</p>', false));
+    $('iaCsv').addEventListener('click', () => downloadCsv('Item analysis ' + (lastIa.title || ''),
+      [['MPS', lastIa.mps.toFixed(2) + '%', lastIa.mpsLevel, 'Learners', lastIa.N, 'Items', lastIa.n], [],
+       ['Item', 'Competency', 'Level', 'Correct', '% correct', 'Difficulty', 'Discrimination', 'Remark']]
+       .concat(lastIa.items.map(i => [i.n, i.comp, i.level, i.correct, i.p.toFixed(2), i.diff, i.d == null ? '' : i.d.toFixed(2), i.least ? 'Least mastered' : 'Mastered']))
+       .concat([[], ['Competency', 'Items', '% correct', 'Mastery level']], lastIa.compList.map(c => [c.comp, '#' + rangeTxt(c.items), c.p.toFixed(2), c.level]))));
+  }
+  function initIa(){
+    const saved = store.get('st_ia_last', null);
+    if(saved){ $('iaTitle').value = saved.title || ''; $('iaSection').value = saved.section || ''; $('iaItems').value = saved.n || 40; $('iaCut').value = saved.cut || 75; }
+    else if(lastTos){ $('iaTitle').value = lastTos.title || ''; $('iaItems').value = lastTos.total || 40; }
+    $('iaMode').addEventListener('change', () => { const w = $('iaMode').value === 'wrong'; $('iaWrongBox').style.display = w ? '' : 'none'; $('iaCountBox').style.display = w ? 'none' : ''; if(!w) drawCounts(); });
+    $('iaItems').addEventListener('change', () => { if($('iaMode').value === 'count') drawCounts(); });
+    $('iaRun').addEventListener('click', runIa);
+  }
+
   // ================= GRADE SHEET (DO 015, s. 2026) =================
   const GROUPS = { core: [20, 50, 30], tle: [20, 60, 20] };
   // SY 2026–2027 adjusted transmutation (Initial Grade 70.00 = 75). Rebuilt from published summaries of DO 015, s. 2026:
@@ -5121,7 +5289,10 @@
   lastTest = store.get('st_test_last', null); if(lastTest) showTest();
   $('testMake').addEventListener('click', makeTest);
   initGrades();
-  window.ST_TOOLS = { transmute, shares };
+  initIa();
+  try{ const pv = localStorage.getItem('st_paper'); if(pv) $('atPaper').value = pv; }catch(e){}
+  $('atPaper').addEventListener('change', () => { try{ localStorage.setItem('st_paper', $('atPaper').value); }catch(e){} });
+  window.ST_TOOLS = { transmute, shares, masteryLevel };
 })();
 </script>
 

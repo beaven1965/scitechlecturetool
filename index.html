@@ -1617,6 +1617,16 @@
   .ia-mps{ border:2px solid #3E9B63; border-radius:12px; padding:12px 14px; margin:12px 0; background:#F4FAF6; }
   .ia-mps .big{ font-size:26px; font-weight:800; color:#1F6B40; }
   .ia-least{ color:#B42318; font-weight:700; }
+  .gs-table td input[type=text], .gs-table td input.wide{ width:140px; text-align:left; }
+  .gs-table td select{ font-size:12.5px; padding:3px; border:1px solid #cfd6df; border-radius:4px; }
+  .ar-table td input[type=text]{ width:130px; }
+  .att-table td.att{ cursor:pointer; min-width:22px; height:24px; font-weight:800; user-select:none; }
+  .att-table td.att.A{ background:#FDE2E1; color:#B42318; } .att-table td.att.T{ background:#FFF1D6; color:#9A4A00; }
+  .att-table th.we{ background:#eee; }
+  .ecp-table td.gs-name{ min-width:170px; font-size:12px; } .ecp-table input[type=text]{ width:150px; } .ecp-ok{ color:#1F7A44; font-weight:700; } .ecp-no{ color:#B42318; font-weight:700; }
+  #atEcp label.ecp-doc{ display:flex !important; font-weight:400 !important; } #atEcp label.ecp-doc input{ width:18px !important; padding:0; } #ecpTarget select, #ecpTarget input{ width:auto !important; display:inline-block; padding:2px 4px; font-size:13px; }
+  .ecp-doc{ display:flex; gap:8px; align-items:flex-start; font-size:13.5px; margin:6px 0; color:#111; } .ecp-doc input{ width:18px; height:18px; margin-top:1px; accent-color:#3E9B63; flex:none; }
+  .lvl-Independent{ color:#1F7A44; font-weight:700; } .lvl-Instructional{ color:#9A6A00; font-weight:700; } .lvl-Frustration{ color:#B42318; font-weight:700; }
   .at-card .lp-sub{ font-weight:700; margin:12px 0 4px; font-size:14px; }
   .gs-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; margin-top:8px; border:1px solid #d6e4db; border-radius:8px; }
   .gs-table, .tos-table{ border-collapse:collapse; font-size:12.5px; min-width:100%; }
@@ -1791,7 +1801,7 @@
         </div>
         </div>
         <div class="settings-item clickable feature-row" id="lessonPlanRow" style="--accent:#2E6B8C"><span>📝 ILAW Lesson Plan helper</span><span class="chevron">→</span></div>
-        <div class="settings-item clickable feature-row" id="assessRow" style="--accent:#3E9B63"><span>🧰 Assessment Tools — HOTS test, TOS, item analysis, grade sheet</span><span class="chevron">→</span></div>
+        <div class="settings-item clickable feature-row" id="assessRow" style="--accent:#3E9B63"><span>🧰 Assessment Tools — HOTS test, TOS, item analysis &amp; MPS, Phil-IRI, ARAL, attendance, ECP, GSIS retirement, grade sheet</span><span class="chevron">→</span></div>
       </div>
 
     </div>
@@ -1899,7 +1909,7 @@
         <span class="date">🧰 Assessment Tools</span>
         <button class="new-recording-btn" id="closeAssessBtn">Close</button>
       </div>
-      <div class="concordance-intro">Tools for tests and grades in the new curriculum: a HOTS test guide, a Table of Specifications (TOS) maker, a HOTS test paper maker, item analysis with MPS, and a grade sheet (DepEd Order No. 015, s. 2026 — three terms).</div>
+      <div class="concordance-intro">Tools for tests, grades and class forms in the new curriculum: HOTS test guide, TOS maker, HOTS test paper maker, item analysis with MPS, MPS summary report, Phil-IRI reading profile, remediation/ARAL tracker, attendance tracker, an ECP reclassification helper, a GSIS retirement estimate, and a grade sheet (DepEd Order No. 015, s. 2026 — three terms).</div>
 
       <label class="at-lbl at-paper">🖨️ Paper size for printing
         <select id="atPaper">
@@ -2011,6 +2021,132 @@
           <div class="at-btnrow"><button type="button" class="at-btn" id="iaRun">Analyze</button></div>
           <div class="error-box" id="iaError" style="display:none;"></div>
           <div id="iaOut"></div>
+        </div></div>
+      </details>
+
+
+      <details class="se-fold at-fold" id="atMps">
+        <summary><span>📋 MPS summary report<small>Several sections or subjects in one table · free</small></span></summary>
+        <div class="se-fold-body"><div class="paper-card at-card">
+          <div class="at-grid2">
+            <label>Report title<input id="msTitle" type="text" placeholder="e.g. Term 1 Summative Test 1 — Grade 7"></label>
+            <label>Number of items<input id="msItems" type="number" min="1" max="200" value="40"></label>
+          </div>
+          <div class="at-help">One row per section or subject. Tip: after an item analysis, tap "Add last item analysis" to copy its numbers.</div>
+          <div class="gs-scroll"><table class="gs-table" id="msTable"></table></div>
+          <div class="at-btnrow">
+            <button type="button" class="at-btn light" id="msAdd">+ Add row</button>
+            <button type="button" class="at-btn light" id="msFromIa">+ Add last item analysis</button>
+            <button type="button" class="at-btn light" id="msPrint">🖨️ Print</button>
+            <button type="button" class="at-btn light" id="msCsv">⬇ Save for Excel</button>
+          </div>
+        </div></div>
+      </details>
+
+      <details class="se-fold at-fold" id="atIri">
+        <summary><span>📖 Phil-IRI reading profile<small>Grades 4–10 · oral reading level per learner · free</small></span></summary>
+        <div class="se-fold-body"><div class="paper-card at-card">
+          <div class="at-grid2">
+            <label>Grade &amp; section<input id="iriSection" type="text" placeholder="e.g. Grade 7 – Rizal"></label>
+            <label>Period
+              <select id="iriPeriod"><option>Beginning of school year (BOSY)</option><option>Middle of school year (MOSY)</option><option>End of school year (EOSY)</option></select>
+            </label>
+            <label>Passage (title / level)<input id="iriPassage" type="text" placeholder="e.g. Grade 7 Set A — Filipino or English"></label>
+            <label>Words in the passage<input id="iriWords" type="number" min="1" value="150"></label>
+            <label>Comprehension questions<input id="iriQs" type="number" min="1" value="8"></label>
+          </div>
+          <div class="at-help">For each learner type the <b>miscues</b> (reading errors), the <b>correct answers</b> to the questions and the <b>reading time in seconds</b>. Word reading: 97–100% Independent · 90–96% Instructional · 89% and below Frustration. Comprehension: 80–100% Independent · 59–79% Instructional · 58% and below Frustration. The oral reading level is the lower of the two.</div>
+          <div class="gs-scroll"><table class="gs-table" id="iriTable"></table></div>
+          <div class="at-btnrow">
+            <button type="button" class="at-btn light" id="iriAdd">+ Add learners</button>
+            <button type="button" class="at-btn light" id="iriPrint">🖨️ Print class reading profile</button>
+            <button type="button" class="at-btn light" id="iriCsv">⬇ Save for Excel</button>
+            <button type="button" class="at-btn light" id="iriClear">Clear</button>
+          </div>
+          <div id="iriSummary"></div>
+        </div></div>
+      </details>
+
+      <details class="se-fold at-fold" id="atAral">
+        <summary><span>🤝 Remediation / ARAL tracker<small>Who needs help, what was done, progress · free</small></span></summary>
+        <div class="se-fold-body"><div class="paper-card at-card">
+          <div class="at-grid2">
+            <label>Grade &amp; section<input id="arSection" type="text" placeholder="e.g. Grade 7 – Rizal"></label>
+            <label>Learning area / program<input id="arSubject" type="text" placeholder="e.g. Science · ARAL Reading"></label>
+          </div>
+          <div class="at-help">One row per learner and competency. Tip: "Add least-mastered from item analysis" fills the competencies for you.</div>
+          <div class="gs-scroll"><table class="gs-table ar-table" id="arTable"></table></div>
+          <div class="at-btnrow">
+            <button type="button" class="at-btn light" id="arAdd">+ Add row</button>
+            <button type="button" class="at-btn light" id="arFromIa">+ Add least-mastered from item analysis</button>
+            <button type="button" class="at-btn light" id="arPrint">🖨️ Print</button>
+            <button type="button" class="at-btn light" id="arCsv">⬇ Save for Excel</button>
+          </div>
+        </div></div>
+      </details>
+
+      <details class="se-fold at-fold" id="atAtt">
+        <summary><span>🗓 Attendance tracker<small>Daily attendance with monthly totals (helps fill SF2) · free</small></span></summary>
+        <div class="se-fold-body"><div class="paper-card at-card">
+          <div class="at-grid2">
+            <label>Grade &amp; section<input id="atSection" type="text" placeholder="e.g. Grade 7 – Rizal"></label>
+            <label>Month<input id="atMonth" type="month"></label>
+          </div>
+          <label class="at-lbl">Learners — one name per line (Boys, then --- , then Girls)<textarea id="atNames" rows="4" placeholder="DELA CRUZ, Juan&#10;---&#10;REYES, Maria"></textarea></label>
+          <div class="at-btnrow" style="margin-top:4px;"><button type="button" class="at-btn light" id="atSaveNames">Save names</button></div>
+          <div class="at-help">Tap a box to cycle: blank = present · <b>A</b> = absent · <b>T</b> = tardy (late). Weekends are skipped.</div>
+          <div class="gs-scroll"><table class="gs-table att-table" id="attTable"></table></div>
+          <div class="at-btnrow">
+            <button type="button" class="at-btn light" id="attPrint">🖨️ Print</button>
+            <button type="button" class="at-btn light" id="attCsv">⬇ Save for Excel</button>
+          </div>
+        </div></div>
+      </details>
+
+      <details class="se-fold at-fold" id="atEcp">
+        <summary><span>🎓 ECP reclassification helper<small>Expanded Career Progression (DO 24, s. 2025) · checklist, PPST tracker, self-score · free</small></span></summary>
+        <div class="se-fold-body"><div class="paper-card at-card">
+          <div class="at-help">For your own preparation only. The official assessment is done by your Division (HRMPSB) using the RFTP form. Numbers below follow published Division memos for DO 24, s. 2025 — please check your own Division memo, and change any number that is different.</div>
+          <div class="at-grid2">
+            <label>Your name<input id="ecpName" type="text" placeholder="e.g. Juan Dela Cruz"></label>
+            <label>Current position<input id="ecpCur" type="text" placeholder="e.g. Teacher I"></label>
+            <label>Position you are applying for<select id="ecpPos"></select></label>
+            <label>School<input id="ecpSchool" type="text" placeholder="e.g. Rizal NHS"></label>
+          </div>
+          <div class="ia-mps" id="ecpTarget"></div>
+
+          <div class="lp-sub">1. Documents checklist</div>
+          <div id="ecpDocs"></div>
+
+          <div class="lp-sub">2. PPST indicators (from your IPCRF / COT ratings)</div>
+          <div class="at-help">Mark each indicator as <b>COI</b> (seen in class observation) or <b>NCOI</b> (shown in your portfolio), then its best rating in your last 3 rating periods. Write your proof (MOV). The box at the top counts what you already have against the target.</div>
+          <div class="gs-scroll"><table class="gs-table ecp-table" id="ecpTable"></table></div>
+
+          <div class="lp-sub">3. Self-score (comparative assessment)</div>
+          <div class="at-help">Type your own estimate for each part. Change the "Max" numbers if your Division uses different ones.</div>
+          <div class="gs-scroll"><table class="gs-table" id="ecpScore"></table></div>
+
+          <div class="at-btnrow">
+            <button type="button" class="at-btn light" id="ecpPrint">🖨️ Print</button>
+            <button type="button" class="at-btn light" id="ecpCsv">⬇ Save for Excel</button>
+            <button type="button" class="at-btn light" id="ecpClear">Clear</button>
+          </div>
+        </div></div>
+      </details>
+
+      <details class="se-fold at-fold" id="atGsis">
+        <summary><span>💰 GSIS retirement estimate<small>Pension or cash at 60–65 (RA 8291) plus terminal leave · free</small></span></summary>
+        <div class="se-fold-body"><div class="paper-card at-card">
+          <div class="at-grid2">
+            <label>Age when you retire<input id="gsAge" type="number" min="40" max="65" value="65"></label>
+            <label>Years of government service<input id="gsYrs" type="number" min="0" max="50" step="0.5" value="10"></label>
+            <label>Average monthly salary, last 3 years (₱)<input id="gsAmc" type="number" min="0" step="100" placeholder="e.g. 45000"></label>
+            <label>Leave credits in days (optional)<input id="gsLeave" type="number" min="0" step="0.001" placeholder="e.g. 120.5"></label>
+            <label>Highest monthly salary (for leave)<input id="gsHigh" type="number" min="0" step="100" placeholder="same as above if blank"></label>
+          </div>
+          <div id="gsOut"></div>
+          <div class="at-help">An estimate only, based on RA 8291 (GSIS Act of 1997): Basic Monthly Pension = 2.5% × (average monthly salary + ₱700) × years of service, at most 90% of the average salary, at least ₱6,000. Under 15 years of service there is no monthly pension — you get a one-time cash payment of one month's average salary for each year (at least ₱12,000). Terminal leave = highest monthly salary × leave credits × 0.0481927. Optional retirement is at 60, compulsory at 65. Older entrants (before June 1997) may have other options under RA 660 or RA 1616. Please confirm your exact amount with GSIS and your Division's personnel office.</div>
+          <div class="at-btnrow"><button type="button" class="at-btn light" id="gsPrint">🖨️ Print</button></div>
         </div></div>
       </details>
 
@@ -5139,6 +5275,332 @@
     $('iaRun').addEventListener('click', runIa);
   }
 
+
+  // ================= MPS SUMMARY REPORT =================
+  let ms = store.get('st_ms', { title: '', items: 40, rows: [] });
+  function msCalc(r){ const n = +r.n || 0, items = +ms.items || 0, tot = +r.total || 0; const mean = n ? tot / n : 0; const mps = (n && items) ? tot / (n * items) * 100 : 0; return { mean, mps }; }
+  function drawMs(){
+    const head = '<tr><th>Section / subject</th><th>No. of learners</th><th>Total score</th><th>Mean</th><th>MPS</th><th>Mastery level</th><th></th></tr>';
+    $('msTable').innerHTML = head + ms.rows.map((r, i) => { const c = msCalc(r); return '<tr><td><input type="text" data-i="' + i + '" data-k="name" value="' + esc(r.name) + '"></td>' +
+      '<td><input inputmode="numeric" data-i="' + i + '" data-k="n" value="' + esc(r.n) + '"></td><td><input inputmode="numeric" class="wide" style="width:70px" data-i="' + i + '" data-k="total" value="' + esc(r.total) + '"></td>' +
+      '<td class="gs-c" data-o="mean">' + (r.n ? c.mean.toFixed(2) : '') + '</td><td class="gs-c" data-o="mps">' + (r.n ? c.mps.toFixed(2) + '%' : '') + '</td><td class="gs-c" data-o="lvl">' + (r.n ? masteryLevel(c.mps) : '') + '</td>' +
+      '<td><button type="button" class="tos-x" data-del="' + i + '">✕</button></td></tr>'; }).join('');
+    $('msTable').querySelectorAll('input').forEach(inp => inp.addEventListener('input', () => {
+      const r = ms.rows[+inp.dataset.i]; r[inp.dataset.k] = inp.value; store.set('st_ms', ms);
+      const tr = inp.closest('tr'), c = msCalc(r);
+      tr.querySelector('[data-o="mean"]').textContent = r.n ? c.mean.toFixed(2) : ''; tr.querySelector('[data-o="mps"]').textContent = r.n ? c.mps.toFixed(2) + '%' : ''; tr.querySelector('[data-o="lvl"]').textContent = r.n ? masteryLevel(c.mps) : '';
+    }));
+    $('msTable').querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => { ms.rows.splice(+b.dataset.del, 1); store.set('st_ms', ms); drawMs(); }));
+  }
+  function msRowsOut(){ return ms.rows.map(r => { const c = msCalc(r); return [r.name, r.n, r.total, r.n ? c.mean.toFixed(2) : '', r.n ? c.mps.toFixed(2) + '%' : '', r.n ? masteryLevel(c.mps) : '']; }); }
+  function initMs(){
+    $('msTitle').value = ms.title; $('msItems').value = ms.items;
+    $('msTitle').addEventListener('input', () => { ms.title = $('msTitle').value; store.set('st_ms', ms); });
+    $('msItems').addEventListener('input', () => { ms.items = +$('msItems').value || 0; store.set('st_ms', ms); drawMs(); });
+    $('msAdd').addEventListener('click', () => { ms.rows.push({ name: '', n: '', total: '' }); store.set('st_ms', ms); drawMs(); });
+    $('msFromIa').addEventListener('click', () => {
+      if(!lastIa){ alert('Please run an item analysis first (📈 Item analysis & MPS).'); return; }
+      const total = Math.round(lastIa.mps / 100 * lastIa.N * lastIa.n);
+      if(!ms.rows.length){ ms.items = lastIa.n; $('msItems').value = lastIa.n; if(!ms.title){ ms.title = lastIa.title; $('msTitle').value = lastIa.title; } }
+      ms.rows.push({ name: lastIa.section || lastIa.title || 'Section', n: lastIa.N, total }); store.set('st_ms', ms); drawMs();
+    });
+    $('msPrint').addEventListener('click', () => openPrint('MPS report', '<h1>Mean Percentage Score (MPS) Report</h1><div class="meta">' + esc(ms.title) + ' · ' + ms.items + ' items</div><table><tr><th>Section / subject</th><th>No. of learners</th><th>Total score</th><th>Mean</th><th>MPS</th><th>Mastery level</th></tr>' +
+      msRowsOut().map(r => '<tr>' + r.map((v, i) => '<td' + (i ? ' class="num"' : '') + '>' + esc(v) + '</td>').join('') + '</tr>').join('') + '</table>' +
+      '<p class="meta" style="margin-top:8px;">MPS = total score ÷ (learners × items) × 100. Levels: 96–100 Mastered · 86–95 Closely Approximating Mastery · 66–85 Moving Toward Mastery · 35–65 Average · 15–34 Low · 5–14 Very Low · 0–4 Absolutely No Mastery.</p>' +
+      '<p style="margin-top:20px;">Prepared by: ______________________ &nbsp;&nbsp;&nbsp; Checked by: ______________________</p>', false));
+    $('msCsv').addEventListener('click', () => downloadCsv('MPS report ' + ms.title, [['Report', ms.title, 'Items', ms.items], ['Section / subject', 'No. of learners', 'Total score', 'Mean', 'MPS', 'Mastery level']].concat(msRowsOut())));
+    drawMs();
+  }
+
+  // ================= PHIL-IRI READING PROFILE =================
+  let iri = store.get('st_iri', { section: '', period: '', passage: '', words: 150, qs: 8, rows: [] });
+  const iriLevel = (p, kind) => kind === 'word' ? (p >= 97 ? 'Independent' : p >= 90 ? 'Instructional' : 'Frustration') : (p >= 80 ? 'Independent' : p >= 59 ? 'Instructional' : 'Frustration');
+  const LV_RANK = { Independent: 3, Instructional: 2, Frustration: 1 };
+  function iriCalc(r){
+    const W = +iri.words || 0, Q = +iri.qs || 0;
+    if(r.miscues === '' || r.correct === '' || !W || !Q) return null;
+    const wr = Math.max(0, (W - (+r.miscues || 0)) / W * 100), cp = Math.min(100, (+r.correct || 0) / Q * 100);
+    const lw = iriLevel(wr, 'word'), lc = iriLevel(cp, 'comp');
+    const overall = LV_RANK[lw] <= LV_RANK[lc] ? lw : lc;
+    const wpm = (+r.secs > 0) ? Math.round(W / +r.secs * 60) : '';
+    return { wr, cp, lw, lc, overall, wpm };
+  }
+  function drawIri(){
+    const head = '<tr><th class="gs-name">Learner</th><th>Miscues</th><th>Correct<br>answers</th><th>Time<br>(sec)</th><th>Word<br>reading</th><th>Compre-<br>hension</th><th>Words /<br>minute</th><th>Oral reading level</th></tr>';
+    $('iriTable').innerHTML = head + iri.rows.map((r, i) => { const c = iriCalc(r);
+      return '<tr data-i="' + i + '"><td class="gs-name">' + (i + 1) + '. ' + esc(r.name) + '</td>' + ['miscues', 'correct', 'secs'].map(k => '<td><input inputmode="numeric" data-k="' + k + '" value="' + esc(r[k]) + '"></td>').join('') +
+        '<td class="gs-c" data-o="w">' + (c ? c.wr.toFixed(0) + '% ' + c.lw.slice(0, 5) + '.' : '') + '</td><td class="gs-c" data-o="c">' + (c ? c.cp.toFixed(0) + '% ' + c.lc.slice(0, 5) + '.' : '') + '</td>' +
+        '<td class="gs-c" data-o="r">' + (c ? c.wpm : '') + '</td><td class="gs-c' + (c ? ' lvl-' + c.overall : '') + '" data-o="o">' + (c ? c.overall : '') + '</td></tr>'; }).join('');
+    $('iriTable').querySelectorAll('input').forEach(inp => inp.addEventListener('input', () => {
+      const tr = inp.closest('tr'), r = iri.rows[+tr.dataset.i]; r[inp.dataset.k] = inp.value; store.set('st_iri', iri);
+      const c = iriCalc(r), set = (o, v) => { tr.querySelector('[data-o="' + o + '"]').textContent = v; };
+      set('w', c ? c.wr.toFixed(0) + '% ' + c.lw.slice(0, 5) + '.' : ''); set('c', c ? c.cp.toFixed(0) + '% ' + c.lc.slice(0, 5) + '.' : ''); set('r', c ? c.wpm : ''); set('o', c ? c.overall : '');
+      tr.querySelector('[data-o="o"]').className = 'gs-c' + (c ? ' lvl-' + c.overall : ''); iriSummary();
+    }));
+    iriSummary();
+  }
+  function iriSummary(){
+    const counts = { Independent: 0, Instructional: 0, Frustration: 0 }; let done = 0;
+    iri.rows.forEach(r => { const c = iriCalc(r); if(c){ counts[c.overall]++; done++; } });
+    $('iriSummary').innerHTML = done ? '<div class="ia-mps"><b>Class reading profile</b> (' + done + ' learners)<br>' + Object.keys(counts).map(k => '<span class="lvl-' + k + '">' + k + ': ' + counts[k] + ' (' + Math.round(counts[k] / done * 100) + '%)</span>').join(' · ') + '</div>' : '';
+    return { counts, done };
+  }
+  function iriOut(){ return iri.rows.map((r, i) => { const c = iriCalc(r); return [i + 1, r.name, r.miscues, r.correct, r.secs, c ? c.wr.toFixed(0) + '%' : '', c ? c.lw : '', c ? c.cp.toFixed(0) + '%' : '', c ? c.lc : '', c ? c.wpm : '', c ? c.overall : '']; }); }
+  function initIri(){
+    ['Section', 'Period', 'Passage', 'Words', 'Qs'].forEach(k => { const el = $('iri' + k), key = k.toLowerCase(); if(iri[key]) el.value = iri[key]; el.addEventListener('input', () => { iri[key] = el.value; store.set('st_iri', iri); drawIri(); }); });
+    $('iriAdd').addEventListener('click', () => {
+      const names = prompt('Type or paste the learners\' names, one per line:');
+      if(!names) return; names.split('\n').map(x => x.trim()).filter(Boolean).forEach(name => iri.rows.push({ name, miscues: '', correct: '', secs: '' }));
+      store.set('st_iri', iri); drawIri();
+    });
+    $('iriClear').addEventListener('click', () => { if(confirm('Clear all learners and results in the reading profile?')){ iri.rows = []; store.set('st_iri', iri); drawIri(); } });
+    $('iriPrint').addEventListener('click', () => { const sm = iriSummary();
+      openPrint('Class reading profile', '<h1>Phil-IRI — Class Reading Profile</h1><div class="meta">' + esc(iri.section) + ' · ' + esc(iri.period) + ' · Passage: ' + esc(iri.passage) + ' (' + iri.words + ' words, ' + iri.qs + ' questions)</div>' +
+        '<table><tr><th>#</th><th>Learner</th><th>Miscues</th><th>Correct</th><th>Time (s)</th><th>Word reading</th><th>Level</th><th>Comprehension</th><th>Level</th><th>WPM</th><th>Oral reading level</th></tr>' +
+        iriOut().map(r => '<tr>' + r.map((v, i) => '<td' + (i !== 1 ? ' class="num"' : '') + '>' + esc(v) + '</td>').join('') + '</tr>').join('') + '</table>' +
+        (sm.done ? '<h2>Summary</h2><table><tr><th>Independent</th><th>Instructional</th><th>Frustration</th><th>Total</th></tr><tr>' + ['Independent', 'Instructional', 'Frustration'].map(k => '<td class="num">' + sm.counts[k] + ' (' + Math.round(sm.counts[k] / sm.done * 100) + '%)</td>').join('') + '<td class="num">' + sm.done + '</td></tr></table>' : '') +
+        '<p class="meta" style="margin-top:8px;">Word reading: 97–100% Independent · 90–96% Instructional · ≤89% Frustration. Comprehension: 80–100% Independent · 59–79% Instructional · ≤58% Frustration. Oral reading level = the lower of the two. Please also follow your school\'s official Phil-IRI forms.</p>' +
+        '<p style="margin-top:20px;">Prepared by: ______________________ &nbsp;&nbsp;&nbsp; Checked by: ______________________</p>', true); });
+    $('iriCsv').addEventListener('click', () => downloadCsv('Phil-IRI ' + iri.section, [['Section', iri.section, 'Period', iri.period, 'Passage', iri.passage], ['#', 'Learner', 'Miscues', 'Correct answers', 'Time (s)', 'Word reading %', 'Word level', 'Comprehension %', 'Comprehension level', 'Words per minute', 'Oral reading level']].concat(iriOut())));
+    drawIri();
+  }
+
+  // ================= REMEDIATION / ARAL TRACKER =================
+  let ar = store.get('st_ar', { section: '', subject: '', rows: [] });
+  const AR_COLS = [['name', 'Learner'], ['comp', 'Competency / skill'], ['intervention', 'Intervention'], ['start', 'Start'], ['end', 'End'], ['pre', 'Pre'], ['post', 'Post']];
+  const AR_STATUS = ['Ongoing', 'Improved', 'Mastered', 'Needs more help'];
+  function drawAr(){
+    $('arTable').innerHTML = '<tr>' + AR_COLS.map(c => '<th>' + c[1] + '</th>').join('') + '<th>Status</th><th></th></tr>' + ar.rows.map((r, i) => '<tr data-i="' + i + '">' +
+      AR_COLS.map(([k]) => '<td><input ' + (k === 'start' || k === 'end' ? 'type="date"' : (k === 'pre' || k === 'post' ? 'inputmode="numeric"' : 'type="text"')) + ' data-k="' + k + '" value="' + esc(r[k] || '') + '"></td>').join('') +
+      '<td><select data-k="status">' + AR_STATUS.map(st => '<option' + (r.status === st ? ' selected' : '') + '>' + st + '</option>').join('') + '</select></td><td><button type="button" class="tos-x" data-del="' + i + '">✕</button></td></tr>').join('');
+    $('arTable').querySelectorAll('input, select').forEach(el => el.addEventListener('input', () => { ar.rows[+el.closest('tr').dataset.i][el.dataset.k] = el.value; store.set('st_ar', ar); }));
+    $('arTable').querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => { ar.rows.splice(+b.dataset.del, 1); store.set('st_ar', ar); drawAr(); }));
+  }
+  function initAr(){
+    $('arSection').value = ar.section; $('arSubject').value = ar.subject;
+    $('arSection').addEventListener('input', () => { ar.section = $('arSection').value; store.set('st_ar', ar); });
+    $('arSubject').addEventListener('input', () => { ar.subject = $('arSubject').value; store.set('st_ar', ar); });
+    $('arAdd').addEventListener('click', () => { ar.rows.push({ status: 'Ongoing', intervention: 'Re-teaching with small-group tutorial' }); store.set('st_ar', ar); drawAr(); });
+    $('arFromIa').addEventListener('click', () => {
+      const least = lastIa ? lastIa.compList.filter(c => c.least) : [];
+      if(!least.length){ alert(lastIa ? 'The last item analysis has no least-mastered competencies.' : 'Please run an item analysis first (📈 Item analysis & MPS) with "Match items to my TOS" ticked.'); return; }
+      least.forEach(c => ar.rows.push({ name: '', comp: c.comp + ' (' + c.p.toFixed(0) + '%)', intervention: 'Re-teaching with small-group tutorial', status: 'Ongoing' }));
+      store.set('st_ar', ar); drawAr();
+    });
+    const out = () => ar.rows.map(r => AR_COLS.map(([k]) => r[k] || '').concat([r.status || '']));
+    $('arPrint').addEventListener('click', () => openPrint('Remediation tracker', '<h1>Remediation / ARAL Progress Tracker</h1><div class="meta">' + esc(ar.section) + ' · ' + esc(ar.subject) + '</div><table><tr>' + AR_COLS.map(c => '<th>' + c[1] + '</th>').join('') + '<th>Status</th></tr>' +
+      out().map(r => '<tr>' + r.map(v => '<td>' + esc(v) + '</td>').join('') + '</tr>').join('') + '</table><p style="margin-top:20px;">Prepared by: ______________________ &nbsp;&nbsp;&nbsp; Noted by: ______________________</p>', true));
+    $('arCsv').addEventListener('click', () => downloadCsv('Remediation ' + ar.section, [['Section', ar.section, 'Subject/program', ar.subject], AR_COLS.map(c => c[1]).concat(['Status'])].concat(out())));
+    drawAr();
+  }
+
+  // ================= ATTENDANCE TRACKER =================
+  let att = store.get('st_att', { section: '', names: [], marks: {} });
+  function monthDays(ym){ const [y, m] = ym.split('-').map(Number); const days = []; const n = new Date(y, m, 0).getDate(); for(let d = 1; d <= n; d++){ const wd = new Date(y, m - 1, d).getDay(); if(wd !== 0 && wd !== 6) days.push({ d, wd }); } return days; }
+  const WD = ['Su', 'M', 'T', 'W', 'Th', 'F', 'Sa'];
+  function drawAtt(){
+    const ym = $('atMonth').value; if(!ym){ $('attTable').innerHTML = ''; return; }
+    const days = monthDays(ym), mk = att.marks[ym] || (att.marks[ym] = {});
+    let h = '<tr><th class="gs-name">Learner</th>' + days.map(x => '<th>' + x.d + '<br><small>' + WD[x.wd] + '</small></th>').join('') + '<th>Absent</th><th>Tardy</th></tr>';
+    let idx = 0;
+    att.names.forEach((nm, li) => {
+      if(nm === '---'){ h += '<tr class="gs-group"><td colspan="99">GIRLS</td></tr>'; return; }
+      if(li === 0 && att.names.includes('---')) h += '<tr class="gs-group"><td colspan="99">BOYS</td></tr>';
+      idx++; const row = mk[nm] || {};
+      const a = days.filter(x => row[x.d] === 'A').length, t = days.filter(x => row[x.d] === 'T').length;
+      h += '<tr data-n="' + esc(nm) + '"><td class="gs-name">' + idx + '. ' + esc(nm) + '</td>' + days.map(x => '<td class="att ' + (row[x.d] || '') + '" data-d="' + x.d + '">' + (row[x.d] || '') + '</td>').join('') + '<td class="gs-c" data-o="a">' + a + '</td><td class="gs-c" data-o="t">' + t + '</td></tr>';
+    });
+    $('attTable').innerHTML = h;
+    $('attTable').querySelectorAll('td.att').forEach(td => td.addEventListener('click', () => {
+      const tr = td.closest('tr'), nm = tr.dataset.n, d = td.dataset.d, row = mk[nm] || (mk[nm] = {});
+      row[d] = row[d] === 'A' ? 'T' : row[d] === 'T' ? '' : 'A'; if(!row[d]) delete row[d];
+      td.textContent = row[d] || ''; td.className = 'att ' + (row[d] || ''); store.set('st_att', att);
+      tr.querySelector('[data-o="a"]').textContent = days.filter(x => row[x.d] === 'A').length; tr.querySelector('[data-o="t"]').textContent = days.filter(x => row[x.d] === 'T').length;
+    }));
+  }
+  function attRows(){ const ym = $('atMonth').value, days = monthDays(ym), mk = att.marks[ym] || {};
+    return [['Learner'].concat(days.map(x => x.d + ' ' + WD[x.wd]), ['Absent', 'Tardy'])].concat(att.names.map(nm => nm === '---' ? ['GIRLS'] : (() => { const row = mk[nm] || {}; return [nm].concat(days.map(x => row[x.d] || ''), [days.filter(x => row[x.d] === 'A').length, days.filter(x => row[x.d] === 'T').length]); })())); }
+  function initAtt(){
+    $('atSection').value = att.section; $('atNames').value = att.names.join('\n');
+    const now = new Date(); $('atMonth').value = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+    $('atSection').addEventListener('input', () => { att.section = $('atSection').value; store.set('st_att', att); });
+    $('atSaveNames').addEventListener('click', () => { att.names = $('atNames').value.split('\n').map(x => x.trim()).filter(Boolean).map(x => /^-{3,}$/.test(x) ? '---' : x).slice(0, 80); store.set('st_att', att); drawAtt(); });
+    $('atMonth').addEventListener('change', drawAtt);
+    $('attPrint').addEventListener('click', () => { const rows = attRows();
+      openPrint('Attendance', '<h1>Attendance — ' + esc($('atMonth').value) + '</h1><div class="meta">' + esc(att.section) + ' · blank = present · A = absent · T = tardy</div><table>' +
+        rows.map((r, i) => '<tr>' + r.map(v => (i ? '<td class="num">' : '<th>') + esc(v) + (i ? '</td>' : '</th>')).join('') + '</tr>').join('') + '</table><p class="meta" style="margin-top:8px;">Use these totals to fill out your official School Form 2 (SF2).</p>', true); });
+    $('attCsv').addEventListener('click', () => downloadCsv('Attendance ' + att.section + ' ' + $('atMonth').value, attRows()));
+    drawAtt();
+  }
+
+  // ================= ECP RECLASSIFICATION HELPER (DO 24, s. 2025) =================
+  // Targets as published in Division memos citing JC 01, s. 2025 (RFTP). Editable by the teacher.
+  // coiR / ncoi ratings: VS = Very Satisfactory or better, O = Outstanding.
+  const ECP_POS = [
+    ['Teacher II',          'Proficient',          6,  'VS', 4, 0],
+    ['Teacher III',         'Proficient',          12, 'VS', 8, 0],
+    ['Teacher IV',          'Proficient',          21, 'VS', 16, 0],
+    ['Teacher V',           'Proficient',          6,  'O',  0, 4],
+    ['Teacher VI',          'Proficient',          12, 'O',  4, 4],
+    ['Teacher VII',         'Proficient',          18, 'O',  6, 6],
+    ['Master Teacher I',    'Proficient',          21, 'O',  8, 8],
+    ['Master Teacher II',   'Highly Proficient',   10, 'O',  5, 5],
+    ['Master Teacher III',  'Highly Proficient',   21, 'O',  8, 8],
+    ['Master Teacher IV',   'Distinguished',       10, 'O',  5, 5],
+    ['Master Teacher V',    'Distinguished',       21, 'O',  8, 8]
+  ];
+  const STAGE_NO = { 'Proficient': 2, 'Highly Proficient': 3, 'Distinguished': 4 };
+  const PPST = [
+    ['1.1','Content knowledge and its application within and across curriculum areas'],['1.2','Research-based knowledge and principles of teaching and learning'],['1.3','Positive use of ICT'],
+    ['1.4','Strategies for promoting literacy and numeracy'],['1.5','Strategies for developing critical and creative thinking and other higher-order thinking skills'],['1.6','Mother tongue, Filipino and English in teaching and learning'],['1.7','Classroom communication strategies'],
+    ['2.1','Learner safety and security'],['2.2','Fair learning environment'],['2.3','Management of classroom structure and activities'],['2.4','Support for learner participation'],['2.5','Promotion of purposive learning'],['2.6','Management of learner behavior'],
+    ['3.1','Learners’ gender, needs, strengths, interests and experiences'],['3.2','Learners’ linguistic, cultural, socio-economic and religious backgrounds'],['3.3','Learners with disabilities, giftedness and talents'],['3.4','Learners in difficult circumstances'],['3.5','Learners from indigenous groups'],
+    ['4.1','Planning and management of teaching and learning process'],['4.2','Learning outcomes aligned with learning competencies'],['4.3','Relevance and responsiveness of learning programs'],['4.4','Professional collaboration to enrich teaching practice'],['4.5','Teaching and learning resources including ICT'],
+    ['5.1','Design, selection, organization and utilization of assessment strategies'],['5.2','Monitoring and evaluation of learner progress and achievement'],['5.3','Feedback to improve learning'],['5.4','Communication of learner needs, progress and achievement to key stakeholders'],['5.5','Use of assessment data to enhance teaching and learning practices and programs'],
+    ['6.1','Learning environments responsive to community contexts'],['6.2','Engagement of parents and the wider school community in the educative process'],['6.3','Professional ethics'],['6.4','School policies and procedures'],
+    ['7.1','Philosophy of teaching'],['7.2','Dignity of teaching as a profession'],['7.3','Professional links with colleagues'],['7.4','Professional reflection and learning to improve practice'],['7.5','Professional development goals']
+  ];
+  const ECP_DOCS = [
+    'Letter of intent to the Schools Division Superintendent (position applied for)',
+    'Personal Data Sheet (CS Form 212, latest revision) with Work Experience Sheet',
+    'Valid PRC license / ID (photocopy)',
+    'Transcript of records, diploma, special order; graduate units or degree if any',
+    'Service record (signed)',
+    'Latest appointment (photocopy)',
+    'Training certificates (NEAP-recognized or equivalent)',
+    'Up to 3 performance ratings (IPCRF), at least Very Satisfactory',
+    'Portfolio for non-classroom observable indicators (NCOIs) with annotations',
+    'Classroom observation (COT) rating sheets',
+    'Omnibus sworn statement (authenticity of documents) and data privacy consent',
+    'For SHS-TVL: TESDA NC II / Trainers Methodology certificate'
+  ];
+  const ECP_SCORE = [['Education', 10], ['Training', 10], ['Experience', 10], ['Performance (IPCRF ratings)', 30], ['Classroom observable indicators (COIs)', 25], ['Non-classroom indicators (NCOIs: portfolio & interview)', 15]];
+  let ecp = store.get('st_ecp', null);
+  if(!ecp || !ecp.rows) ecp = { name: '', cur: '', pos: 'Teacher II', school: '', docs: {}, rows: PPST.map(() => ({ type: '', r: '', mov: '' })), score: ECP_SCORE.map(x => ({ max: x[1], mine: '' })), targets: {} };
+  const saveEcp = () => store.set('st_ecp', ecp);
+  function ecpTarget(){
+    const base = ECP_POS.find(x => x[0] === ecp.pos) || ECP_POS[0];
+    const t = Object.assign({ stage: base[1], coiN: base[2], coiR: base[3], ncoiVS: base[4], ncoiO: base[5] }, ecp.targets[ecp.pos] || {});
+    return t;
+  }
+  function ecpCounts(){
+    const c = { coiVS: 0, coiO: 0, ncoiVS: 0, ncoiO: 0 };
+    ecp.rows.forEach(r => { const ok = r.r === 'O' || r.r === 'VS'; if(!r.type || !ok) return;
+      if(r.type === 'COI'){ c.coiVS++; if(r.r === 'O') c.coiO++; } else { c.ncoiVS++; if(r.r === 'O') c.ncoiO++; } });
+    return c;
+  }
+  function ecpCheck(){
+    const t = ecpTarget(), c = ecpCounts();
+    const coiHave = t.coiR === 'O' ? c.coiO : c.coiVS;
+    const ncoiTotal = (+t.ncoiVS || 0) + (+t.ncoiO || 0);
+    const items = [
+      { label: 'COIs rated ' + (t.coiR === 'O' ? 'Outstanding' : 'Very Satisfactory or better'), have: coiHave, need: +t.coiN || 0 },
+      { label: 'NCOIs rated Outstanding', have: c.ncoiO, need: +t.ncoiO || 0 },
+      { label: 'NCOIs rated Very Satisfactory or better (total)', have: c.ncoiVS, need: ncoiTotal }
+    ].filter(x => x.need > 0);
+    return { t, items, ready: items.every(x => x.have >= x.need) };
+  }
+  function drawEcpTarget(){
+    const k = ecpCheck(), t = k.t;
+    $('ecpTarget').innerHTML = '<b>Target for ' + esc(ecp.pos) + '</b> · PPST career stage: <b>' + esc(t.stage) + '</b> (indicator codes ending in .' + STAGE_NO[t.stage] + ')<br>' +
+      k.items.map(x => '<span class="' + (x.have >= x.need ? 'ecp-ok' : 'ecp-no') + '">' + (x.have >= x.need ? '✓ ' : '✗ ') + esc(x.label) + ': ' + x.have + ' of ' + x.need + '</span>').join('<br>') +
+      '<div class="at-help" style="margin:8px 0 0;">Change the target if your Division memo is different: COIs <input id="ecpTcoi" inputmode="numeric" style="width:40px" value="' + esc(t.coiN) + '"> rated <select id="ecpTcoiR"><option value="VS"' + (t.coiR === 'VS' ? ' selected' : '') + '>VS or better</option><option value="O"' + (t.coiR === 'O' ? ' selected' : '') + '>Outstanding</option></select> · NCOIs VS <input id="ecpTnvs" inputmode="numeric" style="width:40px" value="' + esc(t.ncoiVS) + '"> + Outstanding <input id="ecpTno" inputmode="numeric" style="width:40px" value="' + esc(t.ncoiO) + '"></div>' +
+      '<div class="at-help" style="margin:4px 0 0;">Reclassification can go up to a maximum of 3 salary grades above your current position.</div>';
+    [['ecpTcoi', 'coiN'], ['ecpTcoiR', 'coiR'], ['ecpTnvs', 'ncoiVS'], ['ecpTno', 'ncoiO']].forEach(([id, key]) => $(id).addEventListener('change', () => {
+      ecp.targets[ecp.pos] = Object.assign({}, ecp.targets[ecp.pos] || {}, { [key]: $(id).value }); saveEcp(); drawEcpTarget(); }));
+  }
+  function drawEcpTable(){
+    const sn = STAGE_NO[ecpTarget().stage];
+    $('ecpTable').innerHTML = '<tr><th class="gs-name">PPST indicator</th><th>COI / NCOI</th><th>Best rating</th><th>Proof (MOV)</th></tr>' +
+      PPST.map((p, i) => { const r = ecp.rows[i] || (ecp.rows[i] = { type: '', r: '', mov: '' }); return '<tr data-i="' + i + '"><td class="gs-name"><b>' + p[0] + '.' + sn + '</b> ' + esc(p[1]) + '</td>' +
+        '<td><select data-k="type"><option value="">—</option><option' + (r.type === 'COI' ? ' selected' : '') + '>COI</option><option' + (r.type === 'NCOI' ? ' selected' : '') + '>NCOI</option></select></td>' +
+        '<td><select data-k="r"><option value="">—</option><option value="O"' + (r.r === 'O' ? ' selected' : '') + '>Outstanding</option><option value="VS"' + (r.r === 'VS' ? ' selected' : '') + '>Very Satisfactory</option><option value="S"' + (r.r === 'S' ? ' selected' : '') + '>Satisfactory or lower</option></select></td>' +
+        '<td><input type="text" data-k="mov" value="' + esc(r.mov) + '" placeholder="e.g. COT 2, lesson plan"></td></tr>'; }).join('');
+    $('ecpTable').querySelectorAll('select, input').forEach(el => el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => {
+      ecp.rows[+el.closest('tr').dataset.i][el.dataset.k] = el.value; saveEcp(); if(el.tagName === 'SELECT') drawEcpTarget(); }));
+  }
+  function ecpTotal(){ return ecp.score.reduce((a, s) => a + (parseFloat(s.mine) || 0), 0); }
+  function drawEcpScore(){
+    const maxT = ecp.score.reduce((a, s) => a + (+s.max || 0), 0), tot = ecpTotal();
+    $('ecpScore').innerHTML = '<tr><th class="gs-name">Part</th><th>Max</th><th>My estimate</th></tr>' + ECP_SCORE.map((x, i) => '<tr data-i="' + i + '"><td class="gs-name">' + esc(x[0]) + '</td><td><input inputmode="decimal" data-k="max" value="' + esc(ecp.score[i].max) + '"></td><td><input inputmode="decimal" data-k="mine" value="' + esc(ecp.score[i].mine) + '"></td></tr>').join('') +
+      '<tr><td class="gs-name"><b>Total</b></td><td class="gs-c"><b id="ecpMaxT">' + maxT + '</b></td><td class="gs-c"><b id="ecpTot">' + tot + '</b></td></tr>';
+    $('ecpScore').querySelectorAll('input').forEach(inp => inp.addEventListener('input', () => { ecp.score[+inp.closest('tr').dataset.i][inp.dataset.k] = inp.value; saveEcp();
+      $('ecpTot').textContent = ecpTotal(); $('ecpMaxT').textContent = ecp.score.reduce((a, s) => a + (+s.max || 0), 0); }));
+  }
+  function drawEcpDocs(){
+    $('ecpDocs').innerHTML = ECP_DOCS.map((d, i) => '<label class="ecp-doc"><input type="checkbox" data-d="' + i + '"' + (ecp.docs[i] ? ' checked' : '') + '><span>' + esc(d) + '</span></label>').join('') +
+      '<div class="at-help">Ready: <b id="ecpDocN">' + Object.values(ecp.docs).filter(Boolean).length + '</b> of ' + ECP_DOCS.length + '. Your Division may ask for a different folder colour, labels or order.</div>';
+    $('ecpDocs').querySelectorAll('input').forEach(cb => cb.addEventListener('change', () => { ecp.docs[cb.dataset.d] = cb.checked; saveEcp(); $('ecpDocN').textContent = Object.values(ecp.docs).filter(Boolean).length; }));
+  }
+  const ECP_R = { O: 'Outstanding', VS: 'Very Satisfactory', S: 'Satisfactory or lower', '': '' };
+  function initEcp(){
+    $('ecpPos').innerHTML = ECP_POS.map(x => '<option>' + x[0] + '</option>').join('');
+    [['ecpName', 'name'], ['ecpCur', 'cur'], ['ecpPos', 'pos'], ['ecpSchool', 'school']].forEach(([id, k]) => { $(id).value = ecp[k]; $(id).addEventListener(id === 'ecpPos' ? 'change' : 'input', () => { ecp[k] = $(id).value; saveEcp(); if(id === 'ecpPos'){ drawEcpTarget(); drawEcpTable(); } }); });
+    $('ecpClear').addEventListener('click', () => { if(confirm('Clear everything in the ECP helper?')){ ecp = { name: '', cur: '', pos: 'Teacher II', school: '', docs: {}, rows: PPST.map(() => ({ type: '', r: '', mov: '' })), score: ECP_SCORE.map(x => ({ max: x[1], mine: '' })), targets: {} }; saveEcp(); initEcpDraw(); } });
+    $('ecpPrint').addEventListener('click', () => { const k = ecpCheck(), sn = STAGE_NO[k.t.stage];
+      openPrint('ECP readiness', '<h1>ECP Reclassification — Readiness Summary</h1><div class="meta">' + esc(ecp.name) + ' · ' + esc(ecp.school) + ' · From ' + esc(ecp.cur) + ' to <b>' + esc(ecp.pos) + '</b> · Career stage: ' + esc(k.t.stage) + '</div>' +
+        '<h2>Target</h2><table><tr><th>Requirement</th><th>Have</th><th>Need</th><th>Met?</th></tr>' + k.items.map(x => '<tr><td>' + esc(x.label) + '</td><td class="num">' + x.have + '</td><td class="num">' + x.need + '</td><td class="num">' + (x.have >= x.need ? 'Yes' : 'Not yet') + '</td></tr>').join('') + '</table>' +
+        '<h2>PPST indicators</h2><table><tr><th>Indicator</th><th>COI/NCOI</th><th>Best rating</th><th>Proof (MOV)</th></tr>' + PPST.map((p, i) => { const r = ecp.rows[i] || {}; return '<tr><td>' + p[0] + '.' + sn + ' ' + esc(p[1]) + '</td><td>' + esc(r.type) + '</td><td>' + esc(ECP_R[r.r || '']) + '</td><td>' + esc(r.mov) + '</td></tr>'; }).join('') + '</table>' +
+        '<h2>Documents</h2><table>' + ECP_DOCS.map((d, i) => '<tr><td class="num">' + (ecp.docs[i] ? '☑' : '☐') + '</td><td>' + esc(d) + '</td></tr>').join('') + '</table>' +
+        '<h2>Self-score</h2><table><tr><th>Part</th><th>Max</th><th>My estimate</th></tr>' + ECP_SCORE.map((x, i) => '<tr><td>' + esc(x[0]) + '</td><td class="num">' + esc(ecp.score[i].max) + '</td><td class="num">' + esc(ecp.score[i].mine) + '</td></tr>').join('') + '<tr><td><b>Total</b></td><td class="num">' + ecp.score.reduce((a, s) => a + (+s.max || 0), 0) + '</td><td class="num">' + ecpTotal() + '</td></tr></table>' +
+        '<p class="meta" style="margin-top:8px;">For the teacher\'s own preparation. The official evaluation uses the Division\'s RFTP and HRMPSB assessment under DO 24, s. 2025.</p>', false); });
+    $('ecpCsv').addEventListener('click', () => { const sn = STAGE_NO[ecpTarget().stage];
+      downloadCsv('ECP ' + ecp.pos, [['Name', ecp.name, 'School', ecp.school, 'From', ecp.cur, 'To', ecp.pos], [], ['Indicator', 'Description', 'COI/NCOI', 'Best rating', 'Proof (MOV)']]
+        .concat(PPST.map((p, i) => { const r = ecp.rows[i] || {}; return [p[0] + '.' + sn, p[1], r.type || '', ECP_R[r.r || ''], r.mov || '']; }))
+        .concat([[], ['Part', 'Max', 'My estimate']], ECP_SCORE.map((x, i) => [x[0], ecp.score[i].max, ecp.score[i].mine]), [['Total', '', ecpTotal()], [], ['Document', 'Ready']], ECP_DOCS.map((d, i) => [d, ecp.docs[i] ? 'Yes' : 'No']))); });
+    initEcpDraw();
+  }
+  function initEcpDraw(){ ['name', 'cur', 'pos', 'school'].forEach(k => { $({ name: 'ecpName', cur: 'ecpCur', pos: 'ecpPos', school: 'ecpSchool' }[k]).value = ecp[k]; }); drawEcpTarget(); drawEcpDocs(); drawEcpTable(); drawEcpScore(); }
+
+  // ================= GSIS RETIREMENT ESTIMATE (RA 8291) =================
+  const peso = (n) => '₱' + Math.round(n).toLocaleString('en-PH');
+  function gsisCalc(){
+    const age = +$('gsAge').value || 0, y = Math.floor(+$('gsYrs').value || 0), amc = +$('gsAmc').value || 0;
+    const leave = +$('gsLeave').value || 0, high = (+$('gsHigh').value || 0) || amc;
+    const tlb = leave && high ? high * leave * 0.0481927 : 0;
+    const r = { age, y, amc, tlb, lines: [] };
+    if(!amc){ r.lines.push(['Please type your average monthly salary.', '']); return r; }
+    if(y >= 15){
+      const bmp = Math.max(6000, Math.min(0.9 * amc, 0.025 * y * (amc + 700)));
+      r.bmp = bmp;
+      if(age >= 60){
+        r.kind = 'Old-age pension (60+ with 15+ years): choose one';
+        r.lines.push(['Monthly pension (BMP)', peso(bmp) + ' a month, for life']);
+        r.lines.push(['Option 1 — 5-year lump sum', peso(60 * bmp) + ' now, then ' + peso(bmp) + ' a month starting after 5 years']);
+        r.lines.push(['Option 2 — cash + pension now', peso(18 * bmp) + ' now, plus ' + peso(bmp) + ' a month starting right away']);
+        r.lines.push(['Total received after 5 years', 'Option 1: ' + peso(60 * bmp) + ' · Option 2: ' + peso(78 * bmp)]);
+      } else {
+        r.kind = 'Separation (below 60 with 15+ years)';
+        r.lines.push(['Cash when you leave', peso(18 * bmp)]);
+        r.lines.push(['Monthly pension from age 60', peso(bmp) + ' a month, for life']);
+      }
+    } else if(y >= 3){
+      const cash = Math.max(12000, y * amc);
+      r.kind = 'Less than 15 years: one-time cash, no monthly pension';
+      r.lines.push(['One-time cash payment', peso(cash) + ' (' + y + ' × ' + peso(amc) + ')' + (age < 60 ? ' — paid at age 60' : '')]);
+      r.lines.push(['To get a monthly pension', 'You need ' + (15 - y) + ' more year' + (15 - y === 1 ? '' : 's') + ' of service (15 in total)' + (age + (15 - y) > 65 ? ' — but compulsory retirement is at 65' : '')]);
+    } else {
+      r.kind = 'Less than 3 years of service';
+      r.lines.push(['Benefit', 'Usually a refund of your own contributions. Please ask GSIS.']);
+    }
+    if(tlb) r.lines.push(['Terminal leave benefit (from DepEd)', peso(tlb) + ' (' + leave + ' days)']);
+    return r;
+  }
+  function drawGsis(){
+    const r = gsisCalc();
+    $('gsOut').innerHTML = '<div class="ia-mps">' + (r.kind ? '<b>' + esc(r.kind) + '</b>' : '') + r.lines.map(l => '<div style="margin-top:6px;">' + (l[1] ? esc(l[0]) + ':<br><b>' + esc(l[1]) + '</b>' : esc(l[0])) + '</div>').join('') + '</div>';
+    try{ localStorage.setItem('st_gsis', JSON.stringify(['gsAge', 'gsYrs', 'gsAmc', 'gsLeave', 'gsHigh'].map(id => $(id).value))); }catch(e){}
+  }
+  function initGsis(){
+    try{ const v = JSON.parse(localStorage.getItem('st_gsis') || 'null'); if(v) ['gsAge', 'gsYrs', 'gsAmc', 'gsLeave', 'gsHigh'].forEach((id, i) => { if(v[i] != null) $(id).value = v[i]; }); }catch(e){}
+    ['gsAge', 'gsYrs', 'gsAmc', 'gsLeave', 'gsHigh'].forEach(id => $(id).addEventListener('input', drawGsis));
+    $('gsPrint').addEventListener('click', () => { const r = gsisCalc();
+      openPrint('GSIS retirement estimate', '<h1>GSIS Retirement Estimate</h1><div class="meta">Age at retirement: ' + r.age + ' · Years of service: ' + r.y + ' · Average monthly salary: ' + peso(r.amc) + '</div>' +
+        '<h2>' + esc(r.kind || '') + '</h2><table>' + r.lines.map(l => '<tr><td>' + esc(l[0]) + '</td><td>' + esc(l[1]) + '</td></tr>').join('') + '</table>' +
+        '<p class="meta" style="margin-top:8px;">Estimate based on RA 8291. BMP = 2.5% × (AMC + ₱700) × years, max 90% of AMC, min ₱6,000. Terminal leave = highest salary × leave credits × 0.0481927. Please confirm with GSIS.</p>', false); });
+    drawGsis();
+  }
+
   // ================= GRADE SHEET (DO 015, s. 2026) =================
   const GROUPS = { core: [20, 50, 30], tle: [20, 60, 20] };
   // SY 2026–2027 adjusted transmutation (Initial Grade 70.00 = 75). Rebuilt from published summaries of DO 015, s. 2026:
@@ -5290,6 +5752,7 @@
   $('testMake').addEventListener('click', makeTest);
   initGrades();
   initIa();
+  initMs(); initIri(); initAr(); initAtt(); initEcp(); initGsis();
   try{ const pv = localStorage.getItem('st_paper'); if(pv) $('atPaper').value = pv; }catch(e){}
   $('atPaper').addEventListener('change', () => { try{ localStorage.setItem('st_paper', $('atPaper').value); }catch(e){} });
   window.ST_TOOLS = { transmute, shares, masteryLevel };

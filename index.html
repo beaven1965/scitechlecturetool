@@ -26,8 +26,8 @@
     --ember-bright:#C85F4D;
     --text:#EDE6D6;
     --text-muted:#9AA3B5;
-    --ink-on-paper:#2A2013;
-    --ink-on-paper-muted:#6B5E45;
+    --ink-on-paper:#111111;
+    --ink-on-paper-muted:#3F4A44;
     --link-warm:#D9BE83;
   }
   *{box-sizing:border-box;}
@@ -518,6 +518,19 @@
   }
   .player-row audio{ flex:1; min-width:0; }
   .player-row.wrap{ flex-wrap:wrap; row-gap:8px; }
+  .player-row.ends{ justify-content:space-between; margin-top:10px; }
+  .skip-btn.big{ font-size:14px; padding:10px 16px; }
+  /* One white player box */
+  .wplayer{ background:#FFFFFF; border:2px solid #3E9B63; border-radius:16px; padding:12px 14px 14px; color:#111; }
+  .wp-top{ display:flex; align-items:center; gap:10px; }
+  .wp-btn{ background:#F1F5F2; border:1px solid #CFE3D6; color:#111; border-radius:999px; min-width:44px; height:44px; font-size:20px; line-height:1;
+    cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:1px; padding:0 8px; }
+  .wp-btn small{ font-size:11px; font-weight:700; }
+  .wp-btn.wp-play{ background:#3E9B63; border-color:#3E9B63; color:#fff; min-width:52px; height:52px; font-size:22px; }
+  .wp-btn:hover{ border-color:#3E9B63; }
+  .wp-time{ flex:1; background:none; border:none; color:#111; font-size:15px; font-weight:600; font-variant-numeric:tabular-nums; cursor:pointer; text-align:center; white-space:nowrap; padding:0; }
+  .wp-btn.wp-vol{ font-size:24px; background:none; border-color:transparent; }
+  .wp-seek{ width:100%; margin-top:12px; accent-color:#3E9B63; cursor:pointer; }
   .seek-bar{
     flex:1;
     min-width:60px;
@@ -622,9 +635,10 @@
     border:1px solid var(--surface-line);
     color:var(--text-muted);
     border-radius:8px;
-    width:30px;
-    height:28px;
-    font-size:16px;
+    width:44px;
+    height:38px;
+    font-size:26px;
+    font-weight:900;
     line-height:1;
     cursor:pointer;
     display:flex;
@@ -742,12 +756,44 @@
   .library-search:focus{ outline:none; border-color:var(--gold); }
 
   .paper-card{
-    background:var(--paper);
-    color:var(--ink-on-paper);
+    background:#FFFFFF;
+    border:2px solid #3E9B63;
+    color:#111111;
     border-radius:6px;
     padding:28px 26px;
     box-shadow:0 12px 30px rgba(0,0,0,0.28);
   }
+  /* Tap-to-open sections on the results page */
+  details.se-fold{ margin-top:14px; }
+  details.se-fold > summary{ list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background:var(--surface); border:1px solid var(--surface-line); color:var(--text); border-radius:12px; padding:15px 18px; font-weight:600; font-size:15px; }
+  details.se-fold > summary::-webkit-details-marker{ display:none; }
+  details.se-fold > summary::after{ content:'▾'; color:var(--text-muted); transition:transform .15s; transform:rotate(-90deg); }
+  details.se-fold[open] > summary::after{ transform:rotate(0deg); }
+  details.se-fold > summary small{ display:block; font-weight:400; font-size:12.5px; color:var(--text-muted); margin-top:2px; }
+  details.se-fold > .se-fold-body{ margin-top:10px; }
+  .lib-details{ font-size:12.5px; color:var(--text-muted); margin-top:4px; }
+  .lib-edit{ margin-top:10px; display:grid; gap:8px; }
+  .lib-edit input{ width:100%; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--surface-line); background:var(--ink-deep); color:var(--text); font-size:14px; }
+  .lib-edit .row{ display:flex; gap:8px; }
+  .lib-edit button{ flex:1; padding:10px; border-radius:8px; border:1px solid var(--gold); background:transparent; color:var(--gold-bright); font-weight:600; cursor:pointer; }
+  .lib-edit button.save{ background:var(--gold); color:var(--ink-deep); }
+  .details-popup{ position:fixed; inset:0; background:rgba(0,0,0,.55); display:flex; align-items:center; justify-content:center; z-index:1000; padding:16px; }
+  .details-box{ background:#fff; color:#111; border:2px solid #3E9B63; border-radius:16px; padding:20px; width:100%; max-width:420px; display:grid; gap:10px; box-sizing:border-box; }
+  .details-box h3{ margin:0; font-size:18px; }
+  .details-box p{ margin:0 0 4px; font-size:13.5px; color:#444; }
+  .details-box input{ width:100%; box-sizing:border-box; padding:12px; border-radius:10px; border:1px solid #bcc7c0; font-size:15px; color:#111; background:#fff; }
+  .details-box .row{ display:flex; gap:10px; margin-top:4px; }
+  .details-box button{ flex:1; padding:12px; border-radius:10px; border:1px solid #3E9B63; background:#fff; color:#2F7D4F; font-weight:700; font-size:15px; cursor:pointer; }
+  .details-box button.save{ background:#3E9B63; color:#fff; }
+  .lib-sort-row{ display:flex; align-items:center; gap:10px; margin:10px 0 2px; font-size:14px; font-weight:600; }
+  .lib-sort-row select{ flex:1; }
+  .lib-group{ font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; margin:16px 0 6px; color:#2F7D4F; }
+  .lib-chips{ display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 4px; }
+  .lib-chips button{ padding:5px 11px; border-radius:999px; border:1px solid var(--surface-line); background:var(--surface); color:var(--text); font-size:12.5px; cursor:pointer; }
+  .page-white .lib-details{ color:#5b6876; }
+  .page-white .lib-edit input{ background:#fff; color:#1C2331; border-color:#cfd6df; }
+  .page-white .lib-chips button{ background:#F5F6F7; color:#1C2331; border-color:#dfe3e8; }
   .paper-card .eyebrow{
     font-size:12px;
     color:var(--ink-on-paper-muted);
@@ -946,21 +992,63 @@
   }
   .related-topics .chip:hover{ border-color:var(--gold); color:var(--gold-bright); background:rgba(201,162,39,0.12); }
   .quiz-question{
-    border:1px solid var(--surface-line);
+    border:1px solid rgba(0,0,0,0.25);
     border-radius:12px;
     padding:14px 16px;
     margin-bottom:12px;
   }
+  .hl-tools{ margin-top:18px; padding-top:14px; border-top:1px dashed #9cc8ad; }
+  .ai-uses{ margin-top:8px; font-size:13px; font-weight:600; color:#1F6B40; background:#EEF8F1; border:1px solid #CFE3D6; border-radius:8px; padding:6px 10px; }
+  .ai-uses:empty{ display:none; }
+  /* Free month: Premium is hidden for now */
+  .icon-with-label:has(#paywallBtn){ display:none !important; }
+  .free-box{ margin:6px 0 14px; padding:14px 16px; border:2px solid #3E9B63; border-radius:12px; background:#F4FAF6; color:#111; }
+  .free-box b{ display:block; font-size:15px; margin-bottom:4px; }
+  .free-box .row{ font-size:14px; margin:2px 0; }
+  .renew-btn{ display:inline-block; margin:8px 0 0; padding:9px 14px; border-radius:10px; border:none; background:#3E9B63; color:#fff; font-weight:700; font-size:14px; cursor:pointer; }
+  .renew-steps{ margin:14px 0 4px; padding:14px 16px; border:2px solid #3E9B63; border-radius:12px; background:#F4FAF6; color:#111; }
+  .renew-steps .renew-h{ font-weight:700; margin-bottom:6px; }
+  .renew-steps ol{ margin:0; padding-left:20px; font-size:14.5px; line-height:1.5; }
+  .renew-steps li{ margin-bottom:4px; }
+  .refill-btn{ width:100%; margin-top:8px; padding:11px; border-radius:10px; border:none; background:#E58A2B; color:#fff; font-weight:700; font-size:14.5px; cursor:pointer; }
+  .refill-btn:disabled{ opacity:.7; }
+  .ai-uses.none-left{ color:#8A3B12; background:#FFF4E5; border-color:#F2D3A8; }
+  .hl-tools-h{ font-weight:700; font-size:14px; color:#2F7D4F; margin-bottom:8px; }
+  .hl-tools .translate-row{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .hl-tools .lang-select{ background:#fff; color:#111; border:1px solid #9cc8ad; }
+  .hl-tools .translate-btn{ color:#1F6B40; border-color:#3E9B63; background:#fff; }
+  .hl-tools .translate-note{ display:block; margin-top:8px; font-size:13px; color:#3F4A44; }
+  .note-popup{ position:fixed; inset:0; background:rgba(0,0,0,.55); display:flex; align-items:center; justify-content:center; z-index:1000; padding:16px; }
+  .note-pad{ background:#FFFDF2; color:#111; border:2px solid #3E9B63; border-radius:14px; padding:20px; max-width:380px; width:100%; box-sizing:border-box;
+    background-image:repeating-linear-gradient(#FFFDF2 0 27px, #E3EFE7 27px 28px); box-shadow:0 10px 30px rgba(0,0,0,.35); }
+  .note-pad h3{ margin:0 0 10px; font-size:18px; }
+  .note-pad p{ margin:0 0 14px; font-size:15px; line-height:28px; }
+  .note-pad button{ width:100%; padding:12px; border-radius:10px; border:none; background:#3E9B63; color:#fff; font-weight:700; font-size:15px; cursor:pointer; }
+  .explore-box{ margin-top:18px; }
+  .explore-links{ display:flex; flex-wrap:wrap; gap:8px; }
+  .explore-links a{ padding:8px 12px; border-radius:999px; border:1.5px solid #3E9B63; color:#1F6B40; background:#fff; text-decoration:none; font-size:13.5px; font-weight:600; }
+  .cv-link{ font-size:12.5px; color:#1a73e8; text-decoration:none; }
+  .quiz-types{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:4px 0 12px; }
+  .quiz-types .qt-head{ grid-column:1 / -1; font-size:13.5px; font-weight:600; color:#111; }
+  .quiz-types .qt{ display:flex; align-items:center; gap:8px; border:1.5px solid #cfd8d2; border-radius:12px; padding:10px; cursor:pointer; background:#fff; color:#111; font-size:14px; }
+  .quiz-types .qt input{ width:20px; height:20px; accent-color:#3E9B63; margin:0; }
+  .quiz-types .qt small{ color:#5b6b61; font-weight:600; }
+  .quiz-types .qt:has(input:checked){ border-color:#3E9B63; background:#EEF8F1; }
+  .q-match{ display:grid; grid-template-columns:1fr 1fr; gap:6px 14px; font-size:14px; color:#111; margin:4px 0 8px; }
+  .q-match .col-h{ font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:.4px; color:#2F7D4F; }
+  .q-section{ font-weight:800; font-size:15px; color:#111; margin:14px 0 2px; }
+  .q-direction{ font-size:13px; color:#3F4A44; font-style:italic; margin:0 0 8px; }
   .quiz-question .q-num{
     font-family:'Source Serif 4',serif;
     font-weight:600;
-    color:var(--gold-bright);
+    color:#8A6A10;
     font-size:14px;
     margin-bottom:6px;
   }
   .quiz-question .q-text{
-    font-size:14px;
-    color:var(--text);
+    font-size:15px;
+    font-weight:600;
+    color:var(--ink-on-paper);
     line-height:1.5;
     margin-bottom:8px;
   }
@@ -973,12 +1061,12 @@
     gap:4px;
   }
   .quiz-question .q-options li{
-    font-size:13px;
-    color:var(--text-muted);
+    font-size:14px;
+    color:var(--ink-on-paper);
   }
   .quiz-question .q-answer{
-    font-size:13px;
-    color:#3fbf72;
+    font-size:14px;
+    color:#1F7A44;
     font-weight:600;
   }
   .transcript-box{
@@ -1373,7 +1461,7 @@
   .page-white .lib-actions button{ color:#6B7280; }
   .page-white .lib-actions button:hover{ color:#1a73e8; }
   .page-white .lib-actions button.danger:hover{ color:#B24C3B; }
-  .page-white .lib-menu-toggle{ border-color:#DADCE0; color:#6B7280; }
+  .page-white .lib-menu-toggle{ border-color:#9AA0A6; color:#111; }
   .page-white .lib-menu-toggle:hover{ border-color:#1a73e8; color:#1a73e8; }
   .page-white .lib-menu-panel{
     background:#FFFFFF;
@@ -1414,6 +1502,22 @@
   .research-panel .concordance-result .num{ color:#1C2331; }
   .research-panel .concordance-result .ref{ color:#1C2331; }
   .research-panel .concordance-result .note{ color:#374151; }
+  /* Voices & worldview (Bible Commentary) */
+  details.cv-fold{ margin-top:18px; border:2px solid #3E9B63; border-radius:12px; background:#fff; }
+  details.cv-fold > summary{ list-style:none; cursor:pointer; padding:14px 16px; font-weight:700; color:#1C2331; font-size:15.5px; position:relative; padding-right:40px; }
+  details.cv-fold > summary::-webkit-details-marker{ display:none; }
+  details.cv-fold > summary::after{ content:'▾'; position:absolute; right:16px; top:15px; color:#6b7684; transform:rotate(-90deg); transition:transform .15s; }
+  details.cv-fold[open] > summary::after{ transform:rotate(0deg); }
+  details.cv-fold > summary small{ display:block; font-weight:400; color:#5b6876; font-size:12.5px; margin-top:2px; }
+  .cv-body{ padding:0 16px 14px; color:#374151; font-size:14.5px; line-height:1.55; }
+  .cv-h{ font-weight:700; color:#1C2331; margin:14px 0 6px; font-size:14px; letter-spacing:.2px; }
+  .cv-era{ font-size:12px; font-weight:700; color:#1a73e8; text-transform:uppercase; letter-spacing:.6px; margin:12px 0 2px; }
+  .cv-item{ padding:8px 0; border-bottom:1px solid #eef0f3; }
+  .cv-item b{ color:#1C2331; }
+  .cv-role{ color:#6b7684; font-size:12.5px; }
+  .cv-resp{ margin-top:4px; padding-left:10px; border-left:3px solid #c9a227; color:#4b5563; font-size:13.5px; }
+  .cv-label{ display:inline-block; font-size:11.5px; font-weight:700; padding:2px 8px; border-radius:999px; background:#eef4ff; color:#1a4fb3; margin-left:4px; }
+  .cv-note{ font-size:12px; color:#6b7684; margin-top:12px; }
   .research-panel .linked-term{
     color:#1a73e8;
     text-decoration:underline;
@@ -1458,6 +1562,22 @@
     font-family:'Inter',sans-serif;
   }
   .lesson-plan-row2{ display:flex; gap:12px; }
+  .lp-note{ margin:10px 0 14px; padding:12px 14px; border-radius:12px; background:#FFF8E6; border:1px solid #F0D9A0; color:#4A3B12; font-size:13.5px; line-height:1.5; }
+  .lesson-plan-field textarea{ width:100%; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid #DADCE0; font-size:15px; font-family:inherit; color:#1C2331; background:#fff; }
+  .lp-ind-box{ border:2px solid #3E9B63; border-radius:12px; padding:10px 12px; background:#fff; }
+  .lp-ind-box summary{ cursor:pointer; font-weight:700; color:#1F6B40; }
+  .lp-ind-help{ font-size:12.5px; color:#4B5563; margin:8px 0; }
+  .lp-ind{ display:flex; gap:8px; align-items:flex-start; font-size:13.5px; color:#111; margin:6px 0; line-height:1.35; }
+  .lp-ind input{ width:18px; height:18px; accent-color:#3E9B63; flex-shrink:0; margin-top:1px; }
+  .lp-card{ border:2px solid #3E9B63; border-radius:12px; padding:14px 16px; margin:12px 0; background:#fff; color:#111; }
+  .lp-card h3{ margin:0 0 8px; font-size:16px; color:#1F6B40; }
+  .lp-card .lp-sub{ font-weight:700; margin:10px 0 4px; font-size:14px; }
+  .lp-card p, .lp-card li{ font-size:14px; line-height:1.5; margin:4px 0; }
+  .lp-card ul{ margin:4px 0; padding-left:18px; }
+  .lp-step{ border-top:1px dashed #cfe3d6; padding:8px 0; }
+  .lp-step .lp-min{ display:inline-block; font-size:12px; font-weight:700; background:#EEF8F1; color:#1F6B40; border-radius:999px; padding:1px 8px; margin-left:6px; }
+  .lp-tag{ display:inline-block; font-size:11.5px; font-weight:700; background:#eef4ff; color:#1a4fb3; border-radius:999px; padding:1px 7px; margin:2px 3px 0 0; }
+  .lp-declare{ font-size:12.5px; color:#4B5563; font-style:italic; margin-top:8px; }
   .lesson-plan-row2 .lesson-plan-field{ flex:1; min-width:0; }
   .lesson-plan-generate-btn{
     background:var(--gold);
@@ -1536,7 +1656,7 @@
         <span class="icon-label">Home</span>
       </div>
       <div class="icon-with-label">
-        <button class="gear-btn" id="paywallBtn" aria-label="Go Premium">
+        <button class="gear-btn" id="paywallBtn" aria-label="Go Premium" data-premium-hidden>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
             <path d="M12 2l2.6 6.2L21 9l-5 4.4L17.3 21 12 17.3 6.7 21 8 13.4 3 9l6.4-0.8z" stroke-linejoin="round"/>
           </svg>
@@ -1591,7 +1711,14 @@
         <span class="date">Settings</span>
         <button class="new-recording-btn" id="closeSettingsBtn">Close</button>
       </div>
+      <div class="free-box" id="freeBox">
+        <b>🎁 Your free load</b>
+        <div class="row" id="freeMinutesRow">🎙 Recording: 60 free minutes</div>
+        <div class="row" id="freeAiRow">✨ AI uses: 5 free (lesson plans, quizzes, translations)</div>
+        <div class="row" style="color:#4B5563; font-size:12.5px; margin-top:4px;">Like free load: use it any day, it doesn't expire. Your recordings are always saved, even when the free minutes are used up.</div>
+      </div>
       <div class="settings-list">
+        <div id="premiumArea" style="display:none;">
         <div class="settings-item">
           <span>⭐ Premium status</span>
           <span class="premium-badge locked" id="premiumBadge">Not unlocked</span>
@@ -1603,7 +1730,7 @@
         <div class="error-box" id="redeemError" style="display:none;"></div>
         <div class="hint" id="myCodeHint" style="display:none;"></div>
         <div id="familyCodesSection" style="display:none;">
-          <div class="hint">Create separate access codes for your students or family members — you can turn any of them off later.</div>
+          <div class="hint">Create up to 5 access codes for family members. They share your 5 AI uses a month and stop when your code expires. You can turn any of them off later.</div>
           <div class="redeem-row">
             <input type="text" id="familyLabelInput" placeholder="Student or family member's name (e.g. Juan)">
             <button id="createFamilyCodeBtn">Create code</button>
@@ -1611,51 +1738,105 @@
           <div class="error-box" id="familyCodeError" style="display:none;"></div>
           <div id="familyCodesList"></div>
         </div>
-        <div class="settings-item clickable feature-row" id="lessonPlanRow" style="--accent:#2E6B8C"><span>📝 Lesson Plan Generator</span><span class="chevron">→</span></div>
+        </div>
+        <div class="settings-item clickable feature-row" id="lessonPlanRow" style="--accent:#2E6B8C"><span>📝 ILAW Lesson Plan helper</span><span class="chevron">→</span></div>
       </div>
-      <div class="hint">Got an access code from a payment or from your teacher/family member? Enter it above to unlock Premium on this device. More features will appear here as they're built.</div>
+
     </div>
 
     <!-- LESSON PLAN GENERATOR -->
     <div class="library page-white" id="lessonplanView" style="display:none;">
       <div class="result-meta">
-        <span class="date">Lesson Plan Generator</span>
+        <span class="date">ILAW Lesson Plan helper</span>
         <button class="new-recording-btn" id="closeLessonPlanBtn">Close</button>
       </div>
-      <div class="concordance-intro">Fill in your subject and topic, and this will draft a full DepEd-style Daily Lesson Log you can review, edit, and print. Works for any senior high subject — yours or a colleague's.</div>
+      <div class="concordance-intro">Fill in your lesson and your own ideas, and the app drafts an <b>ILAW</b> lesson plan (DepEd Order No. 016, s. 2026: Intentions, Learning Experience, Assessing Learning, Ways Forward) — with each part matched to the classroom-observation indicators and an observation-day checklist. Works for Kinder to College, and for trainings and meetings.</div>
+      <div class="lp-note">✍️ This is a <b>draft to help you</b>. DO 016 does not allow fully AI-generated lesson plans, so please read it, change it to fit your class, and make it your own. The printout says "AI-assisted, reviewed by the teacher". No plan can guarantee a rating — the observer rates your actual teaching — but a clear, well-aligned plan helps a lot.</div>
       <div class="lesson-plan-form">
         <div class="lesson-plan-field">
-          <label for="lpSubjectInput">Subject</label>
-          <input type="text" id="lpSubjectInput" placeholder="e.g. Understanding Culture, Society and Politics">
+          <label for="lpSubjectInput">Subject / learning area</label>
+          <input type="text" id="lpSubjectInput" placeholder="e.g. Science, Araling Panlipunan, Customer Service">
         </div>
         <div class="lesson-plan-row2">
           <div class="lesson-plan-field">
-            <label for="lpGradeSelect">Grade level</label>
+            <label for="lpGradeSelect">Level</label>
             <select id="lpGradeSelect">
+              <option value="Kindergarten">Kindergarten</option>
+              <option value="Grade 1">Grade 1</option>
+              <option value="Grade 2">Grade 2</option>
+              <option value="Grade 3">Grade 3</option>
+              <option value="Grade 4">Grade 4</option>
+              <option value="Grade 5">Grade 5</option>
+              <option value="Grade 6">Grade 6</option>
+              <option value="Grade 7" selected>Grade 7</option>
+              <option value="Grade 8">Grade 8</option>
+              <option value="Grade 9">Grade 9</option>
+              <option value="Grade 10">Grade 10</option>
               <option value="Grade 11">Grade 11</option>
-              <option value="Grade 12" selected>Grade 12</option>
+              <option value="Grade 12">Grade 12</option>
+              <option value="College">College</option>
+              <option value="Corporate training">Corporate training</option>
+              <option value="Meeting / seminar">Meeting / seminar</option>
             </select>
           </div>
           <div class="lesson-plan-field">
-            <label for="lpDurationSelect">Class length</label>
+            <label for="lpDurationSelect">Length</label>
             <select id="lpDurationSelect">
-              <option value="50 minutes" selected>50 minutes</option>
-              <option value="60 minutes">60 minutes</option>
-              <option value="80 minutes">80 minutes</option>
-              <option value="90 minutes">90 minutes</option>
+              <option value="30">30 minutes</option>
+              <option value="40">40 minutes</option>
+              <option value="45">45 minutes</option>
+              <option value="50">50 minutes</option>
+              <option value="60" selected>60 minutes (1 hour)</option>
+              <option value="80">80 minutes</option>
+              <option value="90">90 minutes (1½ hours)</option>
+              <option value="120">2 hours</option>
+              <option value="180">3 hours</option>
+              <option value="240">Half day (4 hours)</option>
+              <option value="480">Whole day (8 hours)</option>
             </select>
           </div>
         </div>
         <div class="lesson-plan-field">
-          <label for="lpTopicInput">Topic / lesson title</label>
-          <input type="text" id="lpTopicInput" placeholder="e.g. Social Stratification and Inequality">
+          <label for="lpTopicInput">Topic or learning competency</label>
+          <input type="text" id="lpTopicInput" placeholder="e.g. Describe the process of photosynthesis">
         </div>
-        <button class="lesson-plan-generate-btn" id="lpGenerateBtn">Generate lesson plan</button>
+        <div class="lesson-plan-field">
+          <label for="lpCodeInput">Competency code (optional)</label>
+          <input type="text" id="lpCodeInput" placeholder="e.g. from your MATATAG curriculum guide">
+        </div>
+        <div class="lesson-plan-field">
+          <label for="lpLearnersInput">Your learners (optional)</label>
+          <input type="text" id="lpLearnersInput" placeholder="e.g. 38 learners, mixed abilities, 4 struggling readers, mostly Tagalog speakers">
+        </div>
+        <div class="lesson-plan-field">
+          <label for="lpIdeasInput">Your own ideas, activities or materials (recommended)</label>
+          <textarea id="lpIdeasInput" rows="3" placeholder="e.g. I want to use real leaves, a group experiment and a short video"></textarea>
+        </div>
+        <details class="lp-ind-box" id="lpIndBox">
+          <summary>🎯 Classroom observation indicators to show (tap to choose)</summary>
+          <div class="lp-ind-help">Tick the indicators your school will observe this year — please confirm with your principal or the latest PMES memo. Already ticked: the ones reported for SY 2026–2027.</div>
+            <label class="lp-ind"><input type="checkbox" value="1.1.2" checked> <b>1.1.2</b> Content knowledge within and across subjects</label>
+            <label class="lp-ind"><input type="checkbox" value="1.3.2"> <b>1.3.2</b> Positive use of ICT</label>
+            <label class="lp-ind"><input type="checkbox" value="1.4.2" checked> <b>1.4.2</b> Literacy and numeracy strategies</label>
+            <label class="lp-ind"><input type="checkbox" value="1.5.2" checked> <b>1.5.2</b> Critical, creative and higher-order thinking</label>
+            <label class="lp-ind"><input type="checkbox" value="1.6.2" checked> <b>1.6.2</b> Mother Tongue, Filipino and English</label>
+            <label class="lp-ind"><input type="checkbox" value="2.1.2" checked> <b>2.1.2</b> Safe and secure learning environment</label>
+            <label class="lp-ind"><input type="checkbox" value="2.2.2" checked> <b>2.2.2</b> Fairness, respect and care</label>
+            <label class="lp-ind"><input type="checkbox" value="2.3.2"> <b>2.3.2</b> Exploration, discovery and hands-on activities</label>
+            <label class="lp-ind"><input type="checkbox" value="2.6.2"> <b>2.6.2</b> Positive, non-violent discipline</label>
+            <label class="lp-ind"><input type="checkbox" value="3.1.2"> <b>3.1.2</b> Differentiated learning experiences</label>
+            <label class="lp-ind"><input type="checkbox" value="3.2.2" checked> <b>3.2.2</b> Responsive to learners' backgrounds</label>
+            <label class="lp-ind"><input type="checkbox" value="3.5.2" checked> <b>3.5.2</b> Indigenous learners (IKSP)</label>
+            <label class="lp-ind"><input type="checkbox" value="4.1.2"> <b>4.1.2</b> Developmentally sequenced lesson</label>
+            <label class="lp-ind"><input type="checkbox" value="4.5.2"> <b>4.5.2</b> Teaching resources, including ICT</label>
+            <label class="lp-ind"><input type="checkbox" value="5.3.2" checked> <b>5.3.2</b> Timely, constructive feedback</label>
+        </details>
+        <button class="lesson-plan-generate-btn" id="lpGenerateBtn">✨ Draft my ILAW lesson plan (uses 1 free AI use)</button>
       </div>
       <div class="error-box" id="lpError" style="display:none;"></div>
       <div class="status-row" id="lpStatusRow" style="display:none;">
         <div class="spinner"></div>
-        <span>Writing your lesson plan…</span>
+        <span>Drafting your ILAW lesson plan… about 20–40 seconds.</span>
       </div>
       <div id="lpResults"></div>
     </div>
@@ -1694,58 +1875,122 @@
         <button class="new-recording-btn" id="newRecordingBtn">New recording</button>
       </div>
 
-      <div class="player-row wrap" id="customPlayerRow">
-        <button class="skip-btn" id="prevSermonBtn" aria-label="Previous recording">⏮</button>
-        <button class="skip-btn" id="playPauseBtn" aria-label="Play">▶</button>
-        <button class="skip-btn" id="nextSermonBtn" aria-label="Next recording">⏭</button>
-        <input type="range" class="seek-bar" id="seekBar" min="0" max="100" value="0" step="0.1">
-        <button class="skip-btn" id="timeToggleBtn">0:00 / 0:00</button>
-        <button class="skip-btn" id="muteBtn" aria-label="Mute">🔈</button>
-        <button class="skip-btn" id="speedBtn" aria-label="Playback speed">1x</button>
+      <div class="wplayer" id="customPlayerRow">
+        <div class="wp-top">
+          <button class="wp-btn" id="skipBackBtn" aria-label="Back 15 seconds"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><small>15</small></button>
+          <button class="wp-btn wp-play" id="playPauseBtn" aria-label="Play">▶</button>
+          <button class="wp-btn" id="skipFwdBtn" aria-label="Forward 15 seconds"><small>15</small><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button class="wp-time" id="timeToggleBtn">0:00 / 0:00</button>
+          <button class="wp-btn wp-vol" id="muteBtn" aria-label="Mute">🔊</button>
+        </div>
+        <input type="range" class="wp-seek" id="seekBar" min="0" max="100" value="0" step="0.1" aria-label="Position">
+        <audio id="audioPlayback" style="display:none;"></audio>
+        <span style="display:none;"><button id="prevSermonBtn"></button><button id="nextSermonBtn"></button><button id="speedBtn">1x</button></span>
       </div>
 
-      <div class="player-row wrap">
-        <button class="skip-btn" id="skipBackBtn" aria-label="Rewind 15 seconds">⟲ 15</button>
-        <audio id="audioPlayback" style="display:none;"></audio>
-        <button class="skip-btn" id="skipFwdBtn" aria-label="Forward 15 seconds">15 ⟳</button>
-        <button class="skip-btn" id="downloadBtn" aria-label="Download recording">⬇ Save</button>
-        <button class="skip-btn" id="printTranscriptBtn" aria-label="Print full text">🖨️ Print</button>
+      <div class="player-row ends">
+        <button class="skip-btn big" id="downloadBtn" aria-label="Download recording">⬇ Save</button>
+        <button class="skip-btn big" id="printTranscriptBtn" aria-label="Print full text">🖨️ Print</button>
       </div>
 
       <button class="transcript-toggle" id="transcriptToggle">Show full transcript</button>
       <div class="transcript-box" id="transcriptBox" style="display:none;"></div>
 
       <div class="translate-row">
-        <button class="translate-btn" id="translateBtn">🌐 Translate</button>
-        <select class="lang-select" id="translateLangSelect">
+        <button class="translate-btn" id="topTranslateBtn">🌐 Translate</button>
+      </div>
+      <details class="se-fold" id="foldHighlights">
+        <summary><span>✨ Highlights<small>Main points · AI translation here</small></span></summary>
+        <div class="se-fold-body"><div class="paper-card">
+        <div class="eyebrow">Highlights</div>
+        <ul class="bullets" id="bulletsList"></ul>
+        <div class="hl-tools">
+          <div class="hl-tools-h">🌐 AI Translation</div>
+          <div class="translate-row">
+            <select class="lang-select" id="translateLangSelect">
+          <option value="English">English</option>
           <option value="Tagalog">Tagalog</option>
           <option value="Cebuano (Bisaya)">Cebuano (Bisaya)</option>
           <option value="Ilocano">Ilocano</option>
+          <option value="Hiligaynon (Ilonggo)">Hiligaynon (Ilonggo)</option>
+          <option value="Bikol">Bikol</option>
+          <option value="Waray">Waray</option>
+          <option value="Kapampangan">Kapampangan</option>
+          <option value="Pangasinan">Pangasinan</option>
           <option value="Spanish">Spanish</option>
+          <option value="French">French</option>
+          <option value="German">German</option>
+          <option value="Italian">Italian</option>
+          <option value="Portuguese">Portuguese</option>
+          <option value="Dutch">Dutch</option>
+          <option value="Polish">Polish</option>
+          <option value="Russian">Russian</option>
+          <option value="Ukrainian">Ukrainian</option>
+          <option value="Greek">Greek</option>
+          <option value="Hebrew">Hebrew</option>
+          <option value="Arabic">Arabic</option>
+          <option value="Turkish">Turkish</option>
+          <option value="Persian (Farsi)">Persian (Farsi)</option>
+          <option value="Hindi">Hindi</option>
+          <option value="Urdu">Urdu</option>
+          <option value="Bengali">Bengali</option>
+          <option value="Tamil">Tamil</option>
+          <option value="Indonesian">Indonesian</option>
+          <option value="Malay">Malay</option>
+          <option value="Vietnamese">Vietnamese</option>
+          <option value="Thai">Thai</option>
+          <option value="Burmese">Burmese</option>
+          <option value="Khmer">Khmer</option>
           <option value="Mandarin Chinese">Mandarin Chinese</option>
-          <option value="Korean">Korean</option>
+          <option value="Chinese (Traditional)">Chinese (Traditional)</option>
           <option value="Japanese">Japanese</option>
-          <option value="English">English</option>
+          <option value="Korean">Korean</option>
         </select>
-        <button class="translate-btn" id="retranslateBtn" style="display:none;" title="Ask for a fresh translation instead of the saved one">↻ Redo translation</button>
-        <button class="translate-btn" id="listenBtn" title="Read the text aloud with your phone's voice">🔊 Listen</button>
-        <span class="translate-note" id="translateNote"></span>
-      </div>
-      <div class="premium-note" id="translatePremiumNote" style="display:none;"></div>
+            <button class="translate-btn" id="translateBtn">🌐 Translate highlights</button>
+            <button class="translate-btn" id="retranslateBtn" style="display:none;" title="Ask for a fresh translation instead of the saved one">↻ Redo</button>
+          </div>
+          <div class="translate-note" id="translateNote"></div>
+          <div class="ai-uses" id="aiUsesNote"></div>
+          <button class="refill-btn" id="refillBtn" style="display:none;">🎟 Buy 5 more AI uses — ₱50</button>
+          <div class="premium-note" id="translatePremiumNote" style="display:none;"></div>
+          <div class="player-row wrap" id="aiVoiceRow" style="display:none; margin-top:10px;">
+            <button class="translate-btn" id="aiVoiceBtn" style="display:none;">🔊 Listen to translated highlights</button>
+            <audio id="aiVoiceAudio" style="display:none;"></audio>
+          </div>
+        </div>
+      </div></div></details>
 
-      <div class="paper-card">
-        <div class="eyebrow">Highlights</div>
-        <ul class="bullets" id="bulletsList"></ul>
-      </div>
+      <details class="se-fold" id="foldListen">
+        <summary><span>🔊 Listen<small>Hear the full transcript read aloud</small></span></summary>
+        <div class="se-fold-body">
+          <div class="player-row wrap">
+            <button class="translate-btn" id="listenBtn" title="Read the full transcript aloud">▶ Start listening</button>
+          </div>
+          <div class="hint" style="margin-top:6px;">Tap once to start, tap again to stop.</div>
+        </div>
+      </details>
 
-      <div class="paper-card">
+      <details class="se-fold" id="foldTakeaway">
+        <summary><span>💡 Key takeaway<small>The main message in a few lines</small></span></summary>
+        <div class="se-fold-body"><div class="paper-card">
         <div class="eyebrow">Key takeaway</div>
         <div class="takeaway-text" id="takeawayText"></div>
-      </div>
+      </div></div></details>
 
-      <div class="paper-card">
+      <details class="se-fold" id="foldQuiz">
+        <summary><span>📝 Quiz for Students<small>Questions from this lecture · uses 1 free AI use</small></span></summary>
+        <div class="se-fold-body"><div class="paper-card">
         <div class="eyebrow">Quiz for Students</div>
         <div class="premium-note" id="quizPremiumNote" style="display:none;"></div>
+        <div class="quiz-types" id="quizTypes">
+          <div class="qt-head">Choose the test types (tap to turn on or off):</div>
+          <label class="qt"><input type="checkbox" value="multiple_choice" checked><span>Multiple choice <small>10</small></span></label>
+          <label class="qt"><input type="checkbox" value="true_false"><span>True or False <small>10</small></span></label>
+          <label class="qt"><input type="checkbox" value="fill_blank"><span>Fill in the blank <small>5</small></span></label>
+          <label class="qt"><input type="checkbox" value="matching"><span>Matching type <small>5</small></span></label>
+          <label class="qt"><input type="checkbox" value="short_answer" checked><span>Short answer <small>5</small></span></label>
+          <label class="qt"><input type="checkbox" value="essay"><span>Essay <small>2</small></span></label>
+        </div>
         <button class="translate-btn" id="generateQuizBtn">📝 Generate Quiz</button>
         <div class="status-row" id="quizStatusRow" style="display:none; margin-top:10px;">
           <div class="spinner"></div>
@@ -1757,9 +2002,10 @@
           <div class="player-row" style="margin-top:16px; flex-wrap:wrap;">
             <button class="skip-btn" id="printQuizStudentBtn">🖨️ Print (Student copy)</button>
             <button class="skip-btn" id="printQuizAnswerKeyBtn">🖨️ Print (Answer key)</button>
+            <button class="skip-btn" id="newQuizBtn">↻ New quiz</button>
           </div>
         </div>
-      </div>
+      </div></div></details>
     </div>
 
 
@@ -1769,7 +2015,19 @@
         <span class="date">Past lectures</span>
         <button class="new-recording-btn" id="closeLibraryBtn">Close</button>
       </div>
-      <input type="text" class="library-search" id="librarySearchInput" placeholder="Search by word or topic…">
+      <input type="text" class="library-search" id="librarySearchInput" placeholder="Search title, speaker, topic, date…">
+      <div class="lib-sort-row">
+        <label for="librarySort">Arrange by</label>
+        <select id="librarySort" class="lang-select">
+          <option value="new">📅 Newest first</option>
+          <option value="old">📅 Oldest first</option>
+          <option value="speaker">👤 Teacher / speaker</option>
+          <option value="topic">🏷 Subject / topic</option>
+          <option value="event">🏫 Class / event</option>
+          <option value="title">🔤 Title (A–Z)</option>
+        </select>
+      </div>
+      <div class="lib-chips" id="libraryChips"></div>
       <div id="libraryList"></div>
       <div class="hint" id="libraryEmpty" style="display:none;">No saved lectures yet. Once you finish a recording, it'll show up here automatically.</div>
     </div>
@@ -1786,20 +2044,18 @@
       <div class="paywall-hero">
         <div class="paywall-badge">⭐</div>
         <h2 class="paywall-title">Support ScitechLectureTool</h2>
-        <p class="paywall-sub">Help keep this tool running and growing for classrooms like yours.</p>
+        <p class="paywall-sub">Help keep this tool running and growing.</p>
       </div>
 
       <div class="founding-banner">🎉 Founding Supporter Offer — be among the first to help build this classroom tool.</div>
 
       <ul class="feature-list">
-        <li><span class="check">✓</span> Unlimited recordings, transcribing &amp; translating — always</li>
+        <li><span class="check">✓</span> Recordings, transcripts, highlights &amp; takeaways (free for everyone)</li>
+        <li><span class="check">✓</span> Covers you and up to 5 family members (family codes share your AI uses)</li>
         <li><span class="check">✓</span> Easy-to-use recording, right from your phone or laptop</li>
-        <li><span class="check">✓</span> Instant lecture translation into 7+ languages</li>
-        <li><span class="check">✓</span> Auto-generated quiz from any lecture</li>
-        <li><span class="check">✓</span> Lesson Plan Generator for teachers</li>
-        <li><span class="check">✓</span> Class-code sharing — one recording, the whole section</li>
-        <li><span class="check">✓</span> A founding-supporter badge on your account <span class="soon">coming soon</span></li>
-        <li><span class="check">✓</span> Longer lecture storage in your library <span class="soon">coming soon</span></li>
+        <li><span class="check">✓</span> AI translation of the highlights in 37 languages</li>
+        <li><span class="check">✓</span> Quiz for Students — multiple choice, true or false, fill in the blank, matching, short answer &amp; essay</li>
+        <li><span class="check">✓</span> ILAW Lesson Plan helper for teachers</li>
       </ul>
 
       <div class="price-tag">
@@ -1807,12 +2063,23 @@
         <div class="note">No auto-charge, no card stored. Pay once a month here and get a fresh code good for another 30 days.</div>
       </div>
 
+      <div class="renew-steps" id="renewSteps">
+        <div class="renew-h">🔄 How to renew (or get Premium)</div>
+        <ol>
+          <li>Tap <b>Subscribe / Pay Now</b> below.</li>
+          <li>Pay ₱250 with GCash, QR Ph or a card on the PayMongo page.</li>
+          <li>You come back here with a <b>new access code</b>. Premium unlocks on this device right away for 30 days.</li>
+          <li>Family members: make new family codes in <b>Settings → Premium status</b>, because codes from your old code stop when it expires.</li>
+        </ol>
+      </div>
+
       <button class="subscribe-btn" id="subscribeBtn">Subscribe / Pay Now</button>
       <div class="error-box" id="paywallError" style="display:none;"></div>
 
            <p class="paywall-fine">Payments are processed securely by PayMongo. You'll be taken to their payment page and brought right back here.</p>
-           <p class="paywall-fine">After paying, your access code will show up right here — and you'll always be able to find it again under Settings → Premium status.</p>
-            <p class="paywall-fine">Didn't get your access code after paying? Email <a href="mailto:beavenbermudez@gmail.com" style="color:inherit;">beavenbermudez@gmail.com</a> and we'll sort it out.</p>
+           <p class="paywall-fine">After paying, your access code will show up under Settings → Premium status.</p>
+            <p class="paywall-fine">By paying you agree to our <a href="/terms.html" target="_blank" style="color:inherit; font-weight:600;">Terms of Use</a> — 30 days, no automatic renewal, 5 AI uses a month, refills ₱50 for 5.</p>
+            <p class="paywall-fine">Didn't get your access code after paying? Email <a href="mailto:sermonrecord.support@gmail.com" style="color:inherit;">sermonrecord.support@gmail.com</a> and we'll sort it out.</p>
     </div>
   </main>
 </div>
@@ -1871,6 +2138,9 @@
   const lpGradeSelect = document.getElementById('lpGradeSelect');
   const lpDurationSelect = document.getElementById('lpDurationSelect');
   const lpTopicInput = document.getElementById('lpTopicInput');
+  const lpCodeInput = document.getElementById('lpCodeInput');
+  const lpLearnersInput = document.getElementById('lpLearnersInput');
+  const lpIdeasInput = document.getElementById('lpIdeasInput');
   const lpGenerateBtn = document.getElementById('lpGenerateBtn');
   const lpError = document.getElementById('lpError');
   const lpStatusRow = document.getElementById('lpStatusRow');
@@ -1904,6 +2174,33 @@
   });
   closeLessonPlanBtn.addEventListener('click', () => showView('settings'));
 
+  // ---- Free month: each phone/laptop has its own ID for the free minutes and AI uses ----
+  const FREE_MODE = true;   // Premium is hidden; everyone gets the free monthly allowance
+  const DEVICE_ID = (function(){
+    let d = null;
+    try{ d = localStorage.getItem('st_device'); }catch(e){}
+    if(!d || !/^d-[a-z0-9]{12,40}$/.test(d)){
+      const a = new Uint8Array(12); crypto.getRandomValues(a);
+      d = 'd-' + Array.from(a, b => b.toString(36).padStart(2, '0')).join('').slice(0, 24);
+      try{ localStorage.setItem('st_device', d); }catch(e){}
+    }
+    return d;
+  })();
+  async function freeStatus(){
+    try{
+      const r = await fetch('/.netlify/functions/free-ai', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ action:'status', device: DEVICE_ID }) });
+      const d = JSON.parse((await r.text()).trim() || '{}');
+      if(d.error) return null;
+      showFreeStatus(d);
+      return d;
+    }catch(e){ return null; }
+  }
+  function showFreeStatus(d){
+    if(!d) return;
+    const m = document.getElementById('freeMinutesRow'), a = document.getElementById('freeAiRow');
+    if(m && typeof d.minutesLeft === 'number') m.textContent = '🎙 Recording: ' + d.minutesLeft + ' of ' + d.minutesLimit + ' free minutes left';
+    if(a && typeof d.left === 'number') a.textContent = '✨ AI uses: ' + d.left + ' of ' + d.limit + ' left (lesson plans, quizzes, translations)';
+  }
   const CHUNK_THRESHOLD_BYTES = 4 * 1024 * 1024; // ~4MB triggers splitting into chunks
   const CHUNK_SECONDS = 90; // length of each chunk once shrunk down
   const TARGET_SAMPLE_RATE = 16000; // matches what Whisper listens for anyway
@@ -1922,7 +2219,7 @@
     const d = new Date();
     const stamp = d.toISOString().slice(0,10) + '-' + String(d.getHours()).padStart(2,'0') + String(d.getMinutes()).padStart(2,'0');
     const ext = (blob && blob.type && blob.type.includes('wav')) ? 'wav' : 'webm';
-    return 'sermon-echo-' + stamp + '.' + ext;
+    return 'lecture-' + stamp + '.' + ext;
   }
   downloadBtn.addEventListener('click', () => {
     if(currentAudioBlob) downloadBlob(currentAudioBlob, makeFileName(currentAudioBlob));
@@ -1992,7 +2289,7 @@
 
   muteBtn.addEventListener('click', () => {
     audioPlayback.muted = !audioPlayback.muted;
-    muteBtn.textContent = audioPlayback.muted ? '🔇' : '🔈';
+    muteBtn.textContent = audioPlayback.muted ? '🔇' : '🔊';
   });
 
   speedBtn.addEventListener('click', () => {
@@ -2550,20 +2847,22 @@
     });
   }
 
-  async function transcribeOneChunk(blob){
+  async function transcribeOneChunk(blob, seconds){
     const audioBase64 = await blobToBase64(blob);
     const res = await fetch('/.netlify/functions/transcribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ audioBase64, mimeType: blob.type })
+      body: JSON.stringify({ audioBase64, mimeType: blob.type, device: DEVICE_ID, seconds: Math.round(seconds || 0) })
     });
     if(!res.ok){
       const errData = await res.json().catch(() => ({}));
+      if(errData.limit){ const e = new Error(errData.error); e.limit = true; throw e; }
       const base = errData.error || ('Transcription failed. (' + res.status + ')');
       const detail = errData.detail ? (' Detail: ' + String(errData.detail).slice(0, 300)) : '';
       throw new Error(base + detail);
     }
     const data = await res.json();
+    if(typeof data.minutesLeft === 'number') showFreeStatus({ minutesLeft: data.minutesLeft, minutesLimit: 60 });
     return data.transcript;
   }
 
@@ -2572,20 +2871,39 @@
   // functions reject any single request over ~6MB. Short recordings are
   // sent as-is.
   async function transcribeAudio(blob, onProgress){
-    if(blob.size <= CHUNK_THRESHOLD_BYTES){
-      return await transcribeOneChunk(blob);
+    // Free month: check the minutes left first. The recording itself is always saved.
+    const st = await freeStatus();
+    if(st && st.minutesLeft <= 0){
+      throw new Error("You've used your " + st.minutesLimit + ' free recording minutes. Your recording is saved in the Library.');
+    }
+    const budgetSec = st ? st.minutesLeft * 60 + 30 : Infinity;
+
+    let decoded = null;
+    try{ decoded = await decodeBlobToAudioBuffer(blob); }catch(e){}
+    if(blob.size <= CHUNK_THRESHOLD_BYTES || !decoded){
+      return await transcribeOneChunk(blob, decoded ? decoded.duration : 0);
     }
 
-    const decoded = await decodeBlobToAudioBuffer(blob);
     const resampled = await resampleToMono(decoded, TARGET_SAMPLE_RATE);
     const pieces = sliceBufferIntoChunks(resampled, CHUNK_SECONDS);
 
     const transcripts = [];
+    let sentSec = 0, stoppedEarly = false;
     for(let i = 0; i < pieces.length; i++){
+      if(sentSec >= budgetSec){ stoppedEarly = true; break; }
       if(onProgress) onProgress(i + 1, pieces.length);
       const chunkBlob = audioBufferToWav(pieces[i]);
-      const text = await transcribeOneChunk(chunkBlob);
-      transcripts.push(text.trim());
+      try{
+        const text = await transcribeOneChunk(chunkBlob, pieces[i].duration);
+        transcripts.push(text.trim());
+      }catch(err){
+        if(err.limit && transcripts.length){ stoppedEarly = true; break; }
+        throw err;
+      }
+      sentSec += pieces[i].duration;
+    }
+    if(stoppedEarly){
+      transcripts.push('[Only the first ' + Math.round(sentSec / 60) + ' minutes were turned into text — the free minutes are used up. The full recording is saved in your Library.]');
     }
     return transcripts.join(' ');
   }
@@ -2647,9 +2965,44 @@
       } else {
         saveSermon(fields).then(newId => {
           if(currentSermon && currentSermon.transcript === transcript) currentSermon.id = newId;
+          askRecordingDetails(newId);
         }).catch(err => console.error('Could not save sermon to library', err));
       }
+      if(pendingId) askRecordingDetails(pendingId);
     }
+  }
+
+  // ---- Pop-up: name a new recording so it's easy to find in the Library ----
+  function askRecordingDetails(id){
+    if(!id || document.getElementById('detailsPopup')) return;
+    const wrap = document.createElement('div');
+    wrap.id = 'detailsPopup'; wrap.className = 'details-popup';
+    const box = document.createElement('div'); box.className = 'details-box';
+    box.innerHTML = '<h3>Name this recording</h3><p>So you can find it easily in your Library. You can skip this and add it later.</p>';
+    const fields = [
+      ['title', 'Title (e.g. "Faith that moves mountains")'],
+      ['speaker', 'Teacher / speaker'],
+      ['event', 'Class, section or event (e.g. Grade 10 – Rizal)'],
+      ['topic', 'Subject / topic (e.g. Science – Photosynthesis)']
+    ];
+    const inputs = {};
+    fields.forEach(([k, ph]) => {
+      const inp = document.createElement('input'); inp.type = 'text'; inp.placeholder = ph; inp.maxLength = 120;
+      inp.setAttribute('aria-label', ph); inputs[k] = inp; box.appendChild(inp);
+    });
+    const row = document.createElement('div'); row.className = 'row';
+    const skip = document.createElement('button'); skip.type = 'button'; skip.textContent = 'Skip';
+    const save = document.createElement('button'); save.type = 'button'; save.className = 'save'; save.textContent = '✓ Save';
+    skip.addEventListener('click', () => wrap.remove());
+    save.addEventListener('click', async () => {
+      const upd = {}; fields.forEach(([k]) => { upd[k] = inputs[k].value.trim(); });
+      try{ await updateSermon(id, upd); }catch(e){ console.error('Could not save details', e); }
+      wrap.remove();
+      const t = document.getElementById('saveToast');
+      if(t){ t.textContent = '✅ Saved with its details'; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }
+    });
+    row.appendChild(skip); row.appendChild(save); box.appendChild(row);
+    wrap.appendChild(box); document.body.appendChild(wrap);
   }
 
   transcriptToggle.addEventListener('click', () => {
@@ -2753,9 +3106,18 @@
     transcriptBox.textContent = data.transcript;
   }
 
+  // Shows translated highlights; the takeaway and transcript stay in the original language.
+  function showTranslatedHighlights(tr){
+    renderSermonText({ takeaway: currentSermon.takeaway, bullets: (tr && tr.bullets && tr.bullets.length) ? tr.bullets : currentSermon.bullets, transcript: currentSermon.transcript });
+    const f = document.getElementById('foldHighlights'); if(f) f.open = true;
+    const r = document.getElementById('aiVoiceRow'); if(r) r.style.display = 'flex';
+  }
+
   function resetTranslateUI(){
+    const r = document.getElementById('aiVoiceRow'); if(r) r.style.display = 'none';
+    if(typeof stopAiVoice === 'function') stopAiVoice();
     viewingTranslation = false;
-    translateBtn.textContent = '🌐 Translate';
+    translateBtn.textContent = '🌐 Translate highlights';
     translateBtn.disabled = false;
     translateNote.textContent = '';
     retranslateBtn.style.display = 'none';
@@ -2801,54 +3163,103 @@
     quizStatusRow.style.display = 'none';
     hideQuizPremiumNote();
     generateQuizBtn.style.display = 'inline-block';
+    const qt = document.getElementById('quizTypes'); if(qt) qt.style.display = '';
     generateQuizBtn.textContent = '📝 Generate Quiz';
     generateQuizBtn.disabled = false;
   }
 
+  const QUIZ_PARTS = [
+    ['multiple_choice', 'Multiple Choice', 'Choose the letter of the correct answer.'],
+    ['true_false', 'True or False', 'Write True if the statement is correct, False if it is not.'],
+    ['fill_blank', 'Fill in the Blank', 'Write the missing word or phrase.'],
+    ['matching', 'Matching Type', 'Match each item in Column A with Column B.'],
+    ['short_answer', 'Short Answer', 'Answer in one sentence.'],
+    ['essay', 'Essay', 'Answer in a short paragraph.']
+  ];
+  const ROMAN = ['I','II','III','IV','V','VI'];
+  function sortQuiz(questions){
+    const out = [];
+    QUIZ_PARTS.forEach(([t]) => questions.forEach(q => { if((q.type || 'short_answer') === t) out.push(q); }));
+    questions.forEach(q => { if(!QUIZ_PARTS.some(([t]) => t === q.type)) out.push(q); });
+    return out;
+  }
+  // Matching: letters for Column B are shuffled once and remembered, so the printout matches the screen.
+  function matchOrder(q){
+    if(!Array.isArray(q.order) || q.order.length !== q.pairs.length){
+      q.order = q.pairs.map((_, i) => i);
+      for(let i = q.order.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [q.order[i], q.order[j]] = [q.order[j], q.order[i]]; }
+    }
+    return q.order;
+  }
+  function matchKey(q){
+    const order = matchOrder(q), L = 'ABCDEFGHIJ';
+    return q.pairs.map((_, i) => (i + 1) + '–' + L[order.indexOf(i)]).join(', ');
+  }
+  function quizPartsOf(questions){
+    const parts = [];
+    sortQuiz(questions).forEach(q => {
+      const t = q.type || 'short_answer';
+      let part = parts[parts.length - 1];
+      if(!part || part.type !== t){
+        const info = QUIZ_PARTS.find(p => p[0] === t) || [t, 'Questions', ''];
+        part = { type: t, title: info[1], direction: info[2], items: [] }; parts.push(part);
+      }
+      part.items.push(q);
+    });
+    return parts;
+  }
   function renderQuiz(questions){
+    questions = sortQuiz(questions);
     currentQuiz = questions;
     quizQuestionsList.innerHTML = '';
-    questions.forEach((q, i) => {
-      const card = document.createElement('div');
-      card.className = 'quiz-question';
-
-      const num = document.createElement('div');
-      num.className = 'q-num';
-      num.textContent = 'Question ' + (i + 1) + (q.type === 'multiple_choice' ? ' (Multiple Choice)' : ' (Short Answer)');
-      card.appendChild(num);
-
-      const qText = document.createElement('div');
-      qText.className = 'q-text';
-      qText.textContent = q.question;
-      card.appendChild(qText);
-
-      if(q.type === 'multiple_choice' && Array.isArray(q.options)){
-        const ul = document.createElement('ul');
-        ul.className = 'q-options';
-        const letters = ['A','B','C','D','E','F'];
-        q.options.forEach((opt, oi) => {
-          const li = document.createElement('li');
-          li.textContent = letters[oi] + '. ' + opt;
-          ul.appendChild(li);
-        });
-        card.appendChild(ul);
-      }
-
-      const ans = document.createElement('div');
-      ans.className = 'q-answer';
-      ans.textContent = 'Answer: ' + q.answer;
-      card.appendChild(ans);
-
-      quizQuestionsList.appendChild(card);
+    const L = 'ABCDEFGHIJ';
+    quizPartsOf(questions).forEach((part, pi) => {
+      const h = document.createElement('div');
+      h.className = 'q-section';
+      h.textContent = 'Part ' + ROMAN[pi] + ' — ' + part.title;
+      quizQuestionsList.appendChild(h);
+      if(part.direction){ const d = document.createElement('div'); d.className = 'q-direction'; d.textContent = part.direction; quizQuestionsList.appendChild(d); }
+      part.items.forEach((q, n) => {
+        const card = document.createElement('div');
+        card.className = 'quiz-question';
+        if(q.type === 'matching' && Array.isArray(q.pairs)){
+          const order = matchOrder(q);
+          const grid = document.createElement('div'); grid.className = 'q-match';
+          grid.innerHTML = '<div class="col-h">Column A</div><div class="col-h">Column B</div>';
+          q.pairs.forEach((p, i) => {
+            const a = document.createElement('div'); a.textContent = (i + 1) + '. ' + p.left;
+            const b = document.createElement('div'); b.textContent = L[i] + '. ' + q.pairs[order[i]].right;
+            grid.appendChild(a); grid.appendChild(b);
+          });
+          card.appendChild(grid);
+          const ans = document.createElement('div'); ans.className = 'q-answer'; ans.textContent = 'Answers: ' + matchKey(q);
+          card.appendChild(ans);
+        } else {
+          const num = document.createElement('div'); num.className = 'q-num'; num.textContent = (n + 1) + '.';
+          card.appendChild(num);
+          const qText = document.createElement('div'); qText.className = 'q-text'; qText.textContent = q.question;
+          card.appendChild(qText);
+          if(q.type === 'multiple_choice' && Array.isArray(q.options)){
+            const ul = document.createElement('ul'); ul.className = 'q-options';
+            q.options.forEach((opt, oi) => { const li = document.createElement('li'); li.textContent = L[oi] + '. ' + opt; ul.appendChild(li); });
+            card.appendChild(ul);
+          }
+          const ans = document.createElement('div'); ans.className = 'q-answer';
+          ans.textContent = (q.type === 'essay' ? 'Look for: ' : 'Answer: ') + q.answer;
+          card.appendChild(ans);
+        }
+        quizQuestionsList.appendChild(card);
+      });
     });
     quizContainer.style.display = 'block';
     generateQuizBtn.style.display = 'none';
+    document.getElementById('quizTypes').style.display = 'none';
   }
 
   async function generateQuiz(){
     if(!currentSermon) return;
 
-    const premium = localStorage.getItem(PREMIUM_FLAG_KEY) === 'true';
+    const premium = FREE_MODE || localStorage.getItem(PREMIUM_FLAG_KEY) === 'true';
     if(!premium){
       showQuizPremiumNote();
       return;
@@ -2868,18 +3279,30 @@
     generateQuizBtn.disabled = true;
 
     try {
-      const res = await fetch('/.netlify/functions/generate-quiz', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          transcript: currentSermon.transcript,
-          takeaway: currentSermon.takeaway,
-          title: resultDate.textContent || ''
-        })
-      });
-      const data = await res.json().catch(() => ({}));
-      if(!res.ok) throw new Error(data.error || ('Could not generate the quiz (' + res.status + ').'));
-      if(!Array.isArray(data.questions) || data.questions.length === 0) throw new Error('Received an unexpected response. Please try again.');
+      const types = Array.from(document.querySelectorAll('#quizTypes input:checked')).map(i => i.value);
+      if(!types.length) throw new Error('Please turn on at least one test type.');
+      // Free month: one quiz (all its parts) = one AI use.
+      const rs = await fetch('/.netlify/functions/free-ai', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ action:'reserve', device: DEVICE_ID, kind:'quiz' }) });
+      const rd = JSON.parse((await rs.text()).trim() || '{}');
+      showFreeStatus(rd);
+      if(rd.error || !rd.token) throw new Error(rd.error || 'Could not start the quiz right now. Please try again.');
+      const quizToken = rd.token;
+      const askType = async (type) => {
+        const res = await fetch('/.netlify/functions/generate-quiz', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ transcript: currentSermon.transcript, takeaway: currentSermon.takeaway, title: resultDate.textContent || '', type, quizToken })
+        });
+        const d = await res.json().catch(() => ({}));
+        if(!res.ok) throw new Error(d.error || ('Could not generate the quiz (' + res.status + ').'));
+        return Array.isArray(d.questions) ? d.questions : [];
+      };
+      const results = await Promise.allSettled(types.map(askType));
+      const all = []; let firstErr = null;
+      results.forEach(r => { if(r.status === 'fulfilled') all.push(...r.value); else if(!firstErr) firstErr = r.reason; });
+      if(!all.length) throw (firstErr || new Error('Received an unexpected response. Please try again.'));
+      if(firstErr) { quizError.textContent = 'Some parts could not be made this time — tap ↻ New quiz to try again.'; quizError.style.display = 'block'; }
+      const data = { questions: all };
 
       renderQuiz(data.questions);
       currentSermon.quiz = data.questions;
@@ -2891,26 +3314,43 @@
       quizError.style.display = 'block';
     } finally {
       quizGenerationInFlight = false;
+      quizStatusRow.style.display = 'none';
       generateQuizBtn.disabled = false;
     }
   }
 
   generateQuizBtn.addEventListener('click', generateQuiz);
+  document.getElementById('newQuizBtn').addEventListener('click', () => { resetQuizUI(); });
 
   function printQuiz(includeAnswers){
     if(!currentQuiz || currentQuiz.length === 0) return;
     const title = (resultDate.textContent || 'ScitechLectureTool').trim();
     const letters = ['A','B','C','D','E','F'];
 
-    const questionsHtml = currentQuiz.map((q, i) => {
-      let optionsHtml = '';
-      if(q.type === 'multiple_choice' && Array.isArray(q.options)){
-        optionsHtml = '<ul class="opts">' + q.options.map((opt, oi) => '<li>' + letters[oi] + '. ' + escapeHtml(opt) + '</li>').join('') + '</ul>';
-      } else {
-        optionsHtml = '<div class="blank-lines"><div class="line"></div><div class="line"></div></div>';
-      }
-      const answerHtml = includeAnswers ? '<div class="answer">Answer: ' + escapeHtml(q.answer) + '</div>' : '';
-      return '<div class="question"><div class="q-head">' + (i + 1) + '. ' + escapeHtml(q.question) + '</div>' + optionsHtml + answerHtml + '</div>';
+    const L = 'ABCDEFGHIJ';
+    const questionsHtml = quizPartsOf(currentQuiz).map((part, pi) => {
+      let html = '<h2 class="part">Part ' + ROMAN[pi] + ' — ' + escapeHtml(part.title) + '</h2>' + (part.direction ? '<div class="dir">' + escapeHtml(part.direction) + '</div>' : '');
+      part.items.forEach((q, n) => {
+        if(q.type === 'matching' && Array.isArray(q.pairs)){
+          const order = matchOrder(q);
+          html += '<table class="match"><tr><th>Column A</th><th>Column B</th></tr>' + q.pairs.map((p, i) =>
+            '<tr><td>' + (includeAnswers ? '' : '____ ') + (i + 1) + '. ' + escapeHtml(p.left) + '</td><td>' + L[i] + '. ' + escapeHtml(q.pairs[order[i]].right) + '</td></tr>').join('') + '</table>' +
+            (includeAnswers ? '<div class="answer">Answers: ' + escapeHtml(matchKey(q)) + '</div>' : '');
+          return;
+        }
+        let body = '';
+        if(q.type === 'multiple_choice' && Array.isArray(q.options)){
+          body = '<ul class="opts">' + q.options.map((opt, oi) => '<li>' + L[oi] + '. ' + escapeHtml(opt) + '</li>').join('') + '</ul>';
+        } else if(q.type === 'essay'){
+          body = '<div class="blank-lines">' + '<div class="line"></div>'.repeat(6) + '</div>';
+        } else if(q.type === 'short_answer'){
+          body = '<div class="blank-lines"><div class="line"></div><div class="line"></div></div>';
+        }
+        const lead = (q.type === 'true_false' || q.type === 'fill_blank') && !includeAnswers ? '______ ' : '';
+        const answerHtml = includeAnswers ? '<div class="answer">' + (q.type === 'essay' ? 'Look for: ' : 'Answer: ') + escapeHtml(q.answer) + '</div>' : '';
+        html += '<div class="question"><div class="q-head">' + lead + (n + 1) + '. ' + escapeHtml(q.question) + '</div>' + body + answerHtml + '</div>';
+      });
+      return html;
     }).join('');
 
     const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + escapeHtml(title) + ' — Quiz</title>' +
@@ -2921,6 +3361,9 @@
       '.name-line{margin:18px 0 28px; font-size:14px;}' +
       '.name-line span{display:inline-block; border-bottom:1px solid #999; min-width:220px; margin-left:6px;}' +
       '.question{margin-bottom:22px;}' +
+      '.part{font-size:16px; margin:26px 0 2px;}' +
+      '.dir{font-style:italic; font-size:13px; color:#555; margin-bottom:12px;}' +
+      'table.match{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:16px;} table.match th{text-align:left; border-bottom:1px solid #999; padding:4px;} table.match td{padding:5px 4px; vertical-align:top; width:50%;}' +
       '.q-head{font-weight:600; margin-bottom:8px;}' +
       '.opts{list-style:none; margin:0 0 6px; padding-left:14px;}' +
       '.opts li{margin-bottom:4px; font-size:14px;}' +
@@ -2965,27 +3408,37 @@
     return '<ul>' + arr.map(item => '<li>' + escapeHtml(String(item)) + '</li>').join('') + '</ul>';
   }
 
+  const esc = (t) => escapeHtml(String(t == null ? '' : t));
+  const lpLevelIsSchool = () => !/corporate|meeting/i.test(lpGradeSelect.value);
+  function lpPlanHtml(lp, forPrint){
+    const I = lp.intentions || {}, L = lp.learningExperience || {}, A = lp.assessingLearning || {}, W = lp.waysForward || {};
+    const school = lpLevelIsSchool();
+    const card = (title, body) => body ? '<div class="lp-card"><h3>' + title + '</h3>' + body + '</div>' : '';
+    const sub = (t, body) => body ? '<div class="lp-sub">' + t + '</div>' + body : '';
+    const para = (t) => t ? '<p>' + esc(t).replace(/\n/g, '<br>') + '</p>' : '';
+    const list = (arr) => (Array.isArray(arr) && arr.length) ? '<ul>' + arr.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '';
+    const tags = (arr) => (Array.isArray(arr) && arr.length && school) ? '<div>' + arr.map(x => '<span class="lp-tag">' + esc(x) + '</span>').join('') + '</div>' : '';
+    const objectives = (I.objectives || []).map(o => '<li><b>' + esc(o.domain) + ':</b> ' + esc(o.text) + '</li>').join('');
+    const steps = (L.steps || []).map(st =>
+      '<div class="lp-step"><b>' + esc(st.phase) + '</b><span class="lp-min">' + esc(st.minutes) + ' min</span>' +
+      '<p><b>' + (school ? 'Teacher' : 'Facilitator') + ':</b> ' + esc(st.teacher) + '</p>' +
+      '<p><b>' + (school ? 'Learners' : 'Participants') + ':</b> ' + esc(st.learners) + '</p>' +
+      (st.differentiation ? '<p><b>Differentiation:</b> ' + esc(st.differentiation) + '</p>' : '') + tags(st.indicators) + '</div>').join('');
+    const checks = (A.checks || []).map(c => '<li><b>' + esc(c.when) + ':</b> ' + esc(c.how) + '</li>').join('');
+    const cot = (lp.cot || []).map(c => '<li><b>' + esc(c.indicator) + ' ' + esc(c.name || '') + '</b><br>Where: ' + esc(c.where) + '<br>Level 7 looks like: ' + esc(c.lookFor) + '</li>').join('');
+    return (forPrint ? '' : '') +
+      card('I — Intentions',
+        sub('Content standard', para(I.contentStandard)) + sub('Performance standard', para(I.performanceStandard)) +
+        sub(school ? 'Learning competency' : 'Session goal', para(I.competency)) + sub('Objectives', objectives ? '<ul>' + objectives + '</ul>' : '')) +
+      card('L — Learning Experience', sub('Resources', list(L.resources)) + sub('Lesson flow', steps) + sub('Integration', para(L.integration)) + sub('Values', para(L.values))) +
+      card('A — Assessing Learning', sub('Checks for understanding', checks ? '<ul>' + checks + '</ul>' : '') + sub('Exit task', para(A.exitTask)) + sub('Rubric', para(A.rubric))) +
+      card('W — Ways Forward', sub('Reteach', para(W.reteach)) + sub('Remediation', para(W.remediation)) + sub('Enrichment', para(W.enrichment)) + sub('Reflection questions', list(W.reflection))) +
+      (school ? card('🎯 Classroom observation (COT) alignment', cot ? '<ul>' + cot + '</ul>' : '') : '') +
+      card(school ? '✅ Observation-day checklist' : '✅ Facilitation checklist', list(lp.checklist)) +
+      '<div class="lp-declare">AI-assisted draft (ScitechLectureTool), reviewed and adapted by the teacher.</div>';
+  }
   function renderLessonPlan(lp){
-    const proc = lp.procedures || {};
-    const html =
-      lpSection('Content Standard', lpText(lp.contentStandard)) +
-      lpSection('Performance Standard', lpText(lp.performanceStandard)) +
-      lpSection('Learning Competency', lpText(lp.learningCompetency)) +
-      lpSection('Objectives', lpList(lp.objectives)) +
-      lpSection('Subject Matter', lpText(lp.subjectMatter)) +
-      lpSection('Learning Resources', lpList(lp.resources)) +
-      lpSection('A. Reviewing Previous Lesson', lpText(proc.reviewing)) +
-      lpSection('B. Motivation / Establishing Purpose', lpText(proc.motivation)) +
-      lpSection('C. Presenting Examples / Instances', lpText(proc.presentation)) +
-      lpSection('D. Discussing New Concepts', lpText(proc.discussion)) +
-      lpSection('E. Developing Mastery', lpText(proc.developingMastery)) +
-      lpSection('F. Application to Daily Life', lpText(proc.application)) +
-      lpSection('G. Making Generalizations', lpText(proc.generalization)) +
-      lpSection('H. Evaluation', lpText(proc.evaluation)) +
-      lpSection('I. Additional Activities / Assignment', lpText(proc.assignment)) +
-      lpSection('Remarks', lpText(lp.remarks)) +
-      '<button class="lesson-plan-print-btn" id="lpPrintBtn">🖨️ Print / Save as PDF</button>';
-    lpResults.innerHTML = html;
+    lpResults.innerHTML = lpPlanHtml(lp, false) + '<button class="lesson-plan-print-btn" id="lpPrintBtn">🖨️ Print / Save as PDF</button>';
     const printBtn = document.getElementById('lpPrintBtn');
     if(printBtn) printBtn.addEventListener('click', printLessonPlan);
   }
@@ -3003,22 +3456,26 @@
     lpGenerateBtn.disabled = true;
     lpStatusRow.style.display = 'flex';
     try {
-      const res = await fetch('/.netlify/functions/lesson-plan', {
+      const sel = lpDurationSelect.options[lpDurationSelect.selectedIndex];
+      const res = await fetch('/.netlify/functions/ilaw-plan', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          subject,
-          gradeLevel: lpGradeSelect.value,
-          duration: lpDurationSelect.value,
-          topic
+          device: DEVICE_ID, subject, topic,
+          level: lpGradeSelect.value, duration: sel ? sel.textContent : '', minutes: lpDurationSelect.value,
+          code: lpCodeInput.value.trim(), learners: lpLearnersInput.value.trim(), ideas: lpIdeasInput.value.trim(),
+          indicators: Array.from(document.querySelectorAll('#lpIndBox input:checked')).map(i => i.value)
         })
       });
-      const data = await res.json().catch(() => ({}));
-      if(!res.ok) throw new Error(data.error || ('Could not generate the lesson plan (' + res.status + ').'));
-      currentLessonPlan = data;
-      renderLessonPlan(data);
+      let data = null;
+      try{ data = JSON.parse((await res.text()).trim()); }catch(e){}
+      if(!data) throw new Error('This took too long this time. Please try again.');
+      if(typeof data.left === 'number') showFreeStatus(data);
+      if(data.error || !data.plan) throw new Error(data.error || 'Could not make the lesson plan right now. Please try again.');
+      currentLessonPlan = data.plan;
+      renderLessonPlan(data.plan);
     } catch (err) {
-      lpError.textContent = err.message || 'Could not generate the lesson plan right now. Please try again.';
+      lpError.textContent = err.message || 'Could not make the lesson plan right now. Please try again.';
       lpError.style.display = 'block';
     } finally {
       lpGenerateBtn.disabled = false;
@@ -3029,53 +3486,29 @@
   function printLessonPlan(){
     if(!currentLessonPlan) return;
     const lp = currentLessonPlan;
-    const proc = lp.procedures || {};
-    const title = (lpSubjectInput.value.trim() || 'Lesson Plan') + ' — ' + (lpTopicInput.value.trim() || '');
-    const rows = [
-      ['Content Standard', lp.contentStandard],
-      ['Performance Standard', lp.performanceStandard],
-      ['Learning Competency', lp.learningCompetency],
-      ['Objectives', Array.isArray(lp.objectives) ? lp.objectives.map(o => '• ' + o).join('<br>') : lp.objectives],
-      ['Subject Matter', lp.subjectMatter],
-      ['Learning Resources', Array.isArray(lp.resources) ? lp.resources.map(r => '• ' + r).join('<br>') : lp.resources],
-      ['A. Reviewing Previous Lesson', proc.reviewing],
-      ['B. Motivation / Establishing Purpose', proc.motivation],
-      ['C. Presenting Examples / Instances', proc.presentation],
-      ['D. Discussing New Concepts', proc.discussion],
-      ['E. Developing Mastery', proc.developingMastery],
-      ['F. Application to Daily Life', proc.application],
-      ['G. Making Generalizations', proc.generalization],
-      ['H. Evaluation', proc.evaluation],
-      ['I. Additional Activities / Assignment', proc.assignment],
-      ['Remarks', lp.remarks]
-    ];
-    const rowsHtml = rows.filter(r => r[1]).map(r =>
-      '<div class="sec"><div class="sec-title">' + escapeHtml(r[0]) + '</div><div class="sec-body">' + (Array.isArray(r[1]) ? r[1] : escapeHtml(String(r[1])).replace(/\n/g, '<br>')) + '</div></div>'
-    ).join('');
-
-    const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + escapeHtml(title) + '</title>' +
+    const sel = lpDurationSelect.options[lpDurationSelect.selectedIndex];
+    const title = lp.title || ((lpSubjectInput.value.trim() || 'Lesson Plan') + ' — ' + (lpTopicInput.value.trim() || ''));
+    const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + esc(title) + '</title>' +
       '<style>' +
-      'body{font-family: Georgia, "Times New Roman", serif; color:#1a1a1a; max-width:760px; margin:40px auto; padding:0 20px; line-height:1.6;}' +
-      'h1{font-size:19px; margin-bottom:2px;}' +
-      '.meta{color:#666; font-size:12px; margin-bottom:18px;}' +
-      '.sec{margin-bottom:16px;}' +
-      '.sec-title{font-weight:700; font-size:13px; margin-bottom:4px;}' +
-      '.sec-body{font-size:13px;}' +
-      '@media print{ body{margin:0; padding:24px;} }' +
+      'body{font-family: Arial, Helvetica, sans-serif; color:#111; max-width:780px; margin:30px auto; padding:0 18px; line-height:1.45;}' +
+      'h1{font-size:18px; margin:0 0 2px;} .meta{color:#444; font-size:12.5px; margin-bottom:12px;}' +
+      '.lp-card{border:1px solid #999; border-radius:6px; padding:10px 14px; margin:10px 0; page-break-inside:avoid;}' +
+      '.lp-card h3{margin:0 0 6px; font-size:15px;} .lp-sub{font-weight:700; margin:8px 0 2px; font-size:13px;}' +
+      'p, li{font-size:13px; margin:3px 0;} ul{margin:3px 0; padding-left:18px;}' +
+      '.lp-step{border-top:1px dashed #bbb; padding:6px 0;} .lp-min{font-size:11px; font-weight:700; margin-left:6px;}' +
+      '.lp-tag{display:inline-block; font-size:10.5px; border:1px solid #888; border-radius:8px; padding:0 5px; margin:2px 3px 0 0;}' +
+      '.lp-declare{font-size:11.5px; font-style:italic; color:#444; margin-top:10px;}' +
+      '.sign{margin-top:26px; font-size:12.5px;} .sign span{display:inline-block; min-width:220px; border-top:1px solid #333; margin-top:28px; padding-top:2px;}' +
+      '@media print{ body{margin:0; padding:14px;} }' +
       '</style></head><body>' +
-      '<h1>' + escapeHtml((lpGradeSelect.value || '') + ' — ' + (lpSubjectInput.value.trim() || '')) + '</h1>' +
-      '<div class="meta">Topic: ' + escapeHtml(lpTopicInput.value.trim() || '') + ' &nbsp;|&nbsp; Duration: ' + escapeHtml(lpDurationSelect.value || '') + '</div>' +
-      rowsHtml +
+      '<h1>' + esc(title) + '</h1>' +
+      '<div class="meta">' + esc(lpSubjectInput.value.trim()) + ' · ' + esc(lpGradeSelect.value) + ' · ' + esc(sel ? sel.textContent : '') + (lpCodeInput.value.trim() ? ' · ' + esc(lpCodeInput.value.trim()) : '') + '</div>' +
+      lpPlanHtml(lp, true) +
+      '<div class="sign"><span>Prepared by (teacher)</span> &nbsp;&nbsp;&nbsp; <span>Checked by</span></div>' +
       '</body></html>';
-
     const win = window.open('', '_blank');
-    if(!win){
-      alert('Please allow pop-ups for this site so the print page can open.');
-      return;
-    }
-    win.document.open();
-    win.document.write(html);
-    win.document.close();
+    if(!win){ alert('Please allow pop-ups for this site so the print page can open.'); return; }
+    win.document.open(); win.document.write(html); win.document.close();
     const triggerPrint = () => { win.focus(); win.print(); };
     win.onload = triggerPrint;
     setTimeout(triggerPrint, 400);
@@ -3091,19 +3524,79 @@
     }
   });
 
+  // ---- AI uses left this month (5 highlight translations; counted on the server) ----
+  const aiUsesNote = document.getElementById('aiUsesNote');
+  const refillBtn = document.getElementById('refillBtn');
+  function showAiUses(d){
+    if(!aiUsesNote || !d || typeof d.left !== 'number') return;
+    const extra = d.extra || 0;
+    aiUsesNote.textContent = d.left > 0
+      ? '🎁 Free AI uses: ' + d.left + ' of ' + d.limit + ' left (lesson plans, quizzes, translations)'
+      : '🎁 All ' + d.limit + ' free AI uses are used. Thank you for trying the app!';
+    aiUsesNote.classList.toggle('none-left', d.left <= 0);
+    refillBtn.style.display = 'none';   // no refills while Premium is hidden
+    showFreeStatus(d);
+  }
+  const REFILL_SESSION_KEY = 'se_refill_session';
+  refillBtn.addEventListener('click', async () => {
+    const code = localStorage.getItem(PREMIUM_CODE_KEY);
+    if(!code){ translateNote.textContent = 'Refills are for Premium users. Unlock Premium in Settings first.'; return; }
+    refillBtn.disabled = true; refillBtn.textContent = '⏳ Opening the payment page…';
+    try{
+      const r = await fetch('/.netlify/functions/buy-refill', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ action:'start', code }) });
+      const d = await r.json().catch(() => ({}));
+      if(d.error || !d.checkout_url) throw new Error(d.error || 'Could not open the payment page right now.');
+      try{ sessionStorage.setItem(REFILL_SESSION_KEY, d.session_id); localStorage.setItem(REFILL_SESSION_KEY, d.session_id); }catch(e){}
+      window.location.href = d.checkout_url;
+    }catch(err){
+      translateNote.textContent = err.message;
+      refillBtn.disabled = false; refillBtn.textContent = '🎟 Buy 5 more AI uses — ₱50';
+    }
+  });
+  // Back from PayMongo after buying a refill
+  (function checkRefillReturn(){
+    const params = new URLSearchParams(window.location.search);
+    const r = params.get('refill');
+    if(!r) return;
+    params.delete('refill');
+    window.history.replaceState({}, '', window.location.pathname + (params.toString() ? '?' + params.toString() : ''));
+    const say = (msg) => {
+      const wrap = document.createElement('div'); wrap.className = 'note-popup';
+      wrap.innerHTML = '<div class="note-pad"><h3>🎟 AI uses</h3><p></p><button type="button">OK</button></div>';
+      wrap.querySelector('p').textContent = msg;
+      wrap.querySelector('button').addEventListener('click', () => wrap.remove());
+      document.body.appendChild(wrap);
+    };
+    if(r === 'cancelled'){ say('Payment was cancelled — no charge was made.'); return; }
+    let id = null; try{ id = sessionStorage.getItem(REFILL_SESSION_KEY) || localStorage.getItem(REFILL_SESSION_KEY); }catch(e){}
+    if(!id){ say('Thank you! We could not find the payment on this device. If you paid, email sermonrecord.support@gmail.com with your PayMongo receipt and we will add your uses.'); return; }
+    fetch('/.netlify/functions/buy-refill', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ action:'confirm', session_id: id }) })
+      .then(res => res.json()).then(d => {
+        if(d.error) { say(d.error + ' If it still does not show after a few minutes, email sermonrecord.support@gmail.com with your receipt.'); return; }
+        try{ sessionStorage.removeItem(REFILL_SESSION_KEY); localStorage.removeItem(REFILL_SESSION_KEY); }catch(e){}
+        say('✅ Thank you! 5 more AI uses were added. You now have ' + d.extra + ' bought uses — they stay until your Premium code expires.');
+      }).catch(() => say('We could not confirm the payment right now. Please reopen the app in a minute.'));
+  })();
+  async function refreshAiUses(){
+    const d = await freeStatus();
+    if(d) showAiUses(d);
+  }
+  document.getElementById('foldHighlights').addEventListener('toggle', (e) => { if(e.target.open) refreshAiUses(); });
+
   async function attemptTranslate(lang){
-    const res = await fetch('/.netlify/functions/translate', {
+    const res = await fetch('/.netlify/functions/free-ai', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        transcript: currentSermon.transcript,
-        takeaway: currentSermon.takeaway,
-        bullets: currentSermon.bullets,
-        targetLanguage: lang
-      })
+      body: JSON.stringify({ action: 'translate', device: DEVICE_ID, bullets: currentSermon.bullets || [], language: lang })
     });
-    const data = await res.json().catch(() => ({}));
-    if(!res.ok) throw new Error(data.error || ('Translation failed (' + res.status + ').'));
+    let data = {};
+    try{ data = JSON.parse((await res.text()).trim() || '{}'); }catch(e){}
+    showAiUses(data);
+    if(data.error || !res.ok){
+      const err = new Error(data.error || ('Translation failed (' + res.status + ').'));
+      if(typeof data.left === 'number') err.final = true;
+      throw err;
+    }
     return data;
   }
 
@@ -3111,14 +3604,15 @@
   // used by "Redo translation" when an earlier saved translation reads oddly.
   async function runTranslate(forceFresh){
     const lang = translateLangSelect.value;
+    stopListening();
 
     if(!forceFresh){
       const cached = currentSermon.translations && currentSermon.translations[lang];
-      if(cached){
-        renderSermonText(cached);
+      if(cached && Array.isArray(cached.bullets)){
+        showTranslatedHighlights(cached);
         viewingTranslation = true;
         translateBtn.textContent = 'Show original';
-        translateNote.textContent = 'Showing ' + lang + ' translation';
+        translateNote.textContent = 'Highlights shown in ' + lang;
         retranslateBtn.style.display = 'inline-block';
         return;
       }
@@ -3133,6 +3627,7 @@
       try {
         data = await attemptTranslate(lang);
       } catch (firstErr) {
+        if(firstErr.final) throw firstErr;
         // Some languages occasionally trip up the translator on the first
         // try (a malformed response) — silently retry once before giving up.
         translateNote.textContent = 'That took an extra try — still translating into ' + lang + '…';
@@ -3140,11 +3635,11 @@
       }
 
       currentSermon.translations = currentSermon.translations || {};
-      currentSermon.translations[lang] = data;
-      renderSermonText(data);
+      currentSermon.translations[lang] = { bullets: data.bullets || [] };
+      showTranslatedHighlights(data);
       viewingTranslation = true;
       translateBtn.textContent = 'Show original';
-      translateNote.textContent = 'Showing ' + lang + ' translation';
+      translateNote.textContent = 'Highlights shown in ' + lang;
       retranslateBtn.style.display = 'inline-block';
 
       if(currentSermon.id){
@@ -3162,6 +3657,9 @@
   // ---- 🔊 Listen: reads the text on screen aloud with the phone's own voice (free, no AI) ----
   const listenBtn = document.getElementById('listenBtn');
   const LISTEN_LANG = { 'Tagalog':'fil', 'Filipino':'fil', 'Cebuano (Bisaya)':'fil', 'Ilocano':'fil', 'Hiligaynon':'fil',
+    'Hiligaynon (Ilonggo)':'fil', 'Bikol':'fil', 'Waray':'fil', 'Kapampangan':'fil', 'Pangasinan':'fil',
+    'Dutch':'nl', 'Polish':'pl', 'Russian':'ru', 'Ukrainian':'uk', 'Greek':'el', 'Hebrew':'he', 'Turkish':'tr', 'Persian (Farsi)':'fa',
+    'Urdu':'ur', 'Bengali':'bn', 'Tamil':'ta', 'Malay':'ms', 'Thai':'th', 'Burmese':'my', 'Khmer':'km', 'Chinese (Traditional)':'zh',
     'English':'en', 'Spanish':'es', 'Mandarin Chinese':'zh', 'Chinese':'zh', 'Korean':'ko', 'Japanese':'ja',
     'French':'fr', 'German':'de', 'Italian':'it', 'Portuguese':'pt', 'Indonesian':'id', 'Arabic':'ar', 'Hindi':'hi', 'Vietnamese':'vi' };
   let listening = false;
@@ -3169,7 +3667,7 @@
   function stopListening(){
     if(listenSupported()) window.speechSynthesis.cancel();
     listening = false;
-    if(listenBtn) listenBtn.textContent = '🔊 Listen';
+    if(listenBtn) listenBtn.textContent = '▶ Start listening';
   }
   // Long text is read in short pieces — phones stop reading after ~15 seconds of one long piece.
   function listenChunks(text){
@@ -3191,12 +3689,12 @@
     if(!listenSupported()) listenBtn.style.display = 'none';
     listenBtn.addEventListener('click', () => {
       if(listening){ stopListening(); return; }
-      const bullets = Array.from(bulletsList.querySelectorAll('li')).map(li => li.textContent);
-      const text = [takeawayText.textContent].concat(bullets, [transcriptBox.textContent]).map(t => (t || '').trim()).filter(Boolean).map(t => /[.!?。！？]$/.test(t) ? t : t + '.').join(' ');
-      if(!text.trim()){ translateNote.textContent = 'There is nothing to read yet.'; return; }
-      const langName = viewingTranslation ? translateLangSelect.value : null;
-      const code = langName ? (LISTEN_LANG[langName] || 'en') : null;
-      const voice = code ? pickVoice(code) : null;
+      const text = ((currentSermon && currentSermon.transcript) || transcriptBox.textContent || '').trim();
+      if(!text){ translateNote.textContent = 'There is nothing to read yet.'; return; }
+      if(typeof stopAiVoice === 'function') stopAiVoice();
+      const langName = null;
+      const code = null;
+      const voice = null;
       window.speechSynthesis.cancel();
       const chunks = listenChunks(text);
       chunks.forEach((c, i) => {
@@ -3208,7 +3706,8 @@
         window.speechSynthesis.speak(u);
       });
       listening = true;
-      listenBtn.textContent = '⏹ Stop';
+      try{ audioPlayback.pause(); }catch(e){}
+      listenBtn.textContent = '⏹ Stop listening';
       if(code && !voice){
         translateNote.textContent = 'This phone has no ' + langName + ' voice, so it may read with an accent. (Android: Settings › Text-to-speech › install the language.)';
       }
@@ -3220,6 +3719,73 @@
   document.getElementById('newRecordingBtn').addEventListener('click', stopListening);
   window.addEventListener('pagehide', stopListening);
 
+  // ---- 🔊 AI voice (Premium): reads only the TRANSLATED highlights, clear in local dialects ----
+  const aiVoiceBtn = document.getElementById('aiVoiceBtn');
+  const aiVoiceAudio = document.getElementById('aiVoiceAudio');
+  const AI_VOICE_LABEL = '🔊 Listen to translated highlights';
+  let aiVoiceCache = { text: null, url: null };
+  let aiVoiceBusy = false;
+  function stopAiVoice(){
+    try{ aiVoiceAudio.pause(); aiVoiceAudio.currentTime = 0; }catch(e){}
+    if(!aiVoiceBusy && aiVoiceBtn) aiVoiceBtn.textContent = AI_VOICE_LABEL;
+  }
+  aiVoiceAudio.addEventListener('ended', () => { aiVoiceBtn.textContent = AI_VOICE_LABEL; });
+  aiVoiceBtn.addEventListener('click', async () => {
+    if(aiVoiceBusy) return;
+    if(!aiVoiceAudio.paused){ stopAiVoice(); return; }
+    stopListening();
+    try{ audioPlayback.pause(); }catch(e){}
+    const code = localStorage.getItem(PREMIUM_CODE_KEY);
+    if(localStorage.getItem(PREMIUM_FLAG_KEY) !== 'true' || !code){
+      translateNote.textContent = '⭐ The clear AI voice is a Premium feature. Unlock it in Settings.';
+      return;
+    }
+    const text = Array.from(bulletsList.querySelectorAll('li')).map(li => li.textContent.trim()).filter(Boolean)
+      .map(t => /[.!?。！？]$/.test(t) ? t : t + '.').join(' ');
+    if(!text){ translateNote.textContent = 'There are no highlights to read yet.'; return; }
+    const play = () => { aiVoiceAudio.currentTime = 0; aiVoiceAudio.play().catch(() => {}); aiVoiceBtn.textContent = '⏹ Stop'; };
+    if(aiVoiceCache.text === text && aiVoiceCache.url){ play(); return; }
+    aiVoiceBusy = true;
+    aiVoiceBtn.textContent = '⏳ Preparing voice…'; aiVoiceBtn.disabled = true;
+    try{
+      const res = await fetch('/.netlify/functions/narrate-summary', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code, text })
+      });
+      const type = res.headers.get('Content-Type') || '';
+      if(type.indexOf('application/json') >= 0){ const d = await res.json().catch(() => ({})); throw new Error(d.error || 'Could not prepare the AI voice right now.'); }
+      const blob = await res.blob();
+      if(!res.ok || !blob.size) throw new Error('The voice service did not answer. Please try again in a moment.');
+      if(aiVoiceCache.url) URL.revokeObjectURL(aiVoiceCache.url);
+      aiVoiceCache = { text, url: URL.createObjectURL(blob) };
+      aiVoiceAudio.src = aiVoiceCache.url;
+      aiVoiceBusy = false; aiVoiceBtn.disabled = false;
+      play();
+    }catch(err){
+      aiVoiceBusy = false; aiVoiceBtn.disabled = false; aiVoiceBtn.textContent = AI_VOICE_LABEL;
+      translateNote.textContent = err.message || 'Could not prepare the AI voice right now.';
+    }
+  });
+  document.getElementById('newRecordingBtn').addEventListener('click', stopAiVoice);
+  window.addEventListener('pagehide', stopAiVoice);
+
+  // Only one voice at a time: playing the recording stops the reading voices.
+  audioPlayback.addEventListener('play', () => { stopListening(); stopAiVoice(); });
+
+
+  document.getElementById('topTranslateBtn').addEventListener('click', () => {
+    if(document.getElementById('notePopup')) return;
+    const wrap = document.createElement('div'); wrap.id = 'notePopup'; wrap.className = 'note-popup';
+    wrap.innerHTML = '<div class="note-pad"><h3>📝 Note</h3><p>AI Translation is only in the <b>✨ Highlights</b> box.</p><button type="button">Open Highlights</button></div>';
+    wrap.querySelector('button').addEventListener('click', () => {
+      wrap.remove();
+      const f = document.getElementById('foldHighlights');
+      f.open = true;
+      f.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    wrap.addEventListener('click', (e) => { if(e.target === wrap) wrap.remove(); });
+    document.body.appendChild(wrap);
+  });
+
   translateBtn.addEventListener('click', async () => {
     if(!currentSermon) return;
 
@@ -3230,7 +3796,7 @@
       return;
     }
 
-    const premium = localStorage.getItem(PREMIUM_FLAG_KEY) === 'true';
+    const premium = FREE_MODE || localStorage.getItem(PREMIUM_FLAG_KEY) === 'true';
     if(!premium){
       showTranslatePremiumNote();
       return;
@@ -3366,10 +3932,29 @@
       return;
     }
 
+    // Quick-search chips from the details people saved (speaker, event, topic).
+    const chipBox = document.getElementById('libraryChips');
+    if(chipBox){
+      const seen = new Map();
+      sermons.forEach(x => ['speaker','event','topic'].forEach(k => {
+        const v = (x[k] || '').trim(); if(v && !seen.has(v.toLowerCase())) seen.set(v.toLowerCase(), { v, k });
+      }));
+      const icon = { speaker:'👤', event:'🏫', topic:'🏷' };
+      chipBox.innerHTML = '';
+      Array.from(seen.values()).slice(0, 10).forEach(({ v, k }) => {
+        const b = document.createElement('button'); b.type = 'button';
+        b.textContent = icon[k] + ' ' + v;
+        b.addEventListener('click', () => { librarySearchInput.value = v; renderLibrary(); });
+        chipBox.appendChild(b);
+      });
+    }
+
     const query = librarySearchInput.value.trim().toLowerCase();
     if(query){
       sermons = sermons.filter(sermon => {
         const haystack = [
+          sermon.title || '', sermon.speaker || '', sermon.event || '', sermon.topic || '',
+          new Date(sermon.date).toLocaleDateString(undefined, { weekday:'long', month:'long', day:'numeric', year:'numeric' }),
           sermon.takeaway || '',
           (sermon.bullets || []).join(' '),
           sermon.transcript || ''
@@ -3385,7 +3970,26 @@
     }
     libraryEmpty.style.display = 'none';
 
+    const sortBy = (document.getElementById('librarySort') || {}).value || 'new';
+    const keyOf = (x) => (x[sortBy] || '').trim();
+    if(sortBy === 'old') sermons.sort((a, b) => new Date(a.date) - new Date(b.date));
+    else if(sortBy === 'new') sermons.sort((a, b) => new Date(b.date) - new Date(a.date));
+    else sermons.sort((a, b) => {
+      const ka = keyOf(a).toLowerCase(), kb = keyOf(b).toLowerCase();
+      if(!ka && kb) return 1; if(ka && !kb) return -1;
+      return ka.localeCompare(kb) || (new Date(b.date) - new Date(a.date));
+    });
+    const grouped = ['speaker', 'topic', 'event'].includes(sortBy);
+    let lastGroup = null;
+
     sermons.forEach(sermon => {
+      if(grouped){
+        const g = keyOf(sermon) || 'Not yet named';
+        if(g !== lastGroup){
+          const h = document.createElement('div'); h.className = 'lib-group'; h.textContent = g;
+          libraryList.appendChild(h); lastGroup = g;
+        }
+      }
       const item = document.createElement('div');
       item.className = 'library-item';
 
@@ -3410,14 +4014,38 @@
       });
 
       const renameBtn = document.createElement('button');
-      renameBtn.innerHTML = '✏️ Rename';
-      renameBtn.addEventListener('click', async (e) => {
+      renameBtn.innerHTML = '✏️ Title &amp; details';
+      renameBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         closeThisMenu();
-        const next = prompt('Rename this recording:', sermon.title || '');
-        if(next === null) return;
-        await updateSermon(sermon.id, { title: next.trim() });
-        renderLibrary();
+        if(item.querySelector('.lib-edit')) return;
+        const form = document.createElement('div');
+        form.className = 'lib-edit';
+        form.addEventListener('click', ev => ev.stopPropagation());
+        const fields = [
+          ['title', 'Title (e.g. "Faith that moves mountains")'],
+          ['speaker', 'Teacher / speaker (e.g. Mr. Juan Santos)'],
+          ['event', 'Class, section or event (e.g. Grade 10 – Rizal)'],
+          ['topic', 'Subject / topic (e.g. Science – Photosynthesis)']
+        ];
+        const inputs = {};
+        fields.forEach(([k, ph]) => {
+          const inp = document.createElement('input'); inp.type = 'text'; inp.placeholder = ph;
+          inp.setAttribute('aria-label', ph); inp.value = sermon[k] || ''; inp.maxLength = 120;
+          inputs[k] = inp; form.appendChild(inp);
+        });
+        const row = document.createElement('div'); row.className = 'row';
+        const save = document.createElement('button'); save.type = 'button'; save.className = 'save'; save.textContent = '✓ Save';
+        const cancel = document.createElement('button'); cancel.type = 'button'; cancel.textContent = 'Cancel';
+        save.addEventListener('click', async () => {
+          const upd = {}; fields.forEach(([k]) => { upd[k] = inputs[k].value.trim(); });
+          await updateSermon(sermon.id, upd);
+          renderLibrary();
+        });
+        cancel.addEventListener('click', () => form.remove());
+        row.appendChild(save); row.appendChild(cancel); form.appendChild(row);
+        item.appendChild(form);
+        inputs.title.focus();
       });
 
       const quizBtn = document.createElement('button');
@@ -3426,6 +4054,7 @@
         e.stopPropagation();
         closeThisMenu();
         openSavedSermon(sermon);
+        const fq = document.getElementById('foldQuiz'); if(fq){ fq.open = true; setTimeout(() => fq.scrollIntoView({ behavior:'smooth', block:'start' }), 50); }
         if(!sermon.quiz || !sermon.quiz.length){
           generateQuiz();
         }
@@ -3454,7 +4083,7 @@
       del.addEventListener('click', async (e) => {
         e.stopPropagation();
         closeThisMenu();
-        if(!confirm('Delete this saved sermon? This cannot be undone.')) return;
+        if(!confirm('Delete this saved recording? This cannot be undone.')) return;
         await deleteSermon(sermon.id);
         renderLibrary();
       });
@@ -3491,6 +4120,12 @@
 
       item.appendChild(menuWrap);
       item.appendChild(dateEl);
+      const det = [sermon.speaker && ('👤 ' + sermon.speaker), sermon.event && ('⛪ ' + sermon.event), sermon.topic && ('🏷 ' + sermon.topic)].filter(Boolean);
+      if(det.length){
+        const detEl = document.createElement('div'); detEl.className = 'lib-details';
+        detEl.textContent = det.join('   ·   ');
+        item.appendChild(detEl);
+      }
       item.appendChild(takeawayEl);
 
       item.addEventListener('click', () => openSavedSermon(sermon));
@@ -3510,7 +4145,7 @@
     const stamp = d.toISOString().slice(0,10);
     const cleanTitle = (sermon.title && sermon.title.trim())
       ? sermon.title.trim().replace(/[^a-z0-9\-_ ]/gi, '').replace(/\s+/g, '-')
-      : ('sermon-echo-' + stamp);
+      : ('lecture-' + stamp);
     const ext = (sermon.audioBlob && sermon.audioBlob.type && sermon.audioBlob.type.includes('wav')) ? 'wav' : 'webm';
     return cleanTitle + '.' + ext;
   }
@@ -3588,6 +4223,12 @@
     renderLibrary();
   });
 
+  const librarySort = document.getElementById('librarySort');
+  try{ const sv = localStorage.getItem('se_library_sort'); if(sv) librarySort.value = sv; }catch(e){}
+  librarySort.addEventListener('change', () => {
+    try{ localStorage.setItem('se_library_sort', librarySort.value); }catch(e){}
+    renderLibrary();
+  });
   librarySearchInput.addEventListener('input', () => {
     renderLibrary();
   });
@@ -3610,6 +4251,28 @@
   }
 
   paywallBtn.addEventListener('click', openPaywall);
+
+  // Any message that says the code has expired gets a "Renew Premium" button,
+  // and Premium is locked on this device so the app stops offering expired features.
+  (function watchForExpired(){
+    const ids = ['translateNote', 'redeemError', 'quizError', 'concordanceError', 'commentaryError', 'authorsError', 'genealogyError', 'scienceError', 'quotesError', 'comicError'];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if(!el) return;
+      new MutationObserver(() => {
+        if(!/expired/i.test(el.textContent || '') || el.querySelector('.renew-btn')) return;
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'renew-btn'; b.textContent = '🔄 Renew Premium — see how';
+        b.addEventListener('click', (e) => { e.stopPropagation(); openPaywall(); setTimeout(() => { const r = document.getElementById('renewSteps'); if(r) r.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 150); });
+        el.appendChild(document.createElement('br'));
+        el.appendChild(b);
+        if(!FREE_MODE && id !== 'redeemError' && localStorage.getItem(PREMIUM_FLAG_KEY) === 'true'){
+          localStorage.removeItem(PREMIUM_FLAG_KEY);
+          try{ refreshPremiumUI(); }catch(err){}
+        }
+      }).observe(el, { childList: true, characterData: true, subtree: true });
+    });
+  })();
   closePaywallBtn.addEventListener('click', closePaywall);
 
   // ---- Premium access code: unlock, store, and display ----
@@ -3647,7 +4310,7 @@
       if(savedCode){
         myCodeHint.style.display = 'block';
         const expiryLine = expiresAt ? (' — active until ' + formatExpiryDate(expiresAt)) : '';
-        myCodeHint.textContent = 'Your access code (share with family to unlock their device too): ' + savedCode + expiryLine;
+        myCodeHint.textContent = 'Your access code (keep it private — make family codes below for family members): ' + savedCode + expiryLine;
       }
       if(savedCode && savedCode.startsWith('SE-')){
         familyCodesSection.style.display = 'block';
@@ -3880,7 +4543,7 @@
               const expiryLine = data.expiresAt ? ('<div style="font-size:12px; color:var(--text-muted); margin-top:8px;">Active for 30 days, until ' + formatExpiryDate(data.expiresAt) + '</div>') : '';
               showBanner(
                 '<div>🎉 Thank you for your support! Premium is unlocked on this device.' +
-                '<div class="code-box"><div class="code-label">Your access code (save this — it also unlocks Premium for anyone you share it with)</div>' +
+                '<div class="code-box"><div class="code-label">Your access code (save this — you can make up to 5 family codes from it in Settings)</div>' +
                 '<div class="code-value">' + data.code + '</div>' +
                 expiryLine +
                 '<button class="copy-code-btn" id="copyCodeBtn">Copy code</button></div></div>'
@@ -3890,7 +4553,7 @@
                 navigator.clipboard.writeText(data.code).then(() => { copyBtn.textContent = 'Copied ✓'; });
               });
             } else {
-              showBanner('<span>🎉 Thank you for your support! We couldn\'t automatically confirm the payment on this device. If you completed payment, please try reopening the app in the same browser you paid in, or email beavenbermudez@gmail.com with your PayMongo receipt or reference number and we\'ll send your code.</span>');
+              showBanner('<span>🎉 Thank you for your support! We couldn\'t automatically confirm the payment on this device. If you completed payment, please try reopening the app in the same browser you paid in, or email sermonrecord.support@gmail.com with your PayMongo receipt or reference number and we\'ll send your code.</span>');
             }
           })
           .catch(() => {
@@ -3898,7 +4561,7 @@
           })
           .finally(() => sessionStorage.removeItem(CHECKOUT_SESSION_KEY));
       } else {
-        showBanner('<span>🎉 Thank you for your support! We couldn\'t find this payment session on this device (perhaps a different tab was used). If you completed payment, please email beavenbermudez@gmail.com with your PayMongo receipt or reference number and we\'ll send your code.</span>');
+        showBanner('<span>🎉 Thank you for your support! We couldn\'t find this payment session on this device (perhaps a different tab was used). If you completed payment, please email sermonrecord.support@gmail.com with your PayMongo receipt or reference number and we\'ll send your code.</span>');
       }
     } else if(paid === 'cancelled'){
       showBanner('<span>Payment was cancelled — no charge was made. You can try again anytime.</span>');

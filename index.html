@@ -4504,8 +4504,15 @@
       });
 
       const shareBtn = document.createElement('button');
-      shareBtn.innerHTML = '📤 Share';
+      shareBtn.innerHTML = '📤 Share as MP3';
       shareBtn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        closeThisMenu();
+        await shareSermonMp3(sermon);
+      });
+      const shareOrigBtn = document.createElement('button');
+      shareOrigBtn.innerHTML = '📤 Share original';
+      shareOrigBtn.addEventListener('click', async (e) => {
         e.stopPropagation();
         closeThisMenu();
         await shareSermonAudio(sermon);
@@ -4526,6 +4533,7 @@
       menuPanel.appendChild(quizBtn);
       menuPanel.appendChild(printBtn);
       menuPanel.appendChild(shareBtn);
+      menuPanel.appendChild(shareOrigBtn);
       menuPanel.appendChild(del);
 
       menuWrap.appendChild(menuToggle);
@@ -4582,6 +4590,59 @@
       : ('lecture-' + stamp);
     const ext = (sermon.audioBlob && sermon.audioBlob.type && sermon.audioBlob.type.includes('wav')) ? 'wav' : 'webm';
     return cleanTitle + '.' + ext;
+  }
+
+  // ---- 🎵 MP3: turns the recording into an .mp3 file that Messenger, Viber and every phone accept ----
+  // Done on the phone itself (lame.min.js, uploaded next to index.html) — no server, no AI cost.
+  let lameLoading = null;
+  function loadLame(){
+    if(window.lamejs) return Promise.resolve();
+    if(!lameLoading) lameLoading = new Promise((resolve, reject) => {
+      const sc = document.createElement('script'); sc.src = '/lame.min.js';
+      sc.onload = () => resolve(); sc.onerror = () => { lameLoading = null; reject(new Error('Could not load the MP3 maker. Please check your internet and try again.')); };
+      document.head.appendChild(sc);
+    });
+    return lameLoading;
+  }
+  async function blobToMp3(blob, onProgress){
+    await loadLame();
+    const decoded = await decodeBlobToAudioBuffer(blob);
+    const RATE = 22050;                                   // clear for voices, small files (about 22 MB per hour)
+    const mono = await resampleToMono(decoded, RATE);
+    const data = mono.getChannelData(0);
+    const enc = new lamejs.Mp3Encoder(1, mono.sampleRate, 48);
+    const parts = [], STEP = 1152 * 40;
+    for(let i = 0; i < data.length; i += STEP){
+      const slice = data.subarray(i, Math.min(i + STEP, data.length));
+      const pcm = new Int16Array(slice.length);
+      for(let j = 0; j < slice.length; j++){ const v = Math.max(-1, Math.min(1, slice[j])); pcm[j] = v < 0 ? v * 0x8000 : v * 0x7FFF; }
+      const out = enc.encodeBuffer(pcm);
+      if(out.length) parts.push(new Uint8Array(out));
+      if((i / STEP) % 25 === 0){ if(onProgress) onProgress(Math.round(i / data.length * 100)); await new Promise(r => setTimeout(r, 0)); }
+    }
+    const end = enc.flush(); if(end.length) parts.push(new Uint8Array(end));
+    return new Blob(parts, { type: 'audio/mpeg' });
+  }
+  async function shareSermonMp3(sermon){
+    if(!sermon.audioBlob){ alert('No audio file is saved for this recording, so there\'s nothing to share.'); return; }
+    const filename = makeShareFileName(sermon).replace(/\.(webm|wav)$/i, '') + '.mp3';
+    let mp3;
+    try{
+      showToast('🎵 Making the MP3… please keep this page open');
+      mp3 = sermon.audioBlob.type === 'audio/mpeg' ? sermon.audioBlob : await blobToMp3(sermon.audioBlob, (p) => showToast('🎵 Making the MP3… ' + p + '%'));
+      showToast('✅ MP3 ready');
+    }catch(err){
+      alert((err && err.message && err.message.indexOf('MP3 maker') >= 0) ? err.message : 'Sorry, this recording could not be turned into an MP3 on this phone (it may be too long). Use "Share original" instead.');
+      return;
+    }
+    const file = new File([mp3], filename, { type: 'audio/mpeg' });
+    if(navigator.canShare && navigator.canShare({ files: [file] })){
+      try{ await navigator.share({ files: [file], title: sermon.title && sermon.title.trim() ? sermon.title.trim() : 'ScitechLectureTool recording' }); }
+      catch(err){ if(err && err.name !== 'AbortError') { downloadBlob(mp3, filename); alert('The MP3 was saved to your Downloads instead — you can send it from there.'); } }
+    } else {
+      downloadBlob(mp3, filename);
+      alert('The MP3 was saved to your Downloads. Open Messenger and attach it from there.');
+    }
   }
 
   async function shareSermonAudio(sermon){

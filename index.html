@@ -1577,6 +1577,47 @@
   .lp-step{ border-top:1px dashed #cfe3d6; padding:8px 0; }
   .lp-step .lp-min{ display:inline-block; font-size:12px; font-weight:700; background:#EEF8F1; color:#1F6B40; border-radius:999px; padding:1px 8px; margin-left:6px; }
   .lp-tag{ display:inline-block; font-size:11.5px; font-weight:700; background:#eef4ff; color:#1a4fb3; border-radius:999px; padding:1px 7px; margin:2px 3px 0 0; }
+  .lp-bloom{ display:inline-block; font-size:11px; font-weight:700; border-radius:999px; padding:1px 7px; background:#F1F3F5; color:#4B5563; white-space:nowrap; }
+  .lp-bloom.hots{ background:#FFF1E0; color:#9A4A00; }
+  .lp-card ol{ margin:4px 0; padding-left:20px; }
+  /* Assessment tools */
+  #assessView, #assessView > *, #assessView details, #assessView .se-fold-body, .at-card{ min-width:0; max-width:100%; box-sizing:border-box; }
+  .gs-scroll{ max-width:100%; }
+  .at-card{ font-size:14px; }
+  .at-card ol{ padding-left:20px; } .at-card li{ margin:4px 0; line-height:1.45; }
+  .at-starters{ list-style:none; padding:0; } .at-starters li{ margin:6px 0; }
+  .at-grid2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:6px 0; }
+  .at-grid3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:6px 0; }
+  .at-card label{ display:flex; flex-direction:column; gap:4px; font-size:13px; font-weight:600; color:#111; }
+  .at-lbl{ display:block; font-size:13px; font-weight:600; margin:10px 0 4px; color:#111; }
+  .at-card input[type=text], .at-card input[type=number], .at-card select, .at-card textarea{ width:100%; box-sizing:border-box; padding:9px 10px; border:1px solid #bcc7c0; border-radius:8px; font-size:14px; color:#111; background:#fff; font-family:inherit; font-weight:400; }
+  .at-card input:disabled{ background:#F3F4F6; color:#555; }
+  .at-levels{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin:6px 0 10px; }
+  .at-levels label{ font-size:12.5px; }
+  .tos-row{ display:flex; gap:6px; align-items:center; margin:6px 0; }
+  .tos-row input[type=text]{ flex:1; min-width:0; }
+  .tos-row input[type=number]{ width:64px; flex:none; }
+  .tos-unit{ font-size:12px; color:#555; }
+  .tos-x{ border:none; background:none; color:#9B2C2C; font-size:16px; cursor:pointer; padding:4px; }
+  .at-btnrow{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+  .at-btn{ padding:10px 14px; border-radius:10px; border:none; background:#3E9B63; color:#fff; font-weight:700; font-size:14px; cursor:pointer; }
+  .at-btn.light{ background:#fff; color:#1F6B40; border:1.5px solid #3E9B63; }
+  .at-btn:disabled{ opacity:.6; }
+  .at-select{ flex:1; min-width:180px; padding:9px 10px; border:1px solid #bcc7c0; border-radius:8px; font-size:14px; background:#fff; color:#111; }
+  .at-help{ font-size:12.5px; color:#4B5563; margin:6px 0; line-height:1.45; }
+  .at-key{ color:#1F7A44; font-weight:600; font-size:13px; margin-top:2px; }
+  .test-preview .item{ border-bottom:1px solid #eef0f3; padding:8px 0; } .test-preview .opts{ margin:4px 0 0 16px; font-size:13.5px; }
+  .test-preview .line{ border-bottom:1px solid #ccc; height:16px; }
+  .gs-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; margin-top:8px; border:1px solid #d6e4db; border-radius:8px; }
+  .gs-table, .tos-table{ border-collapse:collapse; font-size:12.5px; min-width:100%; }
+  .gs-table th, .gs-table td, .tos-table th, .tos-table td{ border:1px solid #d6dbe1; padding:3px 4px; text-align:center; white-space:nowrap; color:#111; }
+  .tos-table td:first-child{ text-align:left; white-space:normal; min-width:160px; }
+  .gs-table th{ background:#EEF8F1; font-size:11.5px; }
+  .gs-table .gs-name{ text-align:left; position:sticky; left:0; background:#fff; min-width:150px; white-space:normal; z-index:1; }
+  .gs-table input{ width:44px; padding:3px; border:1px solid #cfd6df; border-radius:4px; font-size:13px; text-align:center; }
+  .gs-hps td{ background:#FFF8D6; } .gs-hps .gs-name{ background:#FFF8D6; }
+  .gs-group td{ background:#F3F4F6; font-weight:700; text-align:left; }
+  .gs-c{ background:#FAFAFA; font-weight:600; } .gs-tg{ font-weight:800; } .gs-tg.low{ color:#B42318; }
   .lp-declare{ font-size:12.5px; color:#4B5563; font-style:italic; margin-top:8px; }
   .lesson-plan-row2 .lesson-plan-field{ flex:1; min-width:0; }
   .lesson-plan-generate-btn{
@@ -1740,6 +1781,7 @@
         </div>
         </div>
         <div class="settings-item clickable feature-row" id="lessonPlanRow" style="--accent:#2E6B8C"><span>📝 ILAW Lesson Plan helper</span><span class="chevron">→</span></div>
+        <div class="settings-item clickable feature-row" id="assessRow" style="--accent:#3E9B63"><span>🧰 Assessment Tools — HOTS test, TOS, grade sheet</span><span class="chevron">→</span></div>
       </div>
 
     </div>
@@ -1839,6 +1881,147 @@
         <span>Drafting your ILAW lesson plan… about 30–60 seconds.</span>
       </div>
       <div id="lpResults"></div>
+    </div>
+
+    <!-- ASSESSMENT TOOLS -->
+    <div class="library page-white" id="assessView" style="display:none;">
+      <div class="result-meta">
+        <span class="date">🧰 Assessment Tools</span>
+        <button class="new-recording-btn" id="closeAssessBtn">Close</button>
+      </div>
+      <div class="concordance-intro">Tools for tests and grades in the new curriculum: a HOTS test guide, a Table of Specifications (TOS) maker, a HOTS test paper maker, and a grade sheet (DepEd Order No. 015, s. 2026 — three terms).</div>
+
+      <details class="se-fold at-fold" id="atGuide">
+        <summary><span>🧠 How to make a HOTS test<small>Quick guide · free</small></span></summary>
+        <div class="se-fold-body"><div class="paper-card at-card">
+          <p><b>HOTS</b> (Higher-Order Thinking Skills) items make learners <b>analyze, evaluate and create</b> — not just remember. Follow these steps:</p>
+          <ol>
+            <li><b>Start with a TOS.</b> List the competencies, how many days you taught each, and how many items each should get. Use the TOS maker below.</li>
+            <li><b>Spread the thinking levels.</b> A common DepEd mix is Easy 60% (Remember, Understand) · Average 30% (Apply, Analyze) · Difficult 10% (Evaluate, Create). For a HOTS test, aim higher, e.g. 30% · 40% · 30%.</li>
+            <li><b>Give a situation first.</b> HOTS items start with a short scenario, data table, graph, picture, quote or case from the learners' real life — then ask them to think about it.</li>
+            <li><b>Ask "why, how, which is better, what if".</b> Avoid questions answerable by copying one line from the book.</li>
+            <li><b>Write strong choices.</b> All options should look possible; wrong options should come from common mistakes. Avoid "all of the above" and tricky negatives ("which is NOT…").</li>
+            <li><b>Include a few open-ended items</b> (explain, justify, design) scored with a short rubric.</li>
+            <li><b>Check alignment.</b> Every item matches its competency and level in the TOS. Prepare the answer key and rubric before giving the test.</li>
+          </ol>
+          <div class="lp-sub">Question starters by level</div>
+          <ul class="at-starters">
+            <li><span class="lp-bloom">Remember</span> What is…? List… Name… When did…?</li>
+            <li><span class="lp-bloom">Understand</span> Explain in your own words… What is the main idea…? Give an example of…</li>
+            <li><span class="lp-bloom">Apply</span> How would you use… to solve…? What would happen if you followed… in this situation?</li>
+            <li><span class="lp-bloom hots">HOTS · Analyze</span> What is the cause of…? How are… and… different? Which data supports…? What pattern do you see?</li>
+            <li><span class="lp-bloom hots">HOTS · Evaluate</span> Which solution is best and why? Do you agree with…? Justify. What is the weakness of this argument?</li>
+            <li><span class="lp-bloom hots">HOTS · Create</span> Design a… Propose a plan to… What would you change so that…? Make a new rule/model for…</li>
+          </ul>
+        </div></div>
+      </details>
+
+      <details class="se-fold at-fold" id="atTos">
+        <summary><span>📊 TOS maker<small>Table of Specifications · free, no AI</small></span></summary>
+        <div class="se-fold-body"><div class="paper-card at-card">
+          <div class="at-grid2">
+            <label>Test title<input id="tosTitle" type="text" placeholder="e.g. Term 1 Summative Test 1 — Science 7"></label>
+            <label>Total items<input id="tosTotal" type="number" min="5" max="100" value="40"></label>
+          </div>
+          <label class="at-lbl">Thinking-level mix
+            <select id="tosPreset">
+              <option value="deped">DepEd common — Easy 60% · Average 30% · Difficult 10%</option>
+              <option value="hots" selected>HOTS-focused — Easy 30% · Average 40% · Difficult 30%</option>
+              <option value="custom">Custom — I'll type the percentages</option>
+            </select>
+          </label>
+          <div class="at-levels" id="tosLevels"></div>
+          <div class="at-lbl">Competencies (one row each)</div>
+          <div id="tosRows"></div>
+          <div class="at-btnrow">
+            <button type="button" class="at-btn light" id="tosAddRow">+ Add competency</button>
+            <button type="button" class="at-btn" id="tosMake">Make TOS</button>
+          </div>
+          <div class="error-box" id="tosError" style="display:none;"></div>
+          <div id="tosOut"></div>
+        </div></div>
+      </details>
+
+      <details class="se-fold at-fold" id="atTest">
+        <summary><span>📝 HOTS test paper maker<small>From your TOS · uses 1 free AI use</small></span></summary>
+        <div class="se-fold-body"><div class="paper-card at-card">
+          <p class="at-help">Make your TOS above first. The app writes the items that match it — each one tagged with its competency and thinking level — plus an answer key. Please review and edit every item before giving the test.</p>
+          <div class="at-grid2">
+            <label>Subject<input id="testSubject" type="text" placeholder="e.g. Science"></label>
+            <label>Grade / level<input id="testGrade" type="text" placeholder="e.g. Grade 7"></label>
+          </div>
+          <label class="at-lbl">Item format
+            <select id="testFormat">
+              <option value="mc">All multiple choice (4 options)</option>
+              <option value="mixed" selected>Multiple choice + short written answers for Evaluate/Create</option>
+            </select>
+          </label>
+          <label class="at-lbl">Key concepts or notes to cover (optional)<textarea id="testNotes" rows="3" placeholder="e.g. chlorophyll, sunlight, carbon dioxide, glucose; use examples from farming in our barangay"></textarea></label>
+          <button type="button" class="at-btn" id="testMake">✨ Make the HOTS test paper</button>
+          <div class="status-row" id="testStatus" style="display:none; margin-top:10px;"><div class="spinner"></div><span>Writing your test… about 1–2 minutes.</span></div>
+          <div class="error-box" id="testError" style="display:none;"></div>
+          <div id="testOut"></div>
+        </div></div>
+      </details>
+
+      <details class="se-fold at-fold" id="atGrades">
+        <summary><span>📒 Grade sheet (class record)<small>DO 015, s. 2026 · three terms · free, no AI</small></span></summary>
+        <div class="se-fold-body"><div class="paper-card at-card">
+          <div class="at-btnrow" style="margin-top:0;">
+            <select id="gsClassSelect" class="at-select"></select>
+            <button type="button" class="at-btn light" id="gsNewBtn">+ New class record</button>
+          </div>
+          <div id="gsSetup" class="at-setup" style="display:none;">
+            <div class="at-grid2">
+              <label>Grade &amp; section<input id="gsSection" type="text" placeholder="e.g. Grade 7 – Rizal"></label>
+              <label>Learning area<input id="gsSubject" type="text" placeholder="e.g. Science"></label>
+              <label>School year<input id="gsSY" type="text" value="2026–2027"></label>
+              <label>Term
+                <select id="gsTerm"><option value="1">Term 1</option><option value="2">Term 2</option><option value="3">Term 3</option></select>
+              </label>
+              <label>Teacher<input id="gsTeacher" type="text"></label>
+              <label>Weights
+                <select id="gsGroup">
+                  <option value="core">Most subjects (Grades 4–10, SHS core) — 20 / 50 / 30</option>
+                  <option value="tle">EPP/TLE, MAPEH — 20 / 60 / 20</option>
+                  <option value="custom">Custom (e.g. SHS electives)</option>
+                </select>
+              </label>
+            </div>
+            <div class="at-grid3" id="gsWeights">
+              <label>Written/Oral Works %<input id="gsWW" type="number" min="0" max="100"></label>
+              <label>Performance Tasks %<input id="gsPT" type="number" min="0" max="100"></label>
+              <label>Examinations %<input id="gsEX" type="number" min="0" max="100"></label>
+            </div>
+            <div class="at-grid2">
+              <label>Number of Written/Oral Works<input id="gsWWn" type="number" min="1" max="10" value="4"></label>
+              <label>Number of Performance Tasks<input id="gsPTn" type="number" min="1" max="10" value="4"></label>
+            </div>
+            <label class="at-lbl">Grading mode
+              <select id="gsMode">
+                <option value="adjusted">SY 2026–2027: adjusted transmutation (Initial Grade 70 = 75)</option>
+                <option value="zero">Zero-based (from SY 2027–2028): no transmutation</option>
+              </select>
+            </label>
+            <label class="at-lbl">Learners — paste or type one name per line (Boys first, then Girls, like the official record)<textarea id="gsNames" rows="5" placeholder="DELA CRUZ, Juan A.&#10;SANTOS, Pedro B.&#10;---&#10;REYES, Maria C."></textarea></label>
+            <div class="at-help">Tip: put a line with --- between the boys and the girls.</div>
+            <div class="at-btnrow">
+              <button type="button" class="at-btn" id="gsSaveSetup">Save &amp; show the grade sheet</button>
+              <button type="button" class="at-btn light" id="gsDelete">Delete this class record</button>
+            </div>
+          </div>
+          <div id="gsSheetWrap" style="display:none;">
+            <div class="at-btnrow" style="margin-top:0;">
+              <button type="button" class="at-btn light" id="gsEditSetup">⚙️ Edit setup / learners</button>
+              <button type="button" class="at-btn light" id="gsCsv">⬇ Save for Excel (CSV)</button>
+              <button type="button" class="at-btn light" id="gsPrint">🖨️ Print</button>
+            </div>
+            <div class="at-help">Type the <b>highest possible score (HPS)</b> in the yellow row, then each learner's scores. Grades compute by themselves and are saved on this device.</div>
+            <div class="gs-scroll"><table class="gs-table" id="gsTable"></table></div>
+            <div class="at-help" id="gsNote"></div>
+          </div>
+        </div></div>
+      </details>
     </div>
 
     <!-- RECORD STAGE -->
@@ -2173,6 +2356,8 @@
     lpError.style.display = 'none';
   });
   closeLessonPlanBtn.addEventListener('click', () => showView('settings'));
+  document.getElementById('assessRow').addEventListener('click', () => showView('assess'));
+  document.getElementById('closeAssessBtn').addEventListener('click', () => showView('settings'));
 
   // ---- Free month: each phone/laptop has its own ID for the free minutes and AI uses ----
   const FREE_MODE = true;   // Premium is hidden; everyone gets the free monthly allowance
@@ -2186,6 +2371,7 @@
     }
     return d;
   })();
+  window.ST = { DEVICE_ID, showFreeStatus: (d) => showFreeStatus(d) };
   async function freeStatus(){
     try{
       const r = await fetch('/.netlify/functions/free-ai', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ action:'status', device: DEVICE_ID }) });
@@ -2376,6 +2562,7 @@
     library: libraryView,
     settings: settingsView,
     lessonplan: lessonplanView,
+    assess: document.getElementById('assessView'),
     paywall: paywallView
   };
   function showView(name){
@@ -3236,6 +3423,7 @@
           card.appendChild(ans);
         } else {
           const num = document.createElement('div'); num.className = 'q-num'; num.textContent = (n + 1) + '.';
+          if(q.level){ const lv = document.createElement('span'); lv.className = 'lp-bloom' + (/analy|evaluat|creat/i.test(q.level) ? ' hots' : ''); lv.style.marginLeft = '8px'; lv.textContent = (/analy|evaluat|creat/i.test(q.level) ? 'HOTS · ' : '') + q.level; num.appendChild(lv); }
           card.appendChild(num);
           const qText = document.createElement('div'); qText.className = 'q-text'; qText.textContent = q.question;
           card.appendChild(qText);
@@ -3347,7 +3535,7 @@
           body = '<div class="blank-lines"><div class="line"></div><div class="line"></div></div>';
         }
         const lead = (q.type === 'true_false' || q.type === 'fill_blank') && !includeAnswers ? '______ ' : '';
-        const answerHtml = includeAnswers ? '<div class="answer">' + (q.type === 'essay' ? 'Look for: ' : 'Answer: ') + escapeHtml(q.answer) + '</div>' : '';
+        const answerHtml = includeAnswers ? '<div class="answer">' + (q.type === 'essay' ? 'Look for: ' : 'Answer: ') + escapeHtml(q.answer) + (q.level ? ' &nbsp;(' + escapeHtml(q.level) + (/analy|evaluat|creat/i.test(q.level) ? ' · HOTS' : '') + ')' : '') + '</div>' : '';
         html += '<div class="question"><div class="q-head">' + lead + (n + 1) + '. ' + escapeHtml(q.question) + '</div>' + body + answerHtml + '</div>';
       });
       return html;
@@ -3410,6 +3598,12 @@
 
   const esc = (t) => escapeHtml(String(t == null ? '' : t));
   const lpLevelIsSchool = () => !/corporate|meeting/i.test(lpGradeSelect.value);
+  const HOTS_LEVELS = /analy|evaluat|creat/i;
+  function bloomTag(level){
+    if(!level) return '';
+    const hots = HOTS_LEVELS.test(level);
+    return '<span class="lp-bloom' + (hots ? ' hots' : '') + '">' + (hots ? 'HOTS · ' : '') + esc(level) + '</span>';
+  }
   function lpPlanHtml(lp, forPrint){
     const I = lp.intentions || {}, L = lp.learningExperience || {}, A = lp.assessingLearning || {}, W = lp.waysForward || {};
     const school = lpLevelIsSchool();
@@ -3423,7 +3617,10 @@
       '<div class="lp-step"><b>' + esc(st.phase) + '</b><span class="lp-min">' + esc(st.minutes) + ' min</span>' +
       '<p><b>' + (school ? 'Teacher' : 'Facilitator') + ':</b> ' + esc(st.teacher) + '</p>' +
       '<p><b>' + (school ? 'Learners' : 'Participants') + ':</b> ' + esc(st.learners) + '</p>' +
-      (st.differentiation ? '<p><b>Differentiation:</b> ' + esc(st.differentiation) + '</p>' : '') + tags(st.indicators) + '</div>').join('');
+      (st.differentiation ? '<p><b>Differentiation:</b> ' + esc(st.differentiation) + '</p>' : '') +
+      ((st.questions || []).length ? '<p><b>Key questions (HOTS):</b></p><ul>' + st.questions.map(x => '<li>' + esc(x.q) + ' ' + bloomTag(x.level) + '</li>').join('') + '</ul>' : '') +
+      tags(st.indicators) + '</div>').join('');
+    const quiz = (A.quiz || []).map((x, i) => '<li>' + esc(x.q) + ' ' + bloomTag(x.level) + '<br><i>Answer: ' + esc(x.answer) + '</i></li>').join('');
     const checks = (A.checks || []).map(c => '<li><b>' + esc(c.when) + ':</b> ' + esc(c.how) + '</li>').join('');
     const cot = (lp.cot || []).map(c => '<li><b>' + esc(c.indicator) + ' ' + esc(c.name || '') + '</b><br>Where: ' + esc(c.where) + '<br>Level 7 looks like: ' + esc(c.lookFor) + '</li>').join('');
     return (forPrint ? '' : '') +
@@ -3431,7 +3628,7 @@
         sub('Content standard', para(I.contentStandard)) + sub('Performance standard', para(I.performanceStandard)) +
         sub(school ? 'Learning competency' : 'Session goal', para(I.competency)) + sub('Objectives', objectives ? '<ul>' + objectives + '</ul>' : '')) +
       card('L — Learning Experience', sub('Resources', list(L.resources)) + sub('Lesson flow', steps) + sub('Integration', para(L.integration)) + sub('Values', para(L.values))) +
-      card('A — Assessing Learning', sub('Checks for understanding', checks ? '<ul>' + checks + '</ul>' : '') + sub('Exit task', para(A.exitTask)) + sub('Rubric', para(A.rubric))) +
+      card('A — Assessing Learning', sub('Checks for understanding', checks ? '<ul>' + checks + '</ul>' : '') + sub('🧠 HOTS quick test', quiz ? '<ol>' + quiz + '</ol>' : '') + sub('Exit task', para(A.exitTask)) + sub('Rubric', para(A.rubric))) +
       card('W — Ways Forward', sub('Reteach', para(W.reteach)) + sub('Remediation', para(W.remediation)) + sub('Enrichment', para(W.enrichment)) + sub('Reflection questions', list(W.reflection))) +
       (school ? card('🎯 Classroom observation (COT) alignment', cot ? '<ul>' + cot + '</ul>' : '') : '') +
       card(school ? '✅ Observation-day checklist' : '✅ Facilitation checklist', list(lp.checklist)) +
@@ -3514,6 +3711,7 @@
       '.lp-step{border-top:1px dashed #bbb; padding:6px 0;} .lp-min{font-size:11px; font-weight:700; margin-left:6px;}' +
       '.lp-tag{display:inline-block; font-size:10.5px; border:1px solid #888; border-radius:8px; padding:0 5px; margin:2px 3px 0 0;}' +
       '.lp-declare{font-size:11.5px; font-style:italic; color:#444; margin-top:10px;}' +
+      '.lp-bloom{font-size:10.5px; border:1px solid #888; border-radius:8px; padding:0 5px;} .lp-bloom.hots{font-weight:700;} ol{margin:3px 0; padding-left:20px;}' +
       '.sign{margin-top:26px; font-size:12.5px;} .sign span{display:inline-block; min-width:220px; border-top:1px solid #333; margin-top:28px; padding-top:2px;}' +
       '@media print{ body{margin:0; padding:14px;} }' +
       '</style></head><body>' +
@@ -4594,6 +4792,336 @@
     openPaywall();
   })();
 
+})();
+</script>
+
+<script>
+// ---- 🧰 Assessment Tools: TOS maker, HOTS test paper maker, DO 015 grade sheet ----
+(function(){
+  const $ = (id) => document.getElementById(id);
+  const esc = (t) => String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const store = {
+    get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+    set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+  };
+  function openPrint(title, bodyHtml, landscape){
+    const win = window.open('', '_blank');
+    if(!win){ alert('Please allow pop-ups for this site so the print page can open.'); return; }
+    win.document.open();
+    win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + esc(title) + '</title><style>' +
+      'body{font-family:Arial,Helvetica,sans-serif;color:#111;margin:24px;line-height:1.4;font-size:13px;}' +
+      'h1{font-size:17px;margin:0 0 4px;} h2{font-size:14px;margin:18px 0 6px;} .meta{color:#444;font-size:12px;margin-bottom:10px;}' +
+      'table{border-collapse:collapse;width:100%;} th,td{border:1px solid #666;padding:3px 5px;font-size:11.5px;vertical-align:top;} th{background:#eee;}' +
+      '.num{text-align:center;} .item{margin:0 0 10px; page-break-inside:avoid;} .opts{margin:3px 0 0 18px;} .line{border-bottom:1px solid #777;height:20px;margin:2px 0;}' +
+      '.hdr td{border:none;padding:2px 0;font-size:13px;} .pb{page-break-before:always;}' +
+      '@page{size:' + (landscape ? 'A4 landscape' : 'A4 portrait') + ';margin:12mm;}' +
+      '</style></head><body>' + bodyHtml + '</body></html>');
+    win.document.close();
+    const go = () => { win.focus(); win.print(); };
+    win.onload = go; setTimeout(go, 400);
+  }
+  function downloadCsv(name, rows){
+    const csv = rows.map(r => r.map(c => { const s = String(c == null ? '' : c); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }).join(',')).join('\r\n');
+    const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name.replace(/[^\w\- ]+/g, '').trim().replace(/\s+/g, '-') + '.csv';
+    document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+  // Largest-remainder rounding: whole numbers that add up exactly to total.
+  function shares(total, weights){
+    const sum = weights.reduce((a, b) => a + (b > 0 ? b : 0), 0);
+    if(!sum) return weights.map(() => 0);
+    const raw = weights.map(w => total * (w > 0 ? w : 0) / sum);
+    const out = raw.map(Math.floor);
+    let left = total - out.reduce((a, b) => a + b, 0);
+    raw.map((r, i) => [r - Math.floor(r), i]).sort((a, b) => b[0] - a[0]).forEach(([f, i]) => { if(left > 0 && weights[i] > 0){ out[i]++; left--; } });
+    return out;
+  }
+
+  // ================= TOS MAKER =================
+  const LEVELS = ['Remembering', 'Understanding', 'Applying', 'Analyzing', 'Evaluating', 'Creating'];
+  const PRESETS = { deped: [30, 30, 15, 15, 5, 5], hots: [15, 15, 20, 20, 15, 15] };
+  let tos = store.get('st_tos', { title: '', total: 40, preset: 'hots', pct: PRESETS.hots.slice(), rows: [{ comp: '', days: 1 }, { comp: '', days: 1 }, { comp: '', days: 1 }] });
+  function drawLevels(){
+    $('tosLevels').innerHTML = LEVELS.map((l, i) =>
+      '<label>' + l + (i >= 3 ? ' <span class="lp-bloom hots">HOTS</span>' : '') + '<input type="number" min="0" max="100" data-lv="' + i + '" value="' + tos.pct[i] + '"' + (tos.preset === 'custom' ? '' : ' disabled') + '> %</label>').join('');
+    $('tosLevels').querySelectorAll('input').forEach(inp => inp.addEventListener('input', () => { tos.pct[+inp.dataset.lv] = +inp.value || 0; store.set('st_tos', tos); }));
+  }
+  function drawRows(){
+    $('tosRows').innerHTML = tos.rows.map((r, i) =>
+      '<div class="tos-row"><input type="text" data-i="' + i + '" data-k="comp" placeholder="Competency ' + (i + 1) + ' (e.g. Explain how plants make food)" value="' + esc(r.comp) + '">' +
+      '<input type="number" min="0" step="0.5" data-i="' + i + '" data-k="days" title="Days (or hours) taught" value="' + esc(r.days) + '"><span class="tos-unit">days</span>' +
+      '<button type="button" class="tos-x" data-del="' + i + '" aria-label="Remove">✕</button></div>').join('');
+    $('tosRows').querySelectorAll('input').forEach(inp => inp.addEventListener('input', () => {
+      const r = tos.rows[+inp.dataset.i]; r[inp.dataset.k] = inp.dataset.k === 'days' ? (+inp.value || 0) : inp.value; store.set('st_tos', tos);
+    }));
+    $('tosRows').querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => { tos.rows.splice(+b.dataset.del, 1); if(!tos.rows.length) tos.rows.push({ comp: '', days: 1 }); store.set('st_tos', tos); drawRows(); }));
+  }
+  function computeTos(){
+    const rows = tos.rows.filter(r => r.comp.trim() && r.days > 0);
+    const total = Math.max(1, Math.min(100, tos.total | 0));
+    const perComp = shares(total, rows.map(r => r.days));
+    const totalDays = rows.reduce((a, r) => a + r.days, 0);
+    let n = 1;
+    const table = rows.map((r, i) => {
+      const cells = shares(perComp[i], tos.pct);
+      const placed = cells.map(c => { const nums = []; for(let k = 0; k < c; k++) nums.push(n++); return nums; });
+      return { comp: r.comp.trim(), days: r.days, pctTime: totalDays ? Math.round(r.days / totalDays * 1000) / 10 : 0, items: perComp[i], cells, placed };
+    });
+    return { title: tos.title, total, rows: table, totalDays };
+  }
+  const rangeTxt = (nums) => !nums.length ? '' : (nums.length === 1 ? String(nums[0]) : nums[0] + '–' + nums[nums.length - 1]);
+  function tosTableHtml(t, forPrint){
+    const head = '<tr><th>Competency</th><th>Days</th><th>% time</th><th>Items</th>' + LEVELS.map((l, i) => '<th>' + l + (i >= 3 ? '<br>(HOTS)' : '') + '<br>' + tos.pct[i] + '%</th>').join('') + '</tr>';
+    const body = t.rows.map(r => '<tr><td>' + esc(r.comp) + '</td><td class="num">' + r.days + '</td><td class="num">' + r.pctTime + '%</td><td class="num"><b>' + r.items + '</b></td>' +
+      r.cells.map((c, i) => '<td class="num">' + (c ? c + '<br><small>#' + rangeTxt(r.placed[i]) + '</small>' : '') + '</td>').join('') + '</tr>').join('');
+    const colTotals = LEVELS.map((_, i) => t.rows.reduce((a, r) => a + r.cells[i], 0));
+    const foot = '<tr><th>Total</th><th class="num">' + t.totalDays + '</th><th class="num">100%</th><th class="num">' + t.total + '</th>' + colTotals.map(c => '<th class="num">' + c + '</th>').join('') + '</tr>';
+    return '<table class="' + (forPrint ? '' : 'tos-table') + '">' + head + body + foot + '</table>';
+  }
+  let lastTos = null;
+  function makeTos(){
+    tos.title = $('tosTitle').value.trim(); tos.total = +$('tosTotal').value || 40; store.set('st_tos', tos);
+    const pctSum = tos.pct.reduce((a, b) => a + b, 0);
+    $('tosError').style.display = 'none';
+    if(!tos.rows.some(r => r.comp.trim() && r.days > 0)){ $('tosError').textContent = 'Please type at least one competency and the days you taught it.'; $('tosError').style.display = 'block'; return; }
+    if(pctSum !== 100){ $('tosError').textContent = 'The thinking-level percentages add up to ' + pctSum + '%. Please make them add up to 100%.'; $('tosError').style.display = 'block'; return; }
+    lastTos = computeTos();
+    store.set('st_tos_last', lastTos);
+    $('tosOut').innerHTML = '<div class="gs-scroll">' + tosTableHtml(lastTos, false) + '</div>' +
+      '<div class="at-help">Item numbers (#) show where each item goes in the test. HOTS = Analyzing, Evaluating, Creating.</div>' +
+      '<div class="at-btnrow"><button type="button" class="at-btn light" id="tosPrint">🖨️ Print TOS</button><button type="button" class="at-btn light" id="tosCsv">⬇ Save for Excel</button><button type="button" class="at-btn" id="tosToTest">📝 Make the test from this TOS</button></div>';
+    $('tosPrint').addEventListener('click', () => openPrint('TOS — ' + (lastTos.title || 'Test'),
+      '<h1>Table of Specifications</h1><div class="meta">' + esc(lastTos.title) + ' · ' + lastTos.total + ' items</div>' + tosTableHtml(lastTos, true) +
+      '<p style="margin-top:20px;font-size:12px;">Prepared by: ______________________ &nbsp;&nbsp;&nbsp; Checked by: ______________________</p>', true));
+    $('tosCsv').addEventListener('click', () => downloadCsv('TOS ' + (lastTos.title || ''), [['Competency', 'Days', '% time', 'Items'].concat(LEVELS)]
+      .concat(lastTos.rows.map(r => [r.comp, r.days, r.pctTime + '%', r.items].concat(r.cells.map((c, i) => c ? c + ' (#' + rangeTxt(r.placed[i]) + ')' : ''))))));
+    $('tosToTest').addEventListener('click', () => { $('atTest').open = true; $('atTest').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  }
+  function initTos(){
+    $('tosTitle').value = tos.title || ''; $('tosTotal').value = tos.total || 40; $('tosPreset').value = tos.preset || 'hots';
+    drawLevels(); drawRows();
+    $('tosPreset').addEventListener('change', () => { tos.preset = $('tosPreset').value; if(PRESETS[tos.preset]) tos.pct = PRESETS[tos.preset].slice(); store.set('st_tos', tos); drawLevels(); });
+    $('tosAddRow').addEventListener('click', () => { if(tos.rows.length < 15){ tos.rows.push({ comp: '', days: 1 }); store.set('st_tos', tos); drawRows(); } });
+    $('tosMake').addEventListener('click', makeTos);
+    lastTos = store.get('st_tos_last', null);
+  }
+
+  // ================= HOTS TEST PAPER MAKER (AI) =================
+  let lastTest = null;
+  async function makeTest(){
+    const err = $('testError'); err.style.display = 'none';
+    if(!lastTos || !lastTos.rows || !lastTos.rows.length){ err.textContent = 'Please make your TOS first (in the TOS maker above), then come back here.'; err.style.display = 'block'; return; }
+    if(lastTos.total > 60){ err.textContent = 'For now the test maker can write up to 60 items at a time. Please set the TOS to 60 items or fewer.'; err.style.display = 'block'; return; }
+    const ST = window.ST || {};
+    const post = async (url, obj) => {
+      const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(obj) });
+      let d = {}; try{ d = JSON.parse((await r.text()).trim() || '{}'); }catch(e){}
+      return d;
+    };
+    $('testMake').disabled = true; $('testStatus').style.display = 'flex'; $('testOut').innerHTML = '';
+    try{
+      const plan = lastTos.rows.map(r => ({ comp: r.comp, cells: r.cells, placed: r.placed }));
+      const start = await post('/.netlify/functions/test-paper', { action: 'start', device: ST.DEVICE_ID,
+        subject: $('testSubject').value.trim(), grade: $('testGrade').value.trim(), title: lastTos.title, format: $('testFormat').value,
+        notes: $('testNotes').value.trim(), total: lastTos.total, levels: LEVELS, plan });
+      if(start.error || !start.jobId){ if(ST.showFreeStatus && typeof start.left === 'number') ST.showFreeStatus(start); throw new Error(start.error || 'Could not start the test right now. Please try again.'); }
+      await fetch('/.netlify/functions/test-paper-work-background', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ jobId: start.jobId }) });
+      let data = null; const giveUp = Date.now() + 6 * 60 * 1000;
+      while(Date.now() < giveUp){
+        await new Promise(r => setTimeout(r, 4000));
+        const st = await post('/.netlify/functions/test-paper', { action: 'status', jobId: start.jobId }).catch(() => null);
+        if(st && !st.pending && (st.error || st.items)){ data = st; break; }
+      }
+      if(!data) throw new Error('This is taking much longer than usual. Please try again in a few minutes.');
+      if(ST.showFreeStatus && typeof data.left === 'number') ST.showFreeStatus(data);
+      if(data.error) throw new Error(data.error);
+      lastTest = { items: data.items, title: lastTos.title, subject: $('testSubject').value.trim(), grade: $('testGrade').value.trim() };
+      store.set('st_test_last', lastTest);
+      showTest();
+    }catch(e){ err.textContent = e.message; err.style.display = 'block'; }
+    $('testMake').disabled = false; $('testStatus').style.display = 'none';
+  }
+  const L4 = ['A', 'B', 'C', 'D'];
+  function itemHtml(it, withKey){
+    const hots = /analy|evaluat|creat/i.test(it.level || '');
+    return '<div class="item"><b>' + it.n + '.</b> ' + esc(it.stem) +
+      (withKey ? ' <span class="lp-bloom' + (hots ? ' hots' : '') + '">' + (hots ? 'HOTS · ' : '') + esc(it.level) + '</span>' : '') +
+      (it.type === 'mc' && Array.isArray(it.options) ? '<div class="opts">' + it.options.map((o, i) => L4[i] + '. ' + esc(o)).join('<br>') + '</div>'
+        : '<div class="line"></div><div class="line"></div><div class="line"></div>') +
+      (withKey ? '<div class="at-key">Answer: ' + esc(it.answer) + '</div>' : '') + '</div>';
+  }
+  function showTest(){
+    if(!lastTest) return;
+    const its = lastTest.items;
+    $('testOut').innerHTML = '<div class="at-help">' + its.length + ' items written. Read and edit them before you print — you know your learners best.</div>' +
+      '<div class="test-preview">' + its.map(it => itemHtml(it, true)).join('') + '</div>' +
+      '<div class="at-btnrow"><button type="button" class="at-btn" id="testPrint">🖨️ Print test paper</button><button type="button" class="at-btn light" id="testKey">🖨️ Print answer key</button></div>';
+    const header = '<table class="hdr"><tr><td>Name: ______________________________</td><td>Score: ______ / ' + its.length + '</td></tr>' +
+      '<tr><td>Grade &amp; Section: ____________________</td><td>Date: ______________</td></tr></table>';
+    const title = (lastTest.title || 'Test') + (lastTest.subject ? ' — ' + lastTest.subject : '') + (lastTest.grade ? ' · ' + lastTest.grade : '');
+    $('testPrint').addEventListener('click', () => {
+      const mc = its.filter(i => i.type === 'mc'), op = its.filter(i => i.type !== 'mc');
+      openPrint(title, '<h1>' + esc(title) + '</h1>' + header +
+        (mc.length ? '<h2>I. Multiple Choice</h2><p><i>Directions: Read each item carefully. Choose the letter of the best answer.</i></p>' + mc.map(i => itemHtml(i, false)).join('') : '') +
+        (op.length ? '<h2>' + (mc.length ? 'II' : 'I') + '. Answer in a few sentences</h2><p><i>Directions: Explain your answer clearly. You will be scored with a rubric: idea (2), reasons/evidence (2), clarity (1).</i></p>' + op.map(i => itemHtml(i, false)).join('') : ''), false);
+    });
+    $('testKey').addEventListener('click', () => openPrint('Answer key — ' + title,
+      '<h1>Answer key — ' + esc(title) + '</h1><table><tr><th>#</th><th>Answer</th><th>Thinking level</th><th>Competency</th></tr>' +
+      its.map(i => '<tr><td class="num">' + i.n + '</td><td>' + esc(i.answer) + '</td><td>' + esc(i.level) + (/analy|evaluat|creat/i.test(i.level || '') ? ' (HOTS)' : '') + '</td><td>' + esc(i.comp) + '</td></tr>').join('') + '</table>' +
+      '<p class="meta" style="margin-top:12px;">AI-assisted draft (ScitechLectureTool), reviewed and edited by the teacher.</p>', false));
+  }
+
+  // ================= GRADE SHEET (DO 015, s. 2026) =================
+  const GROUPS = { core: [20, 50, 30], tle: [20, 60, 20] };
+  // SY 2026–2027 adjusted transmutation (Initial Grade 70.00 = 75). Rebuilt from published summaries of DO 015, s. 2026:
+  // above 70 in steps of 1.18 (70.00–71.17 → 75 … 98.32–99.49 → 99, 99.50–100 → 100); below 70 in steps of about 4.67 (0–4.67 → 60 … 65.34–69.99 → 74).
+  function transmute(ig){
+    ig = Math.round(ig * 100) / 100;
+    if(ig >= 99.5) return 100;
+    if(ig >= 70) return Math.min(99, 75 + Math.floor((ig - 70) / 1.18 + 1e-9));
+    let k = 0;
+    for(let j = 1; j <= 14; j++){ const lower = Math.round(70 * j / 15 * 100) / 100 + 0.01; if(ig >= lower - 1e-9) k = j; }
+    return 60 + k;
+  }
+  function descriptor(g){ return g >= 90 ? 'Advancing' : g >= 80 ? 'Benchmarking' : g >= 75 ? 'Connecting' : g >= 65 ? 'Developing' : 'Emerging'; }
+  let classes = store.get('st_classes', []);
+  let cur = null;
+  const saveClasses = () => store.set('st_classes', classes);
+  function drawClassSelect(){
+    $('gsClassSelect').innerHTML = classes.length
+      ? classes.map(c => '<option value="' + c.id + '">' + esc((c.section || 'Class') + ' · ' + (c.subject || '') + ' · Term ' + c.term) + '</option>').join('')
+      : '<option value="">No class record yet — tap "+ New class record"</option>';
+    if(cur) $('gsClassSelect').value = cur.id;
+  }
+  function blankClass(){
+    return { id: 'c' + Date.now().toString(36), section: '', subject: '', sy: '2026–2027', term: '1', teacher: '', group: 'core', w: GROUPS.core.slice(), wwN: 4, ptN: 4, mode: 'adjusted',
+      hps: { ww: [], pt: [], st1: '', st2: '', te: '' }, learners: [] };
+  }
+  function openSetup(c){
+    cur = c;
+    $('gsSetup').style.display = 'block'; $('gsSheetWrap').style.display = 'none';
+    $('gsSection').value = c.section; $('gsSubject').value = c.subject; $('gsSY').value = c.sy; $('gsTerm').value = c.term; $('gsTeacher').value = c.teacher;
+    $('gsGroup').value = c.group; $('gsWW').value = c.w[0]; $('gsPT').value = c.w[1]; $('gsEX').value = c.w[2];
+    $('gsWWn').value = c.wwN; $('gsPTn').value = c.ptN; $('gsMode').value = c.mode;
+    $('gsNames').value = c.learners.map(l => l.sep ? '---' : l.name).join('\n');
+    syncWeightsLock();
+  }
+  function syncWeightsLock(){
+    const g = $('gsGroup').value;
+    if(GROUPS[g]){ $('gsWW').value = GROUPS[g][0]; $('gsPT').value = GROUPS[g][1]; $('gsEX').value = GROUPS[g][2]; }
+    ['gsWW', 'gsPT', 'gsEX'].forEach(id => { $(id).disabled = !!GROUPS[g]; });
+  }
+  function saveSetup(){
+    const c = cur;
+    const w = [+$('gsWW').value || 0, +$('gsPT').value || 0, +$('gsEX').value || 0];
+    if(w[0] + w[1] + w[2] !== 100){ alert('The weights add up to ' + (w[0] + w[1] + w[2]) + '%. Please make them add up to 100%.'); return; }
+    Object.assign(c, { section: $('gsSection').value.trim(), subject: $('gsSubject').value.trim(), sy: $('gsSY').value.trim(), term: $('gsTerm').value,
+      teacher: $('gsTeacher').value.trim(), group: $('gsGroup').value, w, wwN: Math.max(1, Math.min(10, +$('gsWWn').value || 4)),
+      ptN: Math.max(1, Math.min(10, +$('gsPTn').value || 4)), mode: $('gsMode').value });
+    const old = {}; c.learners.forEach(l => { if(!l.sep) old[l.name] = l; });
+    c.learners = $('gsNames').value.split('\n').map(s => s.trim()).filter(Boolean).slice(0, 80).map(name =>
+      /^-{3,}$/.test(name) ? { sep: true } : (old[name] || { name, ww: [], pt: [], st1: '', st2: '', te: '' }));
+    if(!classes.find(x => x.id === c.id)) classes.push(c);
+    saveClasses(); drawClassSelect(); showSheet();
+  }
+  const num = (v) => (v === '' || v == null || isNaN(+v)) ? null : +v;
+  function compute(c, l){
+    const pct = (scores, hps) => { let s = 0, h = 0, any = false; hps.forEach((H, i) => { H = num(H); if(H && H > 0){ h += H; const v = num(scores[i]); if(v != null){ s += v; any = true; } } }); return h ? { p: s / h * 100, any } : null; };
+    const ww = pct(l.ww, c.hps.ww.slice(0, c.wwN)), pt = pct(l.pt, c.hps.pt.slice(0, c.ptN));
+    const ex = []; [['st1', 30], ['st2', 30], ['te', 40]].forEach(([k, wt]) => { const H = num(c.hps[k]); if(H && H > 0){ const v = num(l[k]); ex.push([v == null ? 0 : v / H * 100, wt]); } });
+    const exw = ex.reduce((a, e) => a + e[1], 0);
+    const exP = exw ? ex.reduce((a, e) => a + e[0] * e[1], 0) / exw : null;
+    const ws = [ww ? ww.p * c.w[0] / 100 : 0, pt ? pt.p * c.w[1] / 100 : 0, exP != null ? exP * c.w[2] / 100 : 0];
+    const ig = Math.round((ws[0] + ws[1] + ws[2]) * 100) / 100;
+    const tg = c.mode === 'zero' ? Math.round(ig) : transmute(ig);
+    return { ww: ww ? ww.p : null, pt: pt ? pt.p : null, ex: exP, ws, ig, tg, desc: descriptor(tg) };
+  }
+  const f2 = (v) => v == null ? '' : (Math.round(v * 100) / 100).toFixed(2);
+  function showSheet(){
+    const c = cur; if(!c) return;
+    $('gsSetup').style.display = 'none'; $('gsSheetWrap').style.display = 'block';
+    const wwCols = Array.from({ length: c.wwN }, (_, i) => i), ptCols = Array.from({ length: c.ptN }, (_, i) => i);
+    let h = '<thead><tr><th rowspan="2" class="gs-name">Learner</th><th colspan="' + (c.wwN + 1) + '">Written/Oral Works (' + c.w[0] + '%)</th><th colspan="' + (c.ptN + 1) + '">Performance Tasks (' + c.w[1] + '%)</th>' +
+      '<th colspan="4">Examinations (' + c.w[2] + '%)</th><th rowspan="2">Initial<br>Grade</th><th rowspan="2">Term<br>Grade</th><th rowspan="2">Descriptor</th></tr><tr>' +
+      wwCols.map(i => '<th>' + (i + 1) + '</th>').join('') + '<th>%</th>' + ptCols.map(i => '<th>' + (i + 1) + '</th>').join('') + '<th>%</th>' +
+      '<th>ST1<br><small>30%</small></th><th>ST2<br><small>30%</small></th><th>TE<br><small>40%</small></th><th>%</th></tr>';
+    const cell = (v, attr) => '<td><input inputmode="decimal" ' + attr + ' value="' + esc(v == null ? '' : v) + '"></td>';
+    h += '<tr class="gs-hps"><td class="gs-name"><b>Highest possible score</b></td>' + wwCols.map(i => cell(c.hps.ww[i], 'data-h="ww" data-i="' + i + '"')).join('') + '<td></td>' +
+      ptCols.map(i => cell(c.hps.pt[i], 'data-h="pt" data-i="' + i + '"')).join('') + '<td></td>' +
+      ['st1', 'st2', 'te'].map(k => cell(c.hps[k], 'data-h="' + k + '"')).join('') + '<td></td><td></td><td></td><td></td></tr></thead><tbody>';
+    let label = 'BOYS', idx = 0;
+    if(c.learners.some(l => l.sep)) h += '<tr class="gs-group"><td colspan="99">BOYS</td></tr>';
+    c.learners.forEach((l, li) => {
+      if(l.sep){ h += '<tr class="gs-group"><td colspan="99">GIRLS</td></tr>'; return; }
+      idx++;
+      const r = compute(c, l);
+      h += '<tr data-l="' + li + '"><td class="gs-name">' + idx + '. ' + esc(l.name) + '</td>' +
+        wwCols.map(i => cell(l.ww[i], 'data-k="ww" data-i="' + i + '"')).join('') + '<td class="gs-c" data-o="ww">' + f2(r.ww) + '</td>' +
+        ptCols.map(i => cell(l.pt[i], 'data-k="pt" data-i="' + i + '"')).join('') + '<td class="gs-c" data-o="pt">' + f2(r.pt) + '</td>' +
+        ['st1', 'st2', 'te'].map(k => cell(l[k], 'data-k="' + k + '"')).join('') + '<td class="gs-c" data-o="ex">' + f2(r.ex) + '</td>' +
+        '<td class="gs-c" data-o="ig">' + f2(r.ig) + '</td><td class="gs-c gs-tg' + (r.tg < 75 ? ' low' : '') + '" data-o="tg">' + r.tg + '</td><td class="gs-c" data-o="desc">' + r.desc + '</td></tr>';
+    });
+    $('gsTable').innerHTML = h + '</tbody>';
+    $('gsNote').textContent = (c.mode === 'zero' ? 'Zero-based: Term Grade = Initial Grade, rounded.' :
+      'Term Grade uses the SY 2026–2027 adjusted transmutation table (Initial Grade 70.00 = 75), rebuilt from published summaries of DO 015, s. 2026 — please check it against your school\'s official e-class record.') +
+      ' Examinations = Summative Test 1 (30%) + Summative Test 2 (30%) + Term Exam (40%). Passing: 75. Kindergarten and Grade 1 use descriptive grades only this school year.';
+    $('gsTable').querySelectorAll('input').forEach(inp => inp.addEventListener('input', onScore));
+  }
+  function onScore(e){
+    const inp = e.target, c = cur;
+    if(inp.dataset.h){ const k = inp.dataset.h; if(k === 'ww' || k === 'pt') c.hps[k][+inp.dataset.i] = inp.value; else c.hps[k] = inp.value; saveClasses(); refreshAll(); return; }
+    const tr = inp.closest('tr'); const l = c.learners[+tr.dataset.l]; const k = inp.dataset.k;
+    if(k === 'ww' || k === 'pt') l[k][+inp.dataset.i] = inp.value; else l[k] = inp.value;
+    saveClasses(); refreshRow(tr, l);
+  }
+  function refreshRow(tr, l){
+    const r = compute(cur, l);
+    const set = (o, v) => { const td = tr.querySelector('[data-o="' + o + '"]'); if(td) td.textContent = v; };
+    set('ww', f2(r.ww)); set('pt', f2(r.pt)); set('ex', f2(r.ex)); set('ig', f2(r.ig)); set('tg', r.tg); set('desc', r.desc);
+    const tg = tr.querySelector('[data-o="tg"]'); if(tg) tg.classList.toggle('low', r.tg < 75);
+  }
+  function refreshAll(){ $('gsTable').querySelectorAll('tr[data-l]').forEach(tr => refreshRow(tr, cur.learners[+tr.dataset.l])); }
+  function sheetRows(){
+    const c = cur, rows = [];
+    rows.push(['Learner'].concat(Array.from({ length: c.wwN }, (_, i) => 'WW' + (i + 1)), ['WW %', 'WW WS'], Array.from({ length: c.ptN }, (_, i) => 'PT' + (i + 1)), ['PT %', 'PT WS', 'ST1', 'ST2', 'TE', 'EX %', 'EX WS', 'Initial Grade', 'Term Grade', 'Descriptor']));
+    rows.push(['HPS'].concat(Array.from({ length: c.wwN }, (_, i) => c.hps.ww[i] || ''), ['', ''], Array.from({ length: c.ptN }, (_, i) => c.hps.pt[i] || ''), ['', '', c.hps.st1, c.hps.st2, c.hps.te, '', '', '', '', '']));
+    c.learners.forEach(l => {
+      if(l.sep){ rows.push(['GIRLS']); return; }
+      const r = compute(c, l);
+      rows.push([l.name].concat(Array.from({ length: c.wwN }, (_, i) => l.ww[i] || ''), [f2(r.ww), f2(r.ws[0])], Array.from({ length: c.ptN }, (_, i) => l.pt[i] || ''),
+        [f2(r.pt), f2(r.ws[1]), l.st1, l.st2, l.te, f2(r.ex), f2(r.ws[2]), f2(r.ig), r.tg, r.desc]));
+    });
+    return rows;
+  }
+  function initGrades(){
+    drawClassSelect();
+    if(classes.length){ cur = classes[classes.length - 1]; drawClassSelect(); showSheet(); }
+    $('gsClassSelect').addEventListener('change', () => { cur = classes.find(c => c.id === $('gsClassSelect').value) || null; if(cur) showSheet(); });
+    $('gsNewBtn').addEventListener('click', () => openSetup(blankClass()));
+    $('gsGroup').addEventListener('change', syncWeightsLock);
+    $('gsSaveSetup').addEventListener('click', saveSetup);
+    $('gsEditSetup').addEventListener('click', () => { if(cur) openSetup(cur); });
+    $('gsDelete').addEventListener('click', () => {
+      if(!cur || !confirm('Delete this class record from this device? This cannot be undone.')) return;
+      classes = classes.filter(c => c.id !== cur.id); saveClasses(); cur = classes[classes.length - 1] || null; drawClassSelect();
+      $('gsSetup').style.display = 'none'; if(cur) showSheet(); else $('gsSheetWrap').style.display = 'none';
+    });
+    $('gsCsv').addEventListener('click', () => { if(cur) downloadCsv('Grade sheet ' + cur.section + ' ' + cur.subject + ' Term ' + cur.term, sheetRows()); });
+    $('gsPrint').addEventListener('click', () => {
+      if(!cur) return; const rows = sheetRows();
+      openPrint('Grade sheet', '<h1>Class Record — ' + esc(cur.subject) + '</h1><div class="meta">' + esc(cur.section) + ' · SY ' + esc(cur.sy) + ' · Term ' + esc(cur.term) + ' · Teacher: ' + esc(cur.teacher) +
+        ' · Weights WW ' + cur.w[0] + '% / PT ' + cur.w[1] + '% / EX ' + cur.w[2] + '%</div><table>' +
+        rows.map((r, i) => '<tr>' + r.map(v => (i === 0 ? '<th>' : '<td class="num">') + esc(v) + (i === 0 ? '</th>' : '</td>')).join('') + '</tr>').join('') + '</table>' +
+        '<p style="margin-top:22px;">Prepared by: ______________________ &nbsp;&nbsp;&nbsp; Checked by: ______________________</p>', true);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {});
+  initTos();
+  lastTest = store.get('st_test_last', null); if(lastTest) showTest();
+  $('testMake').addEventListener('click', makeTest);
+  initGrades();
+  window.ST_TOOLS = { transmute, shares };
 })();
 </script>
 

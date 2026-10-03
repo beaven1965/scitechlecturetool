@@ -525,7 +525,11 @@
   }
   .player-row audio{ flex:1; min-width:0; }
   .player-row.wrap{ flex-wrap:wrap; row-gap:8px; }
-  .player-row.ends{ justify-content:space-between; margin-top:10px; }
+  .player-row.ends{ justify-content:space-between; margin-top:10px; gap:8px; }
+  .test-count{ margin:10px 0; padding:10px 12px; border-radius:10px; background:var(--tint, #E9EEF9); font-size:14px; line-height:1.45; }
+  .tap-hint{ margin-top:12px; padding:9px 12px; border-radius:10px; background:var(--tint, #E9EEF9); color:var(--gold-bright); font-size:14px; text-align:center; }
+  details.se-fold > summary > span{ flex:1; }
+  details.se-fold:not([open]) > summary::before{ content:'Tap to open'; order:2; font-size:11.5px; font-weight:600; color:var(--text-muted); white-space:nowrap; }
   .skip-btn.big{ font-size:14px; padding:10px 16px; }
   /* One white player box */
   .wplayer{ background:#FFFFFF; border:2px solid #2B3A8C; border-radius:16px; padding:12px 14px 14px; color:#111; }
@@ -775,7 +779,7 @@
   details.se-fold > summary{ list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:10px;
     background:#E9EEF9; border:1px solid var(--surface-line); color:#1F2A66; border-radius:12px; padding:15px 18px; font-weight:600; font-size:15px; box-shadow:0 1px 3px rgba(30,50,52,0.06); }
   details.se-fold > summary::-webkit-details-marker{ display:none; }
-  details.se-fold > summary::after{ content:'▾'; color:var(--coral); transition:transform .15s; transform:rotate(-90deg); }
+  details.se-fold > summary::after{ content:'▾'; order:3; color:var(--coral); transition:transform .15s; transform:rotate(-90deg); }
   details.se-fold[open] > summary::after{ transform:rotate(0deg); }
   details.se-fold > summary small{ display:block; font-weight:400; font-size:12.5px; color:var(--text-muted); margin-top:2px; }
   details.se-fold > .se-fold-body{ margin-top:10px; }
@@ -1978,7 +1982,7 @@
       </label>
 
       <details class="se-fold at-fold" id="atGuide">
-        <summary><span>🧠 How to make a HOTS test<small>Quick guide · free</small></span></summary>
+        <summary><span>🧠 What is a HOTS question?<small>Meaning, steps and question starters · free</small></span></summary>
         <div class="se-fold-body"><div class="paper-card at-card">
           <p><b>HOTS</b> (Higher-Order Thinking Skills) items make learners <b>analyze, evaluate and create</b> — not just remember. Follow these steps:</p>
           <ol>
@@ -2043,6 +2047,7 @@
             </select>
           </label>
           <label class="at-lbl">Key concepts or notes to cover (optional)<textarea id="testNotes" rows="3" placeholder="e.g. chlorophyll, sunlight, carbon dioxide, glucose; use examples from farming in our barangay"></textarea></label>
+          <div class="test-count" id="testCount"></div>
           <button type="button" class="at-btn" id="testMake">✨ Make the HOTS test paper</button>
           <div class="status-row" id="testStatus" style="display:none; margin-top:10px;"><div class="spinner"></div><span>Writing your test… about 1–2 minutes.</span></div>
           <div class="error-box" id="testError" style="display:none;"></div>
@@ -2317,7 +2322,9 @@
       <div class="player-row ends">
         <button class="skip-btn big" id="downloadBtn" aria-label="Download recording">⬇ Save</button>
         <button class="skip-btn big" id="printTranscriptBtn" aria-label="Print full text">🖨️ Print</button>
+        <button class="skip-btn big" id="shareResultBtn" aria-label="Share recording as MP3">📤 Share</button>
       </div>
+      <div class="tap-hint" id="tapHint">👇 <b>Tap a box below to open it</b> — Highlights, Listen, Quiz and more.</div>
 
       <button class="transcript-toggle" id="transcriptToggle">Show full transcript</button>
       <div class="transcript-box" id="transcriptBox" style="display:none;"></div>
@@ -2380,19 +2387,20 @@
           <button class="refill-btn" id="refillBtn" style="display:none;">🎟 Buy 5 more AI uses — ₱50</button>
           <div class="premium-note" id="translatePremiumNote" style="display:none;"></div>
           <div class="player-row wrap" id="aiVoiceRow" style="display:none; margin-top:10px;">
-            <button class="translate-btn" id="aiVoiceBtn" style="display:none;">🔊 Listen to translated highlights</button>
+            <button class="translate-btn" id="aiVoiceBtn">🔊 Listen to translated highlights</button>
+            <span class="hint" style="align-self:center;">✨ Clear AI voice · 10 free listens</span>
             <audio id="aiVoiceAudio" style="display:none;"></audio>
           </div>
         </div>
       </div></div></details>
 
       <details class="se-fold" id="foldListen">
-        <summary><span>🔊 Listen<small>Hear the full transcript read aloud</small></span></summary>
+        <summary><span>🔊 Listen<small>Hear the full transcript read aloud in a clear voice. Helpful when the recording is noisy or hard to hear.</small></span></summary>
         <div class="se-fold-body">
           <div class="player-row wrap">
             <button class="translate-btn" id="listenBtn" title="Read the full transcript aloud">▶ Start listening</button>
           </div>
-          <div class="hint" style="margin-top:6px;">Tap once to start, tap again to stop.</div>
+          <div class="hint" style="margin-top:6px;">Tap once to start, tap again to stop. Uses your phone's own voice: free, no limit.</div>
         </div>
       </details>
 
@@ -2652,6 +2660,10 @@
   }
   downloadBtn.addEventListener('click', () => {
     if(currentAudioBlob) downloadBlob(currentAudioBlob, makeFileName(currentAudioBlob));
+  });
+  document.getElementById('shareResultBtn').addEventListener('click', async () => {
+    if(!currentAudioBlob){ alert('No audio file is saved for this recording, so there\'s nothing to share.'); return; }
+    await shareSermonMp3({ audioBlob: currentAudioBlob, date: new Date().toISOString(), title: (currentSermon && currentSermon.title) || '' });
   });
   downloadNowBtn.addEventListener('click', () => {
     if(currentAudioBlob) downloadBlob(currentAudioBlob, makeFileName(currentAudioBlob));
@@ -4193,11 +4205,6 @@
     if(!aiVoiceAudio.paused){ stopAiVoice(); return; }
     stopListening();
     try{ audioPlayback.pause(); }catch(e){}
-    const code = localStorage.getItem(PREMIUM_CODE_KEY);
-    if(localStorage.getItem(PREMIUM_FLAG_KEY) !== 'true' || !code){
-      translateNote.textContent = '⭐ The clear AI voice is a Premium feature. Unlock it in Settings.';
-      return;
-    }
     const text = Array.from(bulletsList.querySelectorAll('li')).map(li => li.textContent.trim()).filter(Boolean)
       .map(t => /[.!?。！？]$/.test(t) ? t : t + '.').join(' ');
     if(!text){ translateNote.textContent = 'There are no highlights to read yet.'; return; }
@@ -4207,7 +4214,7 @@
     aiVoiceBtn.textContent = '⏳ Preparing voice…'; aiVoiceBtn.disabled = true;
     try{
       const res = await fetch('/.netlify/functions/narrate-summary', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code, text })
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ device: DEVICE_ID, text })
       });
       const type = res.headers.get('Content-Type') || '';
       if(type.indexOf('application/json') >= 0){ const d = await res.json().catch(() => ({})); throw new Error(d.error || 'Could not prepare the AI voice right now.'); }
@@ -5208,6 +5215,7 @@
       '<p style="margin-top:20px;font-size:12px;">Prepared by: ______________________ &nbsp;&nbsp;&nbsp; Checked by: ______________________</p>', true));
     $('tosCsv').addEventListener('click', () => downloadCsv('TOS ' + (lastTos.title || ''), [['Competency', 'Days', '% time', 'Items'].concat(LEVELS)]
       .concat(lastTos.rows.map(r => [r.comp, r.days, r.pctTime + '%', r.items].concat(r.cells.map((c, i) => c ? c + ' (#' + rangeTxt(r.placed[i]) + ')' : ''))))));
+    showTestCount();
     $('tosToTest').addEventListener('click', () => { $('atTest').open = true; $('atTest').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
   }
   function initTos(){
@@ -5217,6 +5225,20 @@
     $('tosAddRow').addEventListener('click', () => { if(tos.rows.length < 15){ tos.rows.push({ comp: '', days: 1 }); store.set('st_tos', tos); drawRows(); } });
     $('tosMake').addEventListener('click', makeTos);
     lastTos = store.get('st_tos_last', null);
+    showTestCount();
+  }
+  // Shows how many questions the test maker will write, taken from the TOS.
+  function showTestCount(){
+    const el = $('testCount'), btn = $('testMake'); if(!el) return;
+    if(!lastTos || !lastTos.rows || !lastTos.rows.length){
+      el.innerHTML = '📋 <b>No TOS yet.</b> Make your TOS above first. The number of questions comes from your TOS.';
+      if(btn) btn.textContent = '✨ Make the HOTS test paper'; return;
+    }
+    const per = LEVELS.map((l, i) => lastTos.rows.reduce((a, r) => a + (+(r.cells || [])[i] || 0), 0));
+    const hots = per[3] + per[4] + per[5];
+    el.innerHTML = '📋 From your TOS' + (lastTos.title ? ' (' + esc(lastTos.title) + ')' : '') + ': <b>' + lastTos.total + ' questions</b> will be written, <b>' + hots + ' of them HOTS</b>.<br><small>' +
+      LEVELS.map((l, i) => per[i] ? l + ' ' + per[i] : '').filter(Boolean).join(' · ') + '</small>';
+    if(btn) btn.textContent = '✨ Make the HOTS test paper (' + lastTos.total + ' questions)';
   }
 
   // ================= HOTS TEST PAPER MAKER (AI) =================

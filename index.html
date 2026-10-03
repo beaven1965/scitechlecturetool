@@ -1711,6 +1711,7 @@
   .share-app-btn{ margin:4px auto 0; display:block; padding:10px 18px; border-radius:999px; border:1.5px solid var(--gold); background:rgba(255,255,255,.85);
     color:var(--gold); font-weight:700; font-size:14.5px; cursor:pointer; box-shadow:0 1px 4px rgba(30,50,52,.10); font-family:inherit; }
   .share-app-btn:active{ transform:scale(.97); }
+  .share-ic{ display:inline-block; vertical-align:-3px; margin-right:6px; flex:none; }
 </style>
 
 
@@ -1808,7 +1809,7 @@
         </span>
         <span class="home-icon-label">Stop</span>
       </button>
-      <button type="button" class="share-app-btn" id="shareAppBtn">📤 Share this app</button>
+      <button type="button" class="share-app-btn" id="shareAppBtn"><svg class="share-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.5 21 11l-7 6.5v-3.8c-5.2 0-8.6 1.6-11 5.3.9-5.4 4.1-10.2 11-11.1z"/></svg>Share this app</button>
       <script>
       (function(){
         var b = document.getElementById('shareAppBtn');
@@ -1821,7 +1822,7 @@
           }
           try{ await navigator.clipboard.writeText(text + ' ' + url); b.textContent = '✅ Link copied — paste it in Messenger'; }
           catch(e){ prompt('Copy this link and send it:', url); }
-          setTimeout(function(){ b.textContent = '📤 Share this app'; }, 3500);
+          setTimeout(function(){ b.innerHTML = '<svg class="share-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.5 21 11l-7 6.5v-3.8c-5.2 0-8.6 1.6-11 5.3.9-5.4 4.1-10.2 11-11.1z"/></svg>Share this app'; }, 3500);
         });
       })();
       </script>
@@ -2322,7 +2323,7 @@
       <div class="player-row ends">
         <button class="skip-btn big" id="downloadBtn" aria-label="Download recording">⬇ Save</button>
         <button class="skip-btn big" id="printTranscriptBtn" aria-label="Print full text">🖨️ Print</button>
-        <button class="skip-btn big" id="shareResultBtn" aria-label="Share recording as MP3">📤 Share</button>
+        <button class="skip-btn big" id="shareResultBtn" aria-label="Share recording as MP3"><svg class="share-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.5 21 11l-7 6.5v-3.8c-5.2 0-8.6 1.6-11 5.3.9-5.4 4.1-10.2 11-11.1z"/></svg>Share</button>
       </div>
       <div class="tap-hint" id="tapHint">👇 <b>Tap a box below to open it</b> — Highlights, Listen, Quiz and more.</div>
 
@@ -4535,14 +4536,14 @@
       });
 
       const shareBtn = document.createElement('button');
-      shareBtn.innerHTML = '📤 Share as MP3';
+      shareBtn.innerHTML = '<svg class="share-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.5 21 11l-7 6.5v-3.8c-5.2 0-8.6 1.6-11 5.3.9-5.4 4.1-10.2 11-11.1z"/></svg>Share as MP3';
       shareBtn.addEventListener('click', async (e) => {
         e.stopPropagation();
         closeThisMenu();
         await shareSermonMp3(sermon);
       });
       const shareOrigBtn = document.createElement('button');
-      shareOrigBtn.innerHTML = '📤 Share original';
+      shareOrigBtn.innerHTML = '<svg class="share-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.5 21 11l-7 6.5v-3.8c-5.2 0-8.6 1.6-11 5.3.9-5.4 4.1-10.2 11-11.1z"/></svg>Share original';
       shareOrigBtn.addEventListener('click', async (e) => {
         e.stopPropagation();
         closeThisMenu();
